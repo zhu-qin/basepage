@@ -1,3 +1,5 @@
+const SessionConstants = require('../constants/session_constants');
+
 const SessionUtil = {
   signIn: function(signIn, successCallback, errorCallback){
     $.ajax({

@@ -1,6 +1,6 @@
 # Schema Information
 
-## base_page
+## projects
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key

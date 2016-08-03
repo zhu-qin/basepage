@@ -1,7 +1,5 @@
 module.exports = {
   SIGN_IN: "SIGN_IN",
   SIGN_OUT: "SIGN_OUT",
-  SIGN_UP: "SIGN_UP",
   FAIL_SIGN_IN: "FAIL_SIGN_IN",
-  FAIL_SIGN_UP: "FAIL_SIGN_UP"
 };

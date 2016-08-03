@@ -17,14 +17,9 @@ ErrorStore.resetErrors = function(errors){
 ErrorStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case SessionConstants.FAIL_SIGN_IN:
-      ErrorStore.resetErrors(payload.errors);
+      ErrorStore.resetErrors(payload.response);
       ErrorStore.__emitChange();
       break;
-    case SessionConstants.FAIL_SIGN_UP:
-      ErrorStore.resetErrors(payload.errors);
-      ErrorStore.__emitChange();
-      break;
-
   }
 
 };

@@ -7,3 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(username: "qin", password: "password")
+
+Project.create(name: "hello", description: "world", manager_id: 1)
+
+TodoList.create(title: "first", body: "hello", project_id: 1, author_id: 1)
+
+["first", "second", "third", "fourth"].each do |todo|
+  Todo.create(title: todo, body: todo, author_id: 1, todo_list_id: 1)
+end

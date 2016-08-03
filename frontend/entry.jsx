@@ -11,15 +11,16 @@ const hashHistory = ReactRouter.hashHistory;
 
 // Components
 const Session = require('./components/session_comp');
-const NewUser = require('./components/new_user_comp');
+const HomeBasePage = require('./components/basepage_components/home_base_page');
+const ProjectIndex = require('./components/project/project_index');
+const MessageBoard = require('./components/basepage_components/message_board');
 // Stores
 const SessionStore = require('./stores/session_store');
 
 // Actions
 const SessionActions = require('./actions/session_actions.js');
 
-
-const BasePage = React.createClass({
+const App = React.createClass({
   getInitialState: function(){
     return {signedIn: SessionStore.isSignedIn()};
   },
@@ -77,14 +78,19 @@ const BasePage = React.createClass({
 
 const AppRouter = (
   <Router history={hashHistory}>
-    <Route path="/" component={BasePage} />
-    <Route path="/new_user" component={NewUser} />
+    <Route path="/" component={App} />
+    <Route path="/new_user" component={Session} />
     <Route path="/session" component={Session} />
+    <Route path="/base_pages" component={HomeBasePage} />
+    <Route path="/project" component={ProjectIndex}>
+      <Route path="message_board" component={MessageBoard} />
+    </Route>
   </Router>
 );
 
 
 document.addEventListener("DOMContentLoaded", function(){
+  SessionActions.receive("SIGN_IN", window.currentUser)();
   let root = document.getElementById('root');
   ReactDOM.render(AppRouter, root);
 });

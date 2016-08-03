@@ -17,15 +17,11 @@ let _signOut = function(){
 SessionStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case SessionConstants.SIGN_IN:
-      _signIn(payload.user);
+      _signIn(payload.response);
       SessionStore.__emitChange();
       break;
     case SessionConstants.SIGN_OUT:
       _signOut();
-      SessionStore.__emitChange();
-      break;
-    case SessionConstants.SIGN_UP:
-      _signIn(payload.user);
       SessionStore.__emitChange();
       break;
   }

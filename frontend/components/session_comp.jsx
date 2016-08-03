@@ -31,7 +31,7 @@ const Session = React.createClass({
   },
 
   redirectTo: function(){
-    hashHistory.push('/');
+    hashHistory.push('/project');
   },
 
   _errorStoreListener: function(){
@@ -46,14 +46,25 @@ const Session = React.createClass({
 
   _handleSubmit: function(event){
     event.preventDefault();
-    SessionActions.signIn(this.state);
+    if (this.props.location.pathname === "/new_user"){
+      SessionActions.signUp(this.state);
+    } else {
+      SessionActions.signIn(this.state);
+    }
   },
 
   render: function(){
-
     let errors = this.state.errors.map((error, index) =>{
       return (<li key={index}>{error}</li>);
     });
+
+    let submitButton;
+    if (this.props.location.pathname === "/new_user") {
+      submitButton = <input type="submit" value="Sign Up" />;
+    } else {
+      submitButton = <input type="submit" value="Sign In" />;
+    }
+
 
     return(
       <div className="session-form">
@@ -66,7 +77,7 @@ const Session = React.createClass({
             Password:
             <input type="password" value={this.state.password} onChange={this._updateField("password")}/>
           </label>
-          <input type="submit" value="Sign In" />
+          {submitButton}
         </form>
         <ul>
           {errors}
