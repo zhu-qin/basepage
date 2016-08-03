@@ -7,9 +7,9 @@
   "test": "test"
 },
   "scripts": {
-  "postinstall": "./node_modules/.bin/webpack",
-  "webpack": "webpack --watch"
-},
+    "postinstall": "./node_modules/.bin/webpack",
+    "webpack": "webpack --watch"
+  },
   "keywords": [ ],
   "author": "",
   "license": "ISC",
@@ -23,9 +23,9 @@
   "react-dom": "^0.14.2",
   "react-router": "2.0.1",
   "webpack": "^1.12.4"
-},
-"engines": {
-  "node": "6.3.0",
-  "npm": "3.10.3"
-}
+  },
+  "engines": {
+    "node": "6.3.0",
+    "npm": "3.10.3"
+  }
 }

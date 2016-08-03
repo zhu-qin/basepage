@@ -69,11 +69,11 @@ const BasePage = React.createClass({
   }
 });
 
-function redirectIfNotLoggedIn(prevState, replace) {
-  if (!SessionStore.userIsLoggedIn()) {
-    replace("/signin");
-  }
-}
+// function redirectIfNotLoggedIn(prevState, replace) {
+//   if (!SessionStore.userIsLoggedIn()) {
+//     replace("/signin");
+//   }
+// }
 
 const AppRouter = (
   <Router history={hashHistory}>
