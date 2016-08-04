@@ -10,8 +10,13 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.all
+    @projects = current_user.projects
     render :index
+  end
+
+  def show
+    @project = Project.find(params[:id])
+    render :show
   end
 
   def update

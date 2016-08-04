@@ -1,0 +1,3 @@
+module.exports = {
+  RECEIVE_ALL_RESOURCES: "RECEIVE_ALL_RESOURCES"
+};

@@ -5,8 +5,6 @@ const HomeBasePage = React.createClass({
     return { basepages: [] };
   },
 
-
-
   render: function(){
     return (
     <div>

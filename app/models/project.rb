@@ -36,4 +36,5 @@ class Project < ActiveRecord::Base
     through: :todo_lists,
     source: :todos
   )
+
 end

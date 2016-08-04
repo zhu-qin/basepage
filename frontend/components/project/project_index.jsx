@@ -1,17 +1,22 @@
 const React = require('react');
 const NavigationContainer = require('./navigation_container');
+const SessionStore = require('../../stores/session_store');
 
 const ProjectIndex = React.createClass({
   getInitialState: function (){
     return { messages: [],
              todos: [],
-             schedule: []
+             events: []
             };
   },
 
   componentDidMount: function(){
-    ResourceStore.addListener(this._resourceStoreListener);
-    ResourceActions.getResources();
+    this.resourceListener = ResourceStore.addListener(this._resourceStoreListener);
+    ResourceActions.getResources(SessionStore.getCurrentUser().id);
+  },
+
+  componentWillUnmount: function(){
+    this.resourceListener.remove();
   },
 
   _resourceStoreListener: function(){
@@ -23,7 +28,6 @@ const ProjectIndex = React.createClass({
 
 
   render: function(){
-
     let navigation = Object.keys(this.state).map((stateContents, index) => {
       return (<NavigationContainer key={stateContents} className="nav-small-container" field={stateContents} contents={this.state[stateContents] }/>);
     });
@@ -39,9 +43,6 @@ const ProjectIndex = React.createClass({
       </div>
     );
   }
-
-
-
 });
 
 module.exports = ProjectIndex;
