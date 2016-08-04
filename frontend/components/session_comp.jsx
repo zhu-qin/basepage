@@ -31,7 +31,8 @@ const Session = React.createClass({
   },
 
   redirectTo: function(){
-    hashHistory.push('/project');
+    // come back to this later
+    hashHistory.push('/projects/' + SessionStore.userMainProject());
   },
 
   _errorStoreListener: function(){

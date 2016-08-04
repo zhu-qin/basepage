@@ -1,0 +1,19 @@
+.nav-container > ul {
+  list-style-type: none;
+  display: inline-block;
+}
+
+.nav-list-item {
+  list-style-type: none;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  height: 40px;
+  width: 110px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 7%;
+}

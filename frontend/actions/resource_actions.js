@@ -3,13 +3,13 @@ const AppDispatcher = require('../dispatcher/dispatcher');
 const ResourceUtil = require('../util/resource_util');
 
 const ResourceActions = {
-  getResources: function(project_id){
-    ResourceUtil.getResources(project_id, ResourceActions.receiveResources);
+  getNavBarResources: function(project_id){
+    ResourceUtil.getNavBarResources(project_id, ResourceActions.receiveNavBarResources);
   },
 
-  receiveResources: function(response){
+  receiveNavBarResources: function(response){
     AppDispatcher.dispatch({
-      actionType: ResourceConstants.RECEIVE_ALL_RESOURCES,
+      actionType: ResourceConstants.RECEIVE_NAV_RESOURCES,
       response: response
     });
   }

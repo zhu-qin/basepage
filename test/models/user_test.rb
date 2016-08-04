@@ -9,6 +9,7 @@
 #  email           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  main_project    :integer
 #
 
 require 'test_helper'

@@ -13,6 +13,11 @@ const hashHistory = ReactRouter.hashHistory;
 const Session = require('./components/session_comp');
 const HomeBasePage = require('./components/basepage_components/home_base_page');
 const ProjectIndex = require('./components/project/project_index');
+const TodoIndex = require('./components/project/todo_index');
+const EventIndex = require('./components/project/event_index');
+const MessageIndex = require('./components/project/message_index');
+const UploadIndex = require('./components/project/upload_index');
+
 // Stores
 const SessionStore = require('./stores/session_store');
 
@@ -81,7 +86,12 @@ const AppRouter = (
     <Route path="/new_user" component={Session} />
     <Route path="/session" component={Session} />
     <Route path="/base_pages" component={HomeBasePage} />
-    <Route path="/project" component={ProjectIndex}>
+    <Route path="projects/:projectId" component={ProjectIndex} >
+      <IndexRoute component={TodoIndex} />
+      <Route path="todos_index" component={TodoIndex}></Route>
+      <Route path="events_index" component={EventIndex}></Route>
+      <Route path="messages_index" component={MessageIndex}></Route>
+      <Route path="uploads_index" component={UploadIndex}></Route>
 
     </Route>
   </Router>

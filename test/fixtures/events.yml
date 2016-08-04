@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: events
 #
-#  id              :integer          not null, primary key
-#  username        :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  email           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  main_project    :integer
+#  id         :integer          not null, primary key
+#  title      :string           not null
+#  body       :text
+#  project_id :integer          not null
+#  start      :date
+#  finish     :date
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

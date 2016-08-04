@@ -19,11 +19,17 @@ class Project < ActiveRecord::Base
     foreign_key: :manager_id
   )
 
-  # has_many(
-  #   :messages,
-  #   class_name: "Message",
-  #   foreign_key: :project_id
-  # )
+  has_many(
+    :messages,
+    class_name: "Message",
+    foreign_key: :project_id
+  )
+
+  has_many(
+    :events,
+    class_name: "Event",
+    foreign_key: :project_id
+  )
 
   has_many(
     :todo_lists,
@@ -36,5 +42,14 @@ class Project < ActiveRecord::Base
     through: :todo_lists,
     source: :todos
   )
+
+  def get_todos_completion_count
+    todos = self.todos
+    count = 0
+    todos.each do |todo|
+      count += 1 if todo.completion == true
+    end
+    [count, todos.length]
+  end
 
 end
