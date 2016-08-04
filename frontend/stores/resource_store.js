@@ -6,9 +6,10 @@ const ResourceStore = new Store(AppDispatcher);
 
 let _resources = {
   completionCount: 0,
-  todos: [],
-  messages: [],
-  events: [],
+  TODOS: [],
+  TODOLISTS: [],
+  MESSAGES: [],
+  EVENTS: [],
 };
 
 ResourceStore.all = function (resource) {
@@ -23,13 +24,13 @@ ResourceStore.first = function (resource){
   }
 };
 
-ResourceStore.resetOneResource = function (resource, payload) {
-  _resources[resource] = payload;
+ResourceStore.resetOneResource = function (resourceType, payload) {
+  _resources[resourceType] = payload;
 };
 
 ResourceStore.todoCompletionCount = function () {
-  if (_resources.todos.length > 0) {
-    let todos = _resources.todos;
+  if (_resources[ResourceConstants.TODOS].length > 0) {
+    let todos = _resources[ResourceConstants.TODOS];
     let completeCount = 0;
     todos.forEach((todo, index) => {
       if (todo.completion){
@@ -43,8 +44,8 @@ ResourceStore.todoCompletionCount = function () {
 
 ResourceStore.navBarResource = function (payload) {
   _resources.completionCount = payload.completionCount;
-  _resources.messages.push(payload.messages);
-  _resources.events.push(payload.events);
+  _resources.MESSAGES.push(payload.messages);
+  _resources.EVENTS.push(payload.events);
   _resources.name = payload.name;
 };
 

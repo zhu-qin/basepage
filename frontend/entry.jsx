@@ -24,6 +24,9 @@ const SessionStore = require('./stores/session_store');
 // Actions
 const SessionActions = require('./actions/session_actions.js');
 
+// Constants
+const ResourceConstants = require('./constants/resource_constants');
+
 const App = React.createClass({
   getInitialState: function(){
     return {signedIn: SessionStore.isSignedIn()};
@@ -88,10 +91,10 @@ const AppRouter = (
     <Route path="/base_pages" component={HomeBasePage} />
     <Route path="projects/:projectId" component={ProjectIndex} >
       <IndexRoute component={TodoIndex} />
-      <Route path="todos_index" component={TodoIndex}></Route>
-      <Route path="events_index" component={EventIndex}></Route>
-      <Route path="messages_index" component={MessageIndex}></Route>
-      <Route path="uploads_index" component={UploadIndex}></Route>
+      <Route path="TODOS_index" component={TodoIndex}></Route>
+      <Route path="EVENTS_index" component={EventIndex}></Route>
+      <Route path="MESSAGES_index" component={MessageIndex}></Route>
+      <Route path="UPLOADS_index" component={UploadIndex}></Route>
 
     </Route>
   </Router>

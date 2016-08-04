@@ -1,15 +1,16 @@
 const React = require('react');
 const NavigationContainer = require('./navigation_container');
 const SessionStore = require('../../stores/session_store');
-const hashHistory = require('react-router').hashHistory;
+const ResourceConstants = require('../../constants/resource_constants');
 
 const ProjectIndex = React.createClass({
   getInitialState: function (){
-    return { messages: "hello",
-             todos: "hello",
-             events: "world",
-             uploads: "yay"
-            };
+    return {
+              [ResourceConstants.MESSAGES]: "",
+              [ResourceConstants.TODOS]: "",
+              [ResourceConstants.EVENTS]: "",
+              [ResourceConstants.UPLOADS]: ""
+                                                      };
   },
 
   componentDidMount: function(){
@@ -17,31 +18,32 @@ const ProjectIndex = React.createClass({
     ResourceActions.getNavBarResources(SessionStore.userMainProject());
   },
 
-  componentWillUnmount: function(){
+  componentWillUnmount: function () {
     this.resourceListener.remove();
   },
 
-  _resourceStoreListener: function(){
-    let messageButton = ResourceStore.first("messages").title;
+  _resourceStoreListener: function () {
+    let messageButton = ResourceStore.first(ResourceConstants.MESSAGES).title;
     let todoCount = ResourceStore.todoCompletionCount();
     let todoButton = `${todoCount[0]}/${todoCount[1]}`;
-    let eventButton = ResourceStore.first("events").title;
-    this.setState({  messages: messageButton,
-                     todos: todoButton,
-                     events: eventButton,
-                     uploads: "not ready"
-                                                    });
+    let eventButton = ResourceStore.first(ResourceConstants.EVENTS).title;
+    this.setState({
+                      [ResourceConstants.MESSAGES]: messageButton,
+                      [ResourceConstants.TODOS]: todoButton,
+                      [ResourceConstants.EVENTS]: eventButton,
+                      [ResourceConstants.UPLOADS]: "not ready"
+                                                                });
   },
 
-  render: function(){
-    let navigation = Object.keys(this.state).map((stateContents, index) => {
+  render: function () {
+    let navigation = Object.keys(this.state).map((resource, index) => {
       return (
         <NavigationContainer
          projectId={this.props.params.projectId}
-         key={stateContents}
+         key={resource}
          className="nav-small-container"
-         field={stateContents}
-         contents={this.state[stateContents]}/>
+         field={resource}
+         contents={this.state[resource]}/>
       );
     });
 

@@ -5,8 +5,8 @@ const UploadIndex = React.createClass({
 
 
 
-  render: function(){
-    return(
+  render: function() {
+    return (
       <div className="feature-wrapper">
         UploadIndex
       </div>

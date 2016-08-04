@@ -12,6 +12,18 @@ const ResourceActions = {
       actionType: ResourceConstants.RECEIVE_NAV_RESOURCES,
       response: response
     });
+  },
+
+  getOneResource: function(projectId, resource){
+    ResourceUtil.getOneResource( projectId, resource, ResourceActions.receiveOneResource);
+  },
+
+  receiveOneResource: function (response, resourceType){
+    AppDispatcher.dispatch({
+      actionType: ResourceConstants.RECEIVE_ONE_RESOURCE,
+      response: response,
+      resourceType: resourceType
+    });
   }
 
 };
