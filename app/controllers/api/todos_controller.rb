@@ -15,6 +15,12 @@ class Api::TodosController < ApplicationController
   end
 
   def update
+    @todo = Todo.find(todo_params[:id])
+    if @todo.update(todo_params)
+      render json: @todo
+    else
+      render json: ["something went wrong"]
+    end
   end
 
   def destroy
@@ -22,7 +28,7 @@ class Api::TodosController < ApplicationController
 
 
   def todo_params
-    params.require(:todo).permit(:title, :body, :todo_list_id, :author_id, :assign_to_id, :completion)
+    params.require(:todos).permit(:title, :body, :todo_list_id, :author_id, :assign_to_id, :completion, :id)
   end
 
 end

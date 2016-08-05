@@ -18,6 +18,10 @@ ResourceStore.all = function (resource) {
   }
 };
 
+ResourceStore.everything = function (){
+  return Object.assign({}, _resources);
+};
+
 ResourceStore.first = function (resource){
   if (_resources[resource]) {
     return _resources[resource][0];
@@ -42,6 +46,10 @@ ResourceStore.todoCompletionCount = function () {
   return _resources.completionCount;
 };
 
+ResourceStore.resetOneResourceItem = function (resourceType, payload) {
+  console.log(payload);
+};
+
 ResourceStore.navBarResource = function (payload) {
   _resources.completionCount = payload.completionCount;
   _resources.MESSAGES.push(payload.messages);
@@ -60,6 +68,9 @@ ResourceStore.__onDispatch = function(payload){
       ResourceStore.navBarResource(payload.response);
       ResourceStore.__emitChange();
       break;
+    case ResourceConstants.RECEIVE_ONE_RESOURCE_ITEM:
+      ResourceStore.resetOneResourceItem(payload.resourceType, payload.response);
+      ResourceStore.__emitChange();
   }
 };
 

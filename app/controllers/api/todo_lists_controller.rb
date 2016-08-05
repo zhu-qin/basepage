@@ -10,8 +10,8 @@ class Api::TodoListsController < ApplicationController
   end
 
   def index
-    @todo_lists = Project.find(params[:project_id]).todo_lists
-    render :index
+    @todo_lists = Project.find(params[:project_id]).get_todo_lists_with_todos
+    render json: @todo_lists
   end
 
   def update

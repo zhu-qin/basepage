@@ -9,8 +9,9 @@
 User.create(username: "qin", password: "password", main_project: 1)
 
 Project.create(name: "hello", description: "world", manager_id: 1)
-
-TodoList.create(title: "first todolist", body: "hello", project_id: 1, author_id: 1)
+("A".."F").to_a.each do |letter|
+  TodoList.create(title: "todolist #{letter}", body: "hello", project_id: 1, author_id: 1)
+end
 
 ["first", "second", "third", "fourth"].each do |todo|
   Todo.create(title: todo, body: todo, author_id: 1, todo_list_id: 1)

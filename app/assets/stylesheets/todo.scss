@@ -1,0 +1,16 @@
+.todo-link {
+  border: 1px solid black;
+  color: blue;
+  padding: 13px;
+  margin: 2px;
+  border-radius: 5%;
+  background-color: #f5efe6;
+  display: block;
+}
+
+.todo-completed-count {
+  background-color: white;
+  border-radius: 50%;
+  display: inline;
+  padding: 8px;
+}

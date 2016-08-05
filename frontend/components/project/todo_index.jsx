@@ -2,18 +2,17 @@ const React = require('react');
 const ResourceStore = require('../../stores/resource_store');
 const ResourceActions = require('../../actions/resource_actions');
 const ResourceConstants = require('../../constants/resource_constants');
+const Link = require('react-router').Link;
+const TodoList = require('./todo_list');
 
 const TodoIndex = React.createClass({
   getInitialState: function () {
-    return { todoLists: [],
-             todos: []
-                           }
+    return { [ResourceConstants.TODOLISTS]: [] }
   },
 
   componentDidMount: function () {
     this.resourceListener = ResourceStore.addListener(this._resourceStoreListener);
     ResourceActions.getOneResource(this.props.params.projectId, ResourceConstants.TODOLISTS );
-    // ResourceActions.getOneResource(this.props.params.projectId, ResourceConstants.TODOS );
   },
 
   componentWillUnmount: function (){
@@ -21,27 +20,25 @@ const TodoIndex = React.createClass({
   },
 
   _resourceStoreListener: function () {
-    this.setState({ todoLists: ResourceStore.all(ResourceConstants.TODOLISTS),
-                    todos: ResourceStore.all(ResourceConstants.TODOS)
-                                                            })
+    this.setState({ [ResourceConstants.TODOLISTS]: ResourceStore.all(ResourceConstants.TODOLISTS),                                                                                              })
   },
 
   render: function () {
-    let todos = this.state.todoLists.map( (todoList, index) => {
+    let todoLists = this.state[ResourceConstants.TODOLISTS].map( (todoList, index) => {
       return (
-        <li key={todoList.id}>
-          {todoList.title}
-        </li>
+        <TodoList key={index} todoList={todoList} />
       )
     });
 
 
     return (
       <div className="feature-wrapper">
-        TodoIndex
-        <ul>
-          {todos}
-        </ul>
+        <div className="todo-wrapper">
+          <h2>TodoIndex</h2>
+          <ul className="todo-lists">
+            {todoLists}
+          </ul>
+        </div>
       </div>
     );
   }

@@ -90,7 +90,7 @@ const AppRouter = (
     <Route path="/session" component={Session} />
     <Route path="/base_pages" component={HomeBasePage} />
     <Route path="projects/:projectId" component={ProjectIndex} >
-      <IndexRoute component={TodoIndex} />
+      <IndexRoute component={MessageIndex} />
       <Route path="TODOS_index" component={TodoIndex}></Route>
       <Route path="EVENTS_index" component={EventIndex}></Route>
       <Route path="MESSAGES_index" component={MessageIndex}></Route>

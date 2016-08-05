@@ -22,6 +22,20 @@ const ResourceUtil = {
         successCallback(response, resourceType);
       }
     });
+  },
+
+  updateResourceItem: function (resource, resourceType, successCallback, failureCallback){
+    let id = resource[ServerRequestConstants[resourceType]].id
+    let path = `api/${ServerRequestConstants[resourceType]}/${id}`
+    console.log(path);
+    $.ajax ({
+      type: "PATCH",
+      url: path,
+      data: resource,
+      success: function (response) {
+        successCallback(response, resourceType);
+      }
+    });
   }
 
 };

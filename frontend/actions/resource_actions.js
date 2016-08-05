@@ -24,6 +24,18 @@ const ResourceActions = {
       response: response,
       resourceType: resourceType
     });
+  },
+
+  updateResourceItem: function (resource, resourceType) {
+    ResourceUtil.updateResourceItem(resource, resourceType, ResourceActions.receiveOneResourceItem );
+  },
+
+  receiveOneResourceItem: function (response, resourceType) {
+    AppDispatcher.dispatch({
+      actionType: ResourceConstants.RECEIVE_ONE_RESOURCE_ITEM,
+      response: response,
+      resourceType: resourceType
+    });
   }
 
 };
