@@ -1,3 +1,4 @@
 module.exports = {
   RECEIVE_TODOS: "RECEIVE_TODOS",
+  RECEIVE_ONE_TODO: "RECEIVE_ONE_TODO"
 };

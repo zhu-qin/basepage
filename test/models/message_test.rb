@@ -7,9 +7,9 @@
 #  body       :text
 #  project_id :integer          not null
 #  author_id  :integer          not null
-#  message_id :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  message_id :integer
 #
 
 require 'test_helper'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804174640) do
+ActiveRecord::Schema.define(version: 20160806193011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,30 @@ ActiveRecord::Schema.define(version: 20160804174640) do
     t.integer  "message_id"
   end
 
+  create_table "project_documents", force: :cascade do |t|
+    t.integer  "project_id",               null: false
+    t.string   "title",                    null: false
+    t.string   "body"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "project_doc_file_name"
+    t.string   "project_doc_content_type"
+    t.integer  "project_doc_file_size"
+    t.datetime "project_doc_updated_at"
+  end
+
+  add_index "project_documents", ["project_id"], name: "index_project_documents_on_project_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                null: false
     t.string   "description"
-    t.integer  "manager_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "manager_id",          null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   create_table "todo_lists", force: :cascade do |t|
