@@ -18,6 +18,9 @@ const EventIndex = require('./components/project/event_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
 
+// Components Forms
+const TodoForm = require('./components/project/todo_form');
+
 // Stores
 const SessionStore = require('./stores/session_store');
 
@@ -60,10 +63,10 @@ const App = React.createClass({
       );
     } else {
       sessionView = (
-        <div>
-          Sign In or Sign Up
+        <div className="session-links">
           <Link to={"/new_user"}>Sign Up</Link>
           <Link to={"/session"}>Sign In</Link>
+          <Link to={"/guest"}>Guest Sign In</Link>
         </div>
       );
     }
@@ -85,18 +88,21 @@ const App = React.createClass({
 
 const AppRouter = (
   <Router history={hashHistory}>
-    <Route path="/" component={App} />
+    <Route path="/" component={App}/>
     <Route path="/new_user" component={Session} />
     <Route path="/session" component={Session} />
+    <Route path="/guest" component={Session} />
     <Route path="/base_pages" component={HomeBasePage} />
     <Route path="projects/:projectId" component={ProjectIndex} >
       <IndexRoute component={MessageIndex} />
-      <Route path="TODOS_index" component={TodoIndex}></Route>
-      <Route path="EVENTS_index" component={EventIndex}></Route>
-      <Route path="MESSAGES_index" component={MessageIndex}></Route>
-      <Route path="UPLOADS_index" component={UploadIndex}></Route>
+      <Route path="TODOS_index" component={TodoIndex} />
+      <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
+      <Route path="EVENTS_index" component={EventIndex} />
+      <Route path="MESSAGES_index" component={MessageIndex} />
+      <Route path="UPLOADS_index" component={UploadIndex} />
 
     </Route>
+
   </Router>
 );
 
@@ -111,6 +117,8 @@ document.addEventListener("DOMContentLoaded", function(){
 // testing
 const ResourceActions = require('./actions/resource_actions');
 const ResourceStore = require('./stores/resource_store');
-window.ResourceStore = ResourceStore;
-window.ResourceActions = ResourceActions;
+const TodoActions = require('./actions/todo_actions');
+const TodoStore = require('./stores/todo_store');
+window.TodoStore = TodoStore;
+window.TodoActions = TodoActions;
 window.SessionStore = SessionStore;

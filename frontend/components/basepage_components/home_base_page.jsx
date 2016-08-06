@@ -15,7 +15,6 @@ const HomeBasePage = React.createClass({
   }
 
 
-
 });
 
 module.exports = HomeBasePage;

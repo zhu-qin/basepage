@@ -8,7 +8,9 @@ const EventIndex = React.createClass({
   render: function(){
     return(
       <div className="feature-wrapper">
-        EventIndex
+        <div className="message-wrapper">
+          <h2>Schedule</h2>
+        </div>
       </div>
     );
   }

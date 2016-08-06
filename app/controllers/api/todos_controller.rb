@@ -1,7 +1,7 @@
 class Api::TodosController < ApplicationController
 
   def create
-    @todo = TodoList.new(todo_params)
+    @todo = Todo.new(todo_params)
     if @todo.save
       render :show
     else
@@ -10,7 +10,7 @@ class Api::TodosController < ApplicationController
   end
 
   def index
-    @todos = TodoList.find(params[:todo_list_id]).todos
+    @todos = Project.find(params[:project_id]).todos
     render :index
   end
 

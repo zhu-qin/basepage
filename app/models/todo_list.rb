@@ -12,6 +12,9 @@
 #
 
 class TodoList < ActiveRecord::Base
+
+  attr_accessor :list_of_todos
+
   belongs_to(
     :project,
     class_name: "Project",

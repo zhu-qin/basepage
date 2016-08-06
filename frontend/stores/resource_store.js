@@ -6,30 +6,36 @@ const ResourceStore = new Store(AppDispatcher);
 
 let _resources = {
   completionCount: 0,
-  TODOS: [],
-  TODOLISTS: [],
-  MESSAGES: [],
-  EVENTS: [],
+  TODOS: {},
+  TODOLISTS: {},
+  MESSAGES: {},
+  EVENTS: {},
+  PROJECTS: {}
 };
 
 ResourceStore.all = function (resource) {
   if (_resources[resource]) {
-    return _resources[resource].slice();
+    return Object.assign({}, _resources[resource]);
   }
 };
 
-ResourceStore.everything = function (){
-  return Object.assign({}, _resources);
-};
 
 ResourceStore.first = function (resource){
+  let returnElement;
   if (_resources[resource]) {
-    return _resources[resource][0];
+    Object.keys(_resources[resource]).forEach((element , index) => {
+      returnElement = _resources[resource][element];
+    });
+    return returnElement;
   }
 };
 
 ResourceStore.resetOneResource = function (resourceType, payload) {
-  _resources[resourceType] = payload;
+  let data = {};
+  payload.forEach( (element, index) => {
+    data[element.id] = element;
+  });
+  _resources[resourceType] = data;
 };
 
 ResourceStore.todoCompletionCount = function () {
@@ -46,15 +52,29 @@ ResourceStore.todoCompletionCount = function () {
   return _resources.completionCount;
 };
 
+ResourceStore.getTodos = function (listId) {
+  let todos = {};
+  Object.keys(_resources[ResourceConstants.TODOS]).forEach( (id) => {
+    if (parseInt(id) === listId){
+      todos[id] = (_resources[ResourceConstants.TODOS][id]);
+    }
+  });
+  debugger
+  return todos;
+};
+
 ResourceStore.resetOneResourceItem = function (resourceType, payload) {
-  console.log(payload);
 };
 
 ResourceStore.navBarResource = function (payload) {
   _resources.completionCount = payload.completionCount;
-  _resources.MESSAGES.push(payload.messages);
-  _resources.EVENTS.push(payload.events);
-  _resources.name = payload.name;
+  _resources[ResourceConstants.MESSAGES][payload.messages.id] = payload.messages;
+  _resources[ResourceConstants.EVENTS][payload.events.id] = payload.events;
+  let project = {};
+  project.id = payload.id;
+  project.name = payload.name;
+  project.manager_id = payload.manager_id;
+  _resources[ResourceConstants.PROJECTS] = project;
 };
 
 // dispatcher passes actionType, resourceType, and payload.response
@@ -74,5 +94,9 @@ ResourceStore.__onDispatch = function(payload){
   }
 };
 
+// For testing
+ResourceStore.everything = function (){
+  return Object.assign({}, _resources);
+};
 
 module.exports = ResourceStore;

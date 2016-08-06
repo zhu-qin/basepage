@@ -52,13 +52,4 @@ class Project < ActiveRecord::Base
     [count, todos.length]
   end
 
-  def get_todo_lists_with_todos
-    list_of_todos_list = []
-    todo_lists.each do |list_element|
-      list_pair = [list_element, list_element.todos]
-      list_of_todos_list << list_pair
-    end
-    list_of_todos_list
-  end
-
 end

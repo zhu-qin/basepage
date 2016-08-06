@@ -1,42 +1,41 @@
 const React = require('react');
-const ResourceStore = require('../../stores/resource_store');
-const ResourceActions = require('../../actions/resource_actions');
-const ResourceConstants = require('../../constants/resource_constants');
+const TodoStore = require('../../stores/todo_store');
+const TodoActions = require('../../actions/todo_actions');
+const TodoConstants = require('../../constants/todo_constants');
 const Link = require('react-router').Link;
 const TodoList = require('./todo_list');
 
 const TodoIndex = React.createClass({
   getInitialState: function () {
-    return { [ResourceConstants.TODOLISTS]: [] }
+    return { todoLists: {} };
   },
 
   componentDidMount: function () {
-    this.resourceListener = ResourceStore.addListener(this._resourceStoreListener);
-    ResourceActions.getOneResource(this.props.params.projectId, ResourceConstants.TODOLISTS );
+    this.todoListener = TodoStore.addListener(this._todoStoreListener);
+    TodoActions.getTodos(this.props.params.projectId);
   },
 
   componentWillUnmount: function (){
-    this.resourceListener.remove();
+    this.todoListener.remove();
   },
 
-  _resourceStoreListener: function () {
-    this.setState({ [ResourceConstants.TODOLISTS]: ResourceStore.all(ResourceConstants.TODOLISTS),                                                                                              })
+  _todoStoreListener: function () {
+    this.setState( {todoLists: TodoStore.all() });
   },
 
   render: function () {
-    let todoLists = this.state[ResourceConstants.TODOLISTS].map( (todoList, index) => {
+    let todoLists = this.state.todoLists;
+    let allLists = Object.keys(todoLists).map((listId, index) => {
       return (
-        <TodoList key={index} todoList={todoList} />
-      )
+        <TodoList key={listId} todoList={todoLists[parseInt(listId)]} />
+      );
     });
-
-
     return (
       <div className="feature-wrapper">
         <div className="todo-wrapper">
-          <h2>TodoIndex</h2>
+          <h2>To-dos</h2>
           <ul className="todo-lists">
-            {todoLists}
+            {allLists}
           </ul>
         </div>
       </div>

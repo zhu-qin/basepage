@@ -1,3 +1,13 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.session-links > a{
+  padding: 20px;
+  border-radius: 5%;
+  background-color: white;
+  width: 100px;
+  height: 70px;
+  border: 1px solid gray;
+
+}

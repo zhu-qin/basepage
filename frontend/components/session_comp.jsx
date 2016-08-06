@@ -49,8 +49,10 @@ const Session = React.createClass({
     event.preventDefault();
     if (this.props.location.pathname === "/new_user"){
       SessionActions.signUp(this.state);
-    } else {
+    } else if (this.props.location.pathname === "/session"){
       SessionActions.signIn(this.state);
+    } else {
+      SessionActions.signIn({username: "qin", password: "password"});
     }
   },
 
@@ -62,8 +64,10 @@ const Session = React.createClass({
     let submitButton;
     if (this.props.location.pathname === "/new_user") {
       submitButton = <input type="submit" value="Sign Up" />;
-    } else {
+    } else if (this.props.location.pathname === "/session"){
       submitButton = <input type="submit" value="Sign In" />;
+    } else {
+      submitButton = <input type="submit" value="Guest Sign In" />;
     }
 
 

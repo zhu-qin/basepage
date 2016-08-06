@@ -1,16 +1,13 @@
 const React = require('react');
 const hashHistory = require('react-router').hashHistory;
 const NavButtonConstants = require('../../constants/nav_button_constants');
+const SessionStore = require('../../stores/session_store');
 
 const NavigationContainer = React.createClass({
-
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-
+  
   showDetail: function(event){
     event.preventDefault();
-    this.context.router.push(`/projects/${this.props.projectId}/${this.props.field}_index`);
+    hashHistory.push(`/projects/${SessionStore.userMainProject()}/${this.props.field}_index`);
   },
 
   render: function(){

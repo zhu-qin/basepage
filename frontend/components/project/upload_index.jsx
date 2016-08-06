@@ -6,9 +6,11 @@ const UploadIndex = React.createClass({
 
 
   render: function() {
-    return (
+    return(
       <div className="feature-wrapper">
-        UploadIndex
+        <div className="message-wrapper">
+          <h2>Docs & Files</h2>
+        </div>
       </div>
     );
   }

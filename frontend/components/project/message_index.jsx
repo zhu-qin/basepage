@@ -8,7 +8,9 @@ const MessageIndex = React.createClass({
   render: function(){
     return(
       <div className="feature-wrapper">
-        MessageIndex
+        <div className="message-wrapper">
+          <h2>Message Board</h2>
+        </div>
       </div>
     );
   }

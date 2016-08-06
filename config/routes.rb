@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :projects, only: [:show, :index] do
       resources :todo_lists, only: [:create, :index]
+      resources :todos, only: [:index]
     end
 
     resources :todo_lists, only: [:update, :show, :destroy] do
