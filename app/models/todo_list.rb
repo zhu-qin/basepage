@@ -12,8 +12,7 @@
 #
 
 class TodoList < ActiveRecord::Base
-
-  attr_accessor :list_of_todos
+  validates :title, :project_id, :author_id, presence: true 
 
   belongs_to(
     :project,

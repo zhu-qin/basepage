@@ -5,21 +5,24 @@ const UploadActions = require('../../actions/upload_actions');
 
 const UploadIndex = React.createClass({
   getInitialState: function () {
-    return {  documents: {},
+    return {  documents: null,
               title: "",
               file: null,
               fileUrl: ""  };
   },
 
   componentDidMount: function () {
-    UploadStore.addListener(this._storeListener);
+    this.storeListener = UploadStore.addListener(this._uploadStoreListener);
     UploadActions.getAllFiles(SessionStore.userMainProject());
   },
 
-  _storeListener: function () {
+  _uploadStoreListener: function () {
     this.setState( {documents: UploadStore.all()} );
   },
 
+  componentWillUnmount: function () {
+    this.storeListener.remove();
+  },
 
   _handleChange: function (field, event) {
     return (event) => {
@@ -51,31 +54,47 @@ const UploadIndex = React.createClass({
 
   render: function() {
 
-    let docList = Object.keys(this.state.documents).map((id, index) => {
-      return (
-        <li key={id}>
-          {this.state.documents[id].title}
-        </li>
+    let view = function () {
+      let fileList = Object.keys(this.state.documents).map((id, index) => {
+        return (
+          <li key={id}>
+            {this.state.documents[id].title}
+            <img src={this.state.documents[id].project_doc} />
+          </li>
+        );
+      });
+
+    let form = (
+      <div>
+        <ul>
+          {fileList}
+        </ul>
+        <form onSubmit={this._handleSubmit}>
+          <label>Title:
+            <input type="text" onChange={this._handleChange("title")} value={this.state.title} />
+          </label>
+          <img src={this.state.fileUrl} />
+          <label>File:
+            <input type="file" onChange={this._updateFile}/>
+          </label>
+          <input type="submit" value="Upload File" />
+        </form>
+      </div>
       );
-    });
-    
+      return form;
+    }.bind(this);
+
+    let fullView = "";
+
+    if (this.state.documents) {
+      fullView = view();
+    }
+
     return(
       <div className="feature-wrapper">
         <div className="upload-wrapper">
           <h2>Docs & Files</h2>
-          <ul>
-            {docList}
-          </ul>
-          <form onSubmit={this._handleSubmit}>
-            <label>Title:
-              <input type="text" onChange={this._handleChange("title")} value={this.state.title} />
-            </label>
-            <img src={this.state.fileUrl} />
-            <label>File:
-              <input type="file" onChange={this._updateFile} value={this.state.title} />
-            </label>
-            <input type="submit" value="Upload File" />
-          </form>
+            {fullView}
         </div>
       </div>
     );

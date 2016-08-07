@@ -64,5 +64,5 @@ class Project < ActiveRecord::Base
     end
     [count, todos.length]
   end
-
+  
 end

@@ -26,15 +26,19 @@ ActiveRecord::Schema.define(version: 20160806193011) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "events", ["project_id"], name: "index_events_on_project_id", using: :btree
+
   create_table "messages", force: :cascade do |t|
-    t.string   "title",      null: false
+    t.string   "title",       null: false
     t.text     "body"
-    t.integer  "project_id", null: false
-    t.integer  "author_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "message_id"
+    t.integer  "project_id",  null: false
+    t.integer  "author_id",   null: false
+    t.integer  "reply_to_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
+
+  add_index "messages", ["project_id"], name: "index_messages_on_project_id", using: :btree
 
   create_table "project_documents", force: :cascade do |t|
     t.integer  "project_id",               null: false
@@ -71,6 +75,8 @@ ActiveRecord::Schema.define(version: 20160806193011) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "todo_lists", ["project_id"], name: "index_todo_lists_on_project_id", using: :btree
+
   create_table "todos", force: :cascade do |t|
     t.integer  "todo_list_id",                 null: false
     t.integer  "author_id",                    null: false
@@ -86,13 +92,13 @@ ActiveRecord::Schema.define(version: 20160806193011) do
     t.string   "username",        null: false
     t.string   "password_digest", null: false
     t.string   "session_token",   null: false
-    t.string   "email"
+    t.string   "email",           null: false
+    t.integer  "main_project"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.integer  "main_project"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

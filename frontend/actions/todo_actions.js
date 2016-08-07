@@ -19,12 +19,19 @@ const TodoActions = {
   },
 
   createOneTodo: function (todo) {
-    TodoUtil.createOneTodo(todo, TodoActions.receiveOneTodo);
+    TodoUtil.createOneTodo(todo, TodoActions.addOneTodo);
   },
 
   receiveOneTodo: function (response) {
     AppDispatcher.dispatch({
       actionType: TodoConstants.RECEIVE_ONE_TODO,
+      response: response
+    });
+  },
+
+  addOneTodo: function(response){
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.ADD_ONE_TODO,
       response: response
     });
   }

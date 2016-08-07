@@ -20,6 +20,7 @@ const TodoList = React.createClass({
   render: function () {
     let todos = this.props.todoList.todos;
     let completedTodos = 0;
+
     let todoList = todos.map( (todo, index) => {
       let checkBox;
       if (todo.completion) {
@@ -34,7 +35,8 @@ const TodoList = React.createClass({
         );
       });
 
-      let todoCompleteCount = <div className="todo-completed-count">{`${completedTodos}/${todoList.length}`}</div>;
+      let todoCompleteCount = <div className="todo-completed-count">{`${completedTodos}/${todos.length}`}</div>;
+
     return (
       <li>
         <Link to={`todo_lists/${this.props.todoList.id}/edit`} className="todo-link">

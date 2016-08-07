@@ -7,16 +7,22 @@ const TodoList = require('./todo_list');
 
 const TodoIndex = React.createClass({
   getInitialState: function () {
-    return { todoLists: {} };
+    return { todoLists: {}, todoCount: "0/0" };
   },
 
   componentDidMount: function () {
     this.todoListener = TodoStore.addListener(this._todoStoreListener);
+    this.countListener = TodoStore.addListener(this._countListener);
     TodoActions.getTodos(this.props.params.projectId);
   },
 
   componentWillUnmount: function (){
     this.todoListener.remove();
+    this.countListener.remove();
+  },
+
+  _countListener: function(array) {
+    this.setState({todoCount: TodoStore.todoCount()});
   },
 
   _todoStoreListener: function () {
@@ -33,7 +39,7 @@ const TodoIndex = React.createClass({
     return (
       <div className="feature-wrapper">
         <div className="todo-wrapper">
-          <h2>To-dos</h2>
+          <h2>To-dos {this.state.todoCount}</h2>
           <ul className="todo-lists">
             {allLists}
           </ul>

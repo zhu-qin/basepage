@@ -95,11 +95,11 @@ const AppRouter = (
     <Route path="/base_pages" component={HomeBasePage} />
     <Route path="projects/:projectId" component={ProjectIndex} >
       <IndexRoute component={MessageIndex} />
-      <Route path="TODOS_index" component={TodoIndex} />
+      <Route path="todos_index" component={TodoIndex} />
       <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
-      <Route path="EVENTS_index" component={EventIndex} />
-      <Route path="MESSAGES_index" component={MessageIndex} />
-      <Route path="UPLOADS_index" component={UploadIndex} />
+      <Route path="events_index" component={EventIndex} />
+      <Route path="messages_index" component={MessageIndex} />
+      <Route path="uploads_index" component={UploadIndex} />
 
     </Route>
 
@@ -115,12 +115,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 // testing
-const ResourceActions = require('./actions/resource_actions');
-const ResourceStore = require('./stores/resource_store');
 const TodoActions = require('./actions/todo_actions');
 const TodoStore = require('./stores/todo_store');
+const MessageActions = require('./actions/message_actions');
+const MessageStore = require('./stores/message_store');
 const UploadStore = require('./stores/upload_store');
 window.UploadStore = UploadStore;
 window.TodoStore = TodoStore;
 window.TodoActions = TodoActions;
+window.MessageStore = MessageStore;
+window.MessageActions = MessageActions;
 window.SessionStore = SessionStore;

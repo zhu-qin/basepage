@@ -6,11 +6,11 @@ const ResourceConstants = require('../../constants/resource_constants');
 const ProjectIndex = React.createClass({
   getInitialState: function (){
     return {
-              [ResourceConstants.MESSAGES]: "",
-              [ResourceConstants.TODOS]: "",
-              [ResourceConstants.EVENTS]: "",
-              [ResourceConstants.UPLOADS]: ""
-                                                      };
+              messages: "",
+              todos: "",
+              events: "",
+              uploads: ""
+                                      };
   },
 
   componentDidMount: function(){
@@ -22,28 +22,26 @@ const ProjectIndex = React.createClass({
     this.resourceListener.remove();
   },
 
-  _resourceStoreListener: function () {
-    let messageButton = ResourceStore.first(ResourceConstants.MESSAGES).title;
-    let todoCount = ResourceStore.todoCompletionCount();
-    let todoButton = `${todoCount[0]}/${todoCount[1]}`;
-    let eventButton = ResourceStore.first(ResourceConstants.EVENTS).title;
-    this.setState({
-                      [ResourceConstants.MESSAGES]: messageButton,
-                      [ResourceConstants.TODOS]: todoButton,
-                      [ResourceConstants.EVENTS]: eventButton,
-                      [ResourceConstants.UPLOADS]: "not ready"
-                                                                });
-  },
+  // _resourceStoreListener: function () {
+  //   let messageButton = ResourceStore.first(ResourceConstants.MESSAGES).title;
+  //   let todoCount = ResourceStore.todoCompletionCount();
+  //   let todoButton = `${todoCount[0]}/${todoCount[1]}`;
+  //   let eventButton = ResourceStore.first(ResourceConstants.EVENTS).title;
+  //   this.setState({
+  //                     messages: messageButton,
+  //                     todos: todoButton,
+  //                     events: eventButton,
+  //                     uploads: "not ready"
+  //                                                               });
+  // },
 
   render: function () {
-    let navigation = Object.keys(this.state).map((resource, index) => {
+    let navigation = Object.keys(this.state).map((tab, index) => {
       return (
         <NavigationContainer
-         projectId={this.props.params.projectId}
-         key={resource}
-         className="nav-small-container"
-         field={resource}
-         contents={this.state[resource]}/>
+          key={tab}
+          className="nav-small-container"
+          button={tab} />
       );
     });
 

@@ -12,14 +12,14 @@ const UploadUtil = {
     });
   },
 
-  uploadFile: function(file, successCallback){
+  uploadFile: function(project_doc, successCallback){
     $.ajax({
       type: "POST",
-      url: `api/projects/${file.get('project_documents[project_id]')}/project_documents`,
+      url: `api/projects/${project_doc.get('project_doc[project_id]')}/project_documents`,
       dataType: "json",
       contentType: false,
       processData: false,
-      data: file,
+      data: project_doc,
       success: function (response) {
         successCallback(response);
       }

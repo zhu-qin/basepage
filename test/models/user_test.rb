@@ -6,10 +6,10 @@
 #  username        :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
-#  email           :string
+#  email           :string           not null
+#  main_project    :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  main_project    :integer
 #
 
 require 'test_helper'
