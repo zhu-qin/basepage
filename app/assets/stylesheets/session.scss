@@ -2,12 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.session-links > a{
-  padding: 20px;
-  border-radius: 5%;
-  background-color: white;
+
+.session-links {
+  float: right;
   width: 100px;
   height: 70px;
-  border: 1px solid gray;
+}
+.session-links a {
+  margin: 20px;
+  border: 1px solid black;
+  float: left;
+  padding: 10px 20px;
+  display: block;
+  border-radius: 5%;
+  background-color: white;
+}
 
+
+.session-wrapper{
+  padding: 20px;
+  background: yellow;
 }

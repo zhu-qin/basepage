@@ -29,8 +29,10 @@ const TodoList = React.createClass({
       }
         return (
           <li className="todo-list-item" key={index}>
+
             <input className="checkbox" type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
             {todo.title}
+
           </li>
         );
       });
@@ -40,8 +42,8 @@ const TodoList = React.createClass({
     return (
       <li>
         <Link to={`todo_lists/${this.props.todoList.id}/edit`} className="todo-link">
-          {this.props.todoList.title}
           {todoCompleteCount}
+          {this.props.todoList.title}
         </Link>
         <ul>
           {todoList}

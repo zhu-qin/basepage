@@ -1,7 +1,9 @@
 const React = require('react');
 const TodoStore = require('../../stores/todo_store');
+const SessionStore = require('../../stores/session_store');
 const TodoActions = require('../../actions/todo_actions');
 const TodoConstants = require('../../constants/todo_constants');
+
 const Link = require('react-router').Link;
 const TodoList = require('./todo_list');
 
@@ -13,7 +15,7 @@ const TodoIndex = React.createClass({
   componentDidMount: function () {
     this.todoListener = TodoStore.addListener(this._todoStoreListener);
     this.countListener = TodoStore.addListener(this._countListener);
-    TodoActions.getTodos(this.props.params.projectId);
+    TodoActions.getTodos(SessionStore.userMainProject());
   },
 
   componentWillUnmount: function (){
@@ -40,6 +42,7 @@ const TodoIndex = React.createClass({
       <div className="feature-wrapper">
         <div className="todo-wrapper">
           <h2>To-dos {this.state.todoCount}</h2>
+          <button className="feature-add-button">Add a To-do List</button>
           <ul className="todo-lists">
             {allLists}
           </ul>

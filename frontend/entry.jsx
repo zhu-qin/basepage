@@ -63,7 +63,7 @@ const App = React.createClass({
       );
     } else {
       sessionView = (
-        <div className="session-links">
+        <div className="session-links clear-fix">
           <Link to={"/new_user"}>Sign Up</Link>
           <Link to={"/session"}>Sign In</Link>
           <Link to={"/guest"}>Guest Sign In</Link>
@@ -72,9 +72,8 @@ const App = React.createClass({
     }
 
     return (
-      <div>
+      <div className="session-wrapper clear-fix">
         {sessionView}
-        {this.props.children}
       </div>
     );
   }
@@ -120,6 +119,11 @@ const TodoStore = require('./stores/todo_store');
 const MessageActions = require('./actions/message_actions');
 const MessageStore = require('./stores/message_store');
 const UploadStore = require('./stores/upload_store');
+
+const ProjectActions = require('./actions/project_actions');
+const ProjectStore = require('./stores/project_store');
+window.ProjectStore = ProjectStore;
+window.ProjectActions = ProjectActions;
 window.UploadStore = UploadStore;
 window.TodoStore = TodoStore;
 window.TodoActions = TodoActions;

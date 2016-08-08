@@ -2,6 +2,7 @@ const React = require('react');
 const SessionActions = require('../actions/session_actions');
 const SessionStore = require('../stores/session_store');
 const ErrorStore = require('../stores/error_store');
+const ProjectActions = require('../actions/project_actions');
 const hashHistory = require('react-router').hashHistory;
 
 
@@ -26,7 +27,7 @@ const Session = React.createClass({
 
   _sessionListener: function(){
     if (SessionStore.isSignedIn()){
-      this.redirectTo();
+      ProjectActions.getAllProjects();
     }
   },
 

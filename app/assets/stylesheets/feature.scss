@@ -1,7 +1,6 @@
 .feature-wrapper {
-
   border: 1px solid black;
-  width: 800px;
+  max-width: 800px;
   min-height: 500px;
   border-radius: 2%;
   margin: 20px auto;
@@ -12,5 +11,22 @@
 .feature-wrapper > div > h2 {
   font-size: 40px;
   font-weight: bolder;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
+}
+
+.project-container {
+  padding: 30px;
+}
+
+.feature-add-button {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin: auto;
+  width: 140px;
+  height: 50px;
+  border-radius: 5%;
+  cursor: pointer;
+  background: #f5efe6
+
 }

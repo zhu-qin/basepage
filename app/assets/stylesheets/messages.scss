@@ -4,6 +4,7 @@
 
 
 .message-list {
+  display: block;
   text-align: left;
 }
 
@@ -13,6 +14,23 @@
   border: 1px solid black;
 }
 
-.message-list {
+.message-reply-button {
+  margin-left: 100px;
+  color: red;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 7%;
+}
 
+.message-reply {
+  margin-left: 80px;
+  display: block;
+  text-align: left;
+}
+
+.message-parent-button {
+  color: blue;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 7%;
 }

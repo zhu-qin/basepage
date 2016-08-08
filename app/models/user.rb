@@ -6,10 +6,10 @@
 #  username        :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
-#  email           :string           not null
-#  main_project    :integer
+#  email           :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  main_project    :integer
 #
 
 class User < ActiveRecord::Base
@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
     class_name: "Message",
     foreign_key: :author_id
   )
+
+
 
   after_initialize :ensure_session_token
 

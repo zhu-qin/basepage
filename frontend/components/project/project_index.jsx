@@ -1,42 +1,44 @@
 const React = require('react');
 const NavigationContainer = require('./navigation_container');
+const SessionActions = require('../../actions/session_actions');
 const SessionStore = require('../../stores/session_store');
-const ResourceConstants = require('../../constants/resource_constants');
+const ProjectStore = require('../../stores/project_store');
+const hashHistory = require('react-router').hashHistory;
 
 const ProjectIndex = React.createClass({
   getInitialState: function (){
-    return {
-              messages: "",
-              todos: "",
-              events: "",
-              uploads: ""
-                                      };
+    this.navConstants = ["messages", "todos", "events", "uploads"];
+    return { currentProject: {} };
   },
 
   componentDidMount: function(){
-    this.resourceListener = ResourceStore.addListener(this._resourceStoreListener);
-    ResourceActions.getNavBarResources(SessionStore.userMainProject());
+    this.projectListener = ProjectStore.addListener(this._projectStoreListener);
+    this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
+    ProjectActions.getAllProjects();
+  },
+
+  _projectStoreListener: function () {
+    this.setState({currentProject: ProjectStore.getCurrentProject()});
+  },
+
+  _sessionStoreListener: function () {
+    if (!SessionStore.isSignedIn()) {
+      hashHistory.push('/session');
+    }
   },
 
   componentWillUnmount: function () {
-    this.resourceListener.remove();
+    this.projectListener.remove();
+    this.sessionListener.remove();
   },
 
-  // _resourceStoreListener: function () {
-  //   let messageButton = ResourceStore.first(ResourceConstants.MESSAGES).title;
-  //   let todoCount = ResourceStore.todoCompletionCount();
-  //   let todoButton = `${todoCount[0]}/${todoCount[1]}`;
-  //   let eventButton = ResourceStore.first(ResourceConstants.EVENTS).title;
-  //   this.setState({
-  //                     messages: messageButton,
-  //                     todos: todoButton,
-  //                     events: eventButton,
-  //                     uploads: "not ready"
-  //                                                               });
-  // },
+
+  _handleLogOut: function () {
+    SessionActions.signOut();
+  },
 
   render: function () {
-    let navigation = Object.keys(this.state).map((tab, index) => {
+    let navigation = this.navConstants.map((tab, index) => {
       return (
         <NavigationContainer
           key={tab}
@@ -45,10 +47,16 @@ const ProjectIndex = React.createClass({
       );
     });
 
+
     return (
       <div className="project-container">
+        <button className="nav-logout-button nav-list-item" onClick={this._handleLogOut}>Sign Out</button>
         <div className="nav-container">
-          <ul>
+
+          <h1 className="clear-fix">
+            {this.state.currentProject.name}
+          </h1>
+          <ul className="nav-list clear-fix">
             {navigation}
           </ul>
         </div>

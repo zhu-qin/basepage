@@ -25,10 +25,11 @@ MessageStore.find = function(id) {
 MessageStore.findChildren = function (id) {
   let childMessages = [];
   Object.keys(_messages).forEach( (messageId, index) => {
-    if (_messages[messageId].reply_to_id === id) {
+    if (parseInt(_messages[messageId].reply_to_id) === id) {
       childMessages.push(_messages[messageId]);
     }
   });
+
   return childMessages;
 };
 

@@ -1,18 +1,35 @@
-.nav-container > ul {
-  list-style-type: none;
-  display: inline-block;
-}
-
 .nav-list-item {
-  display: inline-block;
-  padding: 5px;
-  margin: 5px;
-  height: 40px;
+  display: block;
+  float: left;
+  padding: 20px;
   width: 110px;
-  font-size: 14px;
+  margin: 10px;
   font-weight: bold;
-  background-color: white;
-  color: black;
+  background: white;
   border: 1px solid black;
   border-radius: 7%;
+  cursor: pointer;
+}
+
+.project-container{
+  text-align: center;
+}
+
+.nav-container > h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.nav-list {
+  margin: auto;
+  max-width: 700px;
+}
+
+.nav-logout-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 24px;
 }

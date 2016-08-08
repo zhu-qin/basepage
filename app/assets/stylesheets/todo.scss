@@ -12,29 +12,24 @@
 .todo-completed-count {
   border-radius: 50%;
   border: 1px solid gray;
-  display: inline;
-  padding: 8px;
-  right: 0px;
-  text-align: right;
   float: right;
-  position: absolute;
-  bottom: 3px;
-  text-decoration: none;
+  padding: 5px;
 }
 
 .todo-create-link {
   padding: 5px;
-  background-color: white;
+  width: 100px;
   border: 1px solid gray;
   display: block;
-  width: 100px;
   margin-left: 10px;
   border-radius: 5%;
+  background: #f5efe6
 
 }
 
 .todo-list-item {
+  display: block;
   text-align: left;
-  margin: 6px;
+  padding: 5px;
   margin-left: 20px;
 }

@@ -24,12 +24,14 @@ const MessageIndex = React.createClass({
 
   render: function(){
     let messages = this.state.messages;
+    console.log(messages);
     let messageList = Object.keys(messages).map((id, index) => {
       if (!messages[id].reply_to_id) {
         return (
-          <span >
+          <span key={messages[id].id}>
+            <button className="message-parent-button">Reply to: {messages[id].author_name}</button>
+            {messages[id].author_name} SAYS: {messages[id].title}
             <MessageItem className="message-item" key={index} message={messages[id]}/>
-            <button className="message-reply-button">Reply to: {messages[id].author_name}</button>
           </span>
         );
       }
@@ -40,7 +42,8 @@ const MessageIndex = React.createClass({
       <div className="feature-wrapper">
         <div className="message-wrapper">
           <h2>Message Board</h2>
-          <ul className="message-list">
+          <button className="feature-add-button">Add a Message</button>
+          <ul className="message-list group">
             {messageList}
           </ul>
         </div>

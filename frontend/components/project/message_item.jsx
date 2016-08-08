@@ -5,16 +5,21 @@ const MessageItem = React.createClass({
 
   render: function () {
     let childMessages = MessageStore.findChildren(this.props.message.id);
-
     let messageList = childMessages.map( (message, index) => {
-      return (<MessageItem className="message-item" key={index} message={message}/>);
+
+      return (
+        <span key={message.id}>
+          <button className="message-reply-button">Reply to: {message.author_name}</button>
+          {message.author_name} SAYS: {message.title}
+          <MessageItem className="message-item" key={index} message={message}/>
+        </span>
+      );
     });
+
     return(
-      <ul className="message-list">
-        {this.props.message.reply_to_id}
-        <button className="message-reply-button">Reply to: {this.props.message.id}</button>
+      <ul className="message-reply group">
         {messageList}
-    </ul>
+      </ul>
     );
 
 
