@@ -34,7 +34,33 @@ const TodoActions = {
       actionType: TodoConstants.ADD_ONE_TODO,
       response: response
     });
+  },
+
+  deleteTodo: function(id) {
+    TodoUtil.deleteTodo(id, TodoActions.receiveDeleteTodo);
+
+  },
+
+  receiveDeleteTodo: function (response) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.DELETE_ONE_TODO,
+      response: response
+    });
+  },
+
+// Todo List Actions
+
+  createOneTodoList: function (todoListData) {
+    TodoUtil.createOneTodoList(todoListData, TodoActions.receiveOneTodoList);
+  },
+
+  receiveOneTodoList: function (todoList) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.ADD_ONE_TODO_LIST,
+      todoList: todoList
+    });
   }
+
 
 };
 

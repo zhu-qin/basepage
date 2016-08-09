@@ -1,8 +1,6 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const TodoConstants = require('../constants/todo_constants');
 const Store = require('flux/utils').Store;
-const hashHistory = require('react-router').hashHistory;
-const SessionStore = require('./session_store');
 
 const TodoStore = new Store(AppDispatcher);
 
@@ -33,21 +31,33 @@ TodoStore.resetTodos = function (todos) {
   _todos = todos;
 };
 
-TodoStore.updateOneTodo = function(todoToUpdate) {
-  let todos = _todos[todoToUpdate.todo_list_id].todos;
+TodoStore.findIndex = function (todoToFind) {
+  let todos = _todos[todoToFind.todo_list_id].todos;
   let ind;
   todos.forEach((todo, index) => {
-    if (todoToUpdate.id === todo.id){
+    if (todoToFind.id === todo.id){
       ind = index;
     }
   });
-  todos[ind] = todoToUpdate;
-  hashHistory.push(`/projects/${SessionStore.userMainProject()}/todos_index`);
+  return ind;
+};
+
+TodoStore.updateOneTodo = function(todoToUpdate) {
+  let todosList = _todos[todoToUpdate.todo_list_id];
+  todosList.todos[TodoStore.findIndex(todoToUpdate)] = todoToUpdate;
 };
 
 TodoStore.addOneTodo = function(todo) {
   _todos[todo.todo_list_id].todos.push(todo);
-  hashHistory.push(`/projects/${SessionStore.userMainProject()}/todos_index`);
+};
+
+TodoStore.deleteTodo = function(todoToDelete) {
+  let todosList = _todos[todoToDelete.todo_list_id];
+  delete todosList.todos[TodoStore.findIndex(todoToDelete)];
+};
+
+TodoStore.addOneTodoList = function(todoList) {
+  _todos[todoList.id] = todoList;
 };
 
 TodoStore.__onDispatch = function(payload){
@@ -59,9 +69,18 @@ TodoStore.__onDispatch = function(payload){
     case TodoConstants.RECEIVE_ONE_TODO:
       TodoStore.updateOneTodo(payload.response);
       TodoStore.__emitChange();
+
       break;
     case TodoConstants.ADD_ONE_TODO:
       TodoStore.addOneTodo(payload.response);
+      TodoStore.__emitChange();
+      break;
+    case TodoConstants.DELETE_ONE_TODO:
+      TodoStore.deleteTodo(payload.response);
+      TodoStore.__emitChange();
+      break;
+    case TodoConstants.RECEIVE_ONE_TODO_LIST:
+      TodoStore.addOneTodoList(payload.response);
       TodoStore.__emitChange();
       break;
   }

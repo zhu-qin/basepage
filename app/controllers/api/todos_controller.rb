@@ -24,6 +24,9 @@ class Api::TodosController < ApplicationController
   end
 
   def destroy
+    @todo = Todo.find(params[:id])
+    @todo.destroy
+    render :show
   end
 
 

@@ -18,34 +18,42 @@ const TodoList = React.createClass({
     TodoActions.updateOneTodo(todoUpdate);
   },
 
+  handleDelete: function (id, event) {
+    event.preventDefault();
+    TodoActions.deleteTodo(id);
+  },
+
   _redirectToCreateTodo: function () {
     hashHistory.push(`todo_lists/${this.props.todoList.id}/todos`);
   },
 
   render: function () {
+
     let todos = this.props.todoList.todos;
     let completedTodos = 0;
-
     let todoList = todos.map( (todo, index) => {
       let checkBox;
+      let deleteButton;
       if (todo.completion) {
         completedTodos += 1;
         checkBox = "checked";
+        deleteButton = <button className="button-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
       }
         return (
           <li className="todo-list-item" key={index}>
             <input className="checkbox" type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
+            {deleteButton}
             {todo.title}
           </li>
         );
       });
 
-      let todoCompleteCount = <div className="todo-completed-count">{`${completedTodos}/${todos.length}`}</div>;
+      // let todoCompleteCount = <div className="todo-completed-count">{`${completedTodos}/${todos.length}`}</div>;
 
     return (
       <li>
         <Link to={`todo_lists/${this.props.todoList.id}/edit`} className="todo-link">
-          {todoCompleteCount}
+
           {this.props.todoList.title}
         </Link>
         <ul>

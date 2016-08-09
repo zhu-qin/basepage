@@ -5,6 +5,7 @@ const hashHistory = require('react-router').hashHistory;
 const SessionStore = require('./session_store');
 
 let _messages = {};
+let _saved = false;
 
 const MessageStore = new Store(AppDispatcher);
 
@@ -18,6 +19,7 @@ MessageStore.resetMessages = function (messages) {
 
 MessageStore.addOneMessage = function (message) {
   _messages[message.id] = message;
+  _saved = true;
   hashHistory.push(`projects/${SessionStore.userMainProject()}/messages_index`);
 };
 

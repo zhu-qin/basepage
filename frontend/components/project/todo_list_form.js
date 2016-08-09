@@ -1,6 +1,7 @@
 const React = require('react');
 const TodoListActions = require('../../actions/todo_actions');
 const SessionStore = require('../../stores/session_store');
+const Link = require('react-router').Link;
 
 const TodoListForm = React.createClass({
   getInitialState: function () {
@@ -24,10 +25,9 @@ const TodoListForm = React.createClass({
     TodoActions.createOneTodoList(this.state);
   },
 
-
   render: function () {
     return(
-      <div className="todo-create-form">
+      <div className="post-wrapper">
         <div>
           <h2>Create a To-do List</h2>
           <form className="todo-form" onSubmit={this._handleSubmit}>
@@ -35,9 +35,10 @@ const TodoListForm = React.createClass({
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
             <label>Body:
-              <input type="text" onChange={this._handleChange("body")} value={this.state.body}/>
+              <input type="textarea" onChange={this._handleChange("body")} value={this.state.body}/>
             </label>
-            <input className="todo-create-link" type="submit" value="Create To-do List"/>
+            <input className="button-form" type="submit" value="Create To-do List"/>
+            <Link to={`projects/${SessionStore.userMainProject()}/todos_index`} className="button-form" >Cancel</Link>
           </form>
         </div>
       </div>

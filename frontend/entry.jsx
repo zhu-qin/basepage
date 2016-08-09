@@ -19,6 +19,7 @@ const UploadIndex = require('./components/project/upload_index');
 
 // Components Forms
 const TodoForm = require('./components/project/todo_form');
+const TodoListForm = require('./components/project/todo_list_form');
 const MessageForm = require('./components/project/message_form');
 
 // Stores
@@ -38,6 +39,7 @@ const AppRouter = (
 
       <Route path="todos_index" component={TodoIndex} >
         <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
+        <Route path="/projects/:projectId/todo_list_new" component={TodoListForm}/>
       </Route>
 
       <Route path="messages_index" component={MessageIndex}>

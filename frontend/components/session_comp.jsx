@@ -66,10 +66,10 @@ const Session = React.createClass({
       return (<li key={index}>{error}</li>);
     });
 
-    let signUpButton = <input onClick={this._handleSignUp} type="button" value="Sign Up" />;
-    let submitButton = <input type="submit" value="Sign In" />;
+    let signUpButton = <input className="button-main" onClick={this._handleSignUp} type="button" value="Sign Up" />;
+    let submitButton = <input className="button-main" type="submit" value="Sign In" />;
     if (this.props.route.path === "/sign_up") {
-      submitButton = <input type="submit" value="Sign Up" />;
+      submitButton = <input className="button-main" type="submit" value="Sign Up" />;
       signUpButton = "";
     }
 
@@ -92,7 +92,7 @@ const Session = React.createClass({
             <div className="session-buttons-wrapper clear-fix">
               {submitButton}
               {signUpButton}
-              <input onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+              <input className="button-main" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
             </div>
         </form>
         <ul>

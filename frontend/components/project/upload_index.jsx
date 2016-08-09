@@ -91,7 +91,7 @@ const UploadIndex = React.createClass({
     }
 
     return(
-      <div className="feature-wrapper">
+      <div className="feature-wrapper clear-fix">
         <div className="upload-wrapper">
           <h2>Docs & Files</h2>
             {fullView}

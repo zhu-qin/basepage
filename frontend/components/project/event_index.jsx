@@ -24,7 +24,7 @@ const EventIndex = React.createClass({
 
   render: function(){
     return(
-      <div className="feature-wrapper">
+      <div className="feature-wrapper clear-fix">
         <div className="event-wrapper">
           <h2>Schedule</h2>
           <ul>

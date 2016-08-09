@@ -45,7 +45,7 @@ const MessageIndex = React.createClass({
     });
 
     return(
-      <div className="feature-wrapper">
+      <div className="feature-wrapper clear-fix">
         <div className="message-wrapper">
           <h2>Message Board</h2>
           <button className="feature-add-button" onClick={this._handleClickToReply.bind(null, 0)}>Post a Message</button>

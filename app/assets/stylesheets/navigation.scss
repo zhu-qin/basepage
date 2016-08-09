@@ -1,14 +1,16 @@
 .nav-list-item {
   display: block;
   float: left;
-  padding: 20px;
-  width: 110px;
+  font-size: 12;
+  padding: 20px 10px;;
+  width: 130px;
   margin: 10px;
   font-weight: bold;
-  background: white;
-  border: 1px solid black;
   border-radius: 7%;
   cursor: pointer;
+  background: #3cb371;
+  color: white;
+  box-shadow: 4px 4px #339961
 }
 
 .project-container{
