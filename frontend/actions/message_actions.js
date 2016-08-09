@@ -15,8 +15,8 @@ const MessageActions = {
     });
   },
 
-  getOneMessage: function(message){
-    MessageUtil.getOneMessage(message, MessageActions.receiveOneMessage);
+  createOneMessage: function(message){
+    MessageUtil.createOneMessage(message, MessageActions.receiveOneMessage);
   },
 
   receiveOneMessage: function(message){

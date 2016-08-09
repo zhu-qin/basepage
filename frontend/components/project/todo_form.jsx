@@ -30,7 +30,7 @@ const TodoForm = React.createClass({
 
   render: function () {
     return(
-      <div className="feature-wrapper">
+      <div className="todo-create-form">
         <div className="message-wrapper">
           <h2>Create a to-do</h2>
           <form className="todo-form" onSubmit={this._handleSubmit}>

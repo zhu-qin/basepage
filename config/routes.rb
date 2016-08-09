@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     resources :todos,                only: [:update, :show, :destroy]
     resources :projects,             only: [:update, :destroy, :index, :create]
-    resources :messages,             only: [:update, :destroy, :index, :create]
+    resources :messages,             only: [:update, :destroy]
 
   end
 

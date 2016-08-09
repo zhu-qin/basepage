@@ -20,6 +20,7 @@ const UploadIndex = require('./components/project/upload_index');
 
 // Components Forms
 const TodoForm = require('./components/project/todo_form');
+const MessageForm = require('./components/project/message_form');
 
 // Stores
 const SessionStore = require('./stores/session_store');
@@ -94,10 +95,16 @@ const AppRouter = (
     <Route path="/base_pages" component={HomeBasePage} />
     <Route path="projects/:projectId" component={ProjectIndex} >
       <IndexRoute component={MessageIndex} />
-      <Route path="todos_index" component={TodoIndex} />
-      <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
+
+      <Route path="todos_index" component={TodoIndex} >
+        <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
+      </Route>
+
+      <Route path="messages_index" component={MessageIndex}>
+        <Route path="/message_board/:messageId/reply" component={MessageForm}></Route>
+      </Route>
+      
       <Route path="events_index" component={EventIndex} />
-      <Route path="messages_index" component={MessageIndex} />
       <Route path="uploads_index" component={UploadIndex} />
 
     </Route>

@@ -32,7 +32,6 @@ const Session = React.createClass({
   },
 
   redirectTo: function(){
-    // come back to this later
     hashHistory.push('/projects/' + SessionStore.userMainProject());
   },
 
@@ -53,7 +52,7 @@ const Session = React.createClass({
     } else if (this.props.location.pathname === "/session"){
       SessionActions.signIn(this.state);
     } else {
-      SessionActions.signIn({username: "qin", password: "password"});
+      SessionActions.signIn({username: "Qin", password: "password"});
     }
   },
 

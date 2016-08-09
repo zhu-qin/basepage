@@ -10,6 +10,17 @@ const MessageUtil = {
         successCallback(response);
       }
     });
+  },
+
+  createOneMessage: function (message, successCallback) {
+    $.ajax({
+      type: "POST",
+      url: `api/projects/${message.project_id}/messages`,
+      data: {message: message},
+      success: function (response) {
+        successCallback(response);
+      }
+    });
   }
 
 };

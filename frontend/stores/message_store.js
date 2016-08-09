@@ -1,6 +1,8 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
 const MessageConstants = require('../constants/message_constants');
+const hashHistory = require('react-router').hashHistory;
+const SessionStore = require('./session_store');
 
 let _messages = {};
 
@@ -16,6 +18,7 @@ MessageStore.resetMessages = function (messages) {
 
 MessageStore.addOneMessage = function (message) {
   _messages[message.id] = message;
+  hashHistory.push(`projects/${SessionStore.userMainProject()}/messages_index`);
 };
 
 MessageStore.find = function(id) {
@@ -40,6 +43,7 @@ MessageStore.__onDispatch = function(payload) {
       MessageStore.__emitChange();
       break;
     case MessageConstants.RECEIVE_ALL_MESSAGES:
+
       MessageStore.resetMessages(payload.messages);
       MessageStore.__emitChange();
       break;
