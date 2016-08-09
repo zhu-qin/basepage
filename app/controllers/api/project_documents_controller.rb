@@ -5,7 +5,7 @@ class Api::ProjectDocumentsController < ApplicationController
     if @project_document.save
       render json: @project_document
     else
-      render json: @project_document.errors.full_messages
+      render json: @project_document.errors.full_messages, status: 400
     end
   end
 

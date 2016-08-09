@@ -5,7 +5,7 @@ class Api::TodosController < ApplicationController
     if @todo.save
       render :show
     else
-      render @todo.errors.full_messages
+      render @todo.errors.full_messages, status: 400
     end
   end
 
@@ -19,7 +19,7 @@ class Api::TodosController < ApplicationController
     if @todo.update(todo_params)
       render json: @todo
     else
-      render json: ["something went wrong"]
+      render json: ["something went wrong"], status: 400
     end
   end
 

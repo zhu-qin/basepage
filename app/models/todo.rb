@@ -14,9 +14,12 @@
 #
 
 class Todo < ActiveRecord::Base
+  validates :todo_list_id, :title, :author_id, presence: true
+
   belongs_to(
     :todo_list,
     class_name: "TodoList",
     foreign_key: :todo_list_id
   )
+  
 end

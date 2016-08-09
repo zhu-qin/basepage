@@ -23,7 +23,7 @@ const ProjectIndex = React.createClass({
 
   _sessionStoreListener: function () {
     if (!SessionStore.isSignedIn()) {
-      hashHistory.push('/session');
+      hashHistory.push('/');
     }
   },
 
@@ -52,7 +52,6 @@ const ProjectIndex = React.createClass({
       <div className="project-container">
         <button className="nav-logout-button nav-list-item" onClick={this._handleLogOut}>Sign Out</button>
         <div className="nav-container">
-
           <h1 className="clear-fix">
             {this.state.currentProject.name}
           </h1>

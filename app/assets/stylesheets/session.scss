@@ -23,3 +23,39 @@
   padding: 20px;
   background: yellow;
 }
+
+.session-form {
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  background: white;
+  padding: 80px;
+  border-radius: 8%;
+  margin-top: 100px;
+}
+
+.session-button{
+  display: block;
+  padding: 20px;
+  width: 100px;
+  float: left;
+}
+
+.session-form{
+
+}
+
+.session-form label{
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.session-form input {
+  margin-left: 5px;
+  float: left;
+
+  display: block;
+  border: 1px solid black;
+
+}

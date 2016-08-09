@@ -5,7 +5,7 @@ class Api::ProjectsController < ApplicationController
     if @project.save
       render :show
     else
-      render @project.errors.full_messages
+      render @project.errors.full_messages, status: 400
     end
   end
 

@@ -11,6 +11,7 @@ const Session = React.createClass({
     return {
       username: "",
       password: "",
+      email: "",
       errors: []
     };
   },
@@ -31,10 +32,6 @@ const Session = React.createClass({
     }
   },
 
-  redirectTo: function(){
-    hashHistory.push('/projects/' + SessionStore.userMainProject());
-  },
-
   _errorStoreListener: function(){
     this.setState( {errors: ErrorStore.all()} );
   },
@@ -45,15 +42,23 @@ const Session = React.createClass({
     };
   },
 
-  _handleSubmit: function(event){
-    event.preventDefault();
-    if (this.props.location.pathname === "/new_user"){
-      SessionActions.signUp(this.state);
-    } else if (this.props.location.pathname === "/session"){
+  _handleSignIn: function(event){
+      event.preventDefault();
+    if (this.props.route.path === "/") {
       SessionActions.signIn(this.state);
-    } else {
-      SessionActions.signIn({username: "Qin", password: "password"});
+    } else if (this.props.route.path === "/sign_up"){
+      SessionActions.signUp(this.state);
     }
+  },
+
+  _handleGuestSignIn: function(event){
+    event.preventDefault();
+    SessionActions.signIn({username: "Qin", password: "password"});
+  },
+
+  _handleSignUp: function(event){
+    event.preventDefault();
+    hashHistory.push('/sign_up');
   },
 
   render: function(){
@@ -61,28 +66,34 @@ const Session = React.createClass({
       return (<li key={index}>{error}</li>);
     });
 
-    let submitButton;
-    if (this.props.location.pathname === "/new_user") {
+    let signUpButton = <input onClick={this._handleSignUp} type="button" value="Sign Up" />;
+    let submitButton = <input type="submit" value="Sign In" />;
+    if (this.props.route.path === "/sign_up") {
       submitButton = <input type="submit" value="Sign Up" />;
-    } else if (this.props.location.pathname === "/session"){
-      submitButton = <input type="submit" value="Sign In" />;
-    } else {
-      submitButton = <input type="submit" value="Guest Sign In" />;
+      signUpButton = "";
     }
-
 
     return(
       <div className="session-form">
-        <form onSubmit={this._handleSubmit}>
-          <label>
-            Username:
-            <input type="text" value={this.state.username} onChange={this._updateField("username")}/>
-          </label>
-          <label>
-            Password:
-            <input type="password" value={this.state.password} onChange={this._updateField("password")}/>
-          </label>
-          {submitButton}
+        <h1> Sign In</h1>
+          <form onSubmit={this._handleSignIn}>
+            <label>
+              Username:
+              <input type="text" value={this.state.username} onChange={this._updateField("username")}/>
+            </label>
+            <label>
+              Email:
+              <input type="password" value={this.state.email} onChange={this._updateField("email")}/>
+            </label>
+            <label>
+              Password:
+              <input type="password" value={this.state.password} onChange={this._updateField("password")}/>
+            </label>
+            <div className="session-buttons-wrapper clear-fix">
+              {submitButton}
+              {signUpButton}
+              <input onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+            </div>
         </form>
         <ul>
           {errors}
@@ -90,6 +101,7 @@ const Session = React.createClass({
       </div>
     );
   }
+
 
 
 });

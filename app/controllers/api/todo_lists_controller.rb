@@ -5,7 +5,7 @@ class Api::TodoListsController < ApplicationController
     if @todo_list.save
       render :show
     else
-      render @todo_list.errors.full_messages
+      render @todo_list.errors.full_messages, status: 400
     end
   end
 

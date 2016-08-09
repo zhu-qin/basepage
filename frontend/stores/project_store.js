@@ -18,6 +18,8 @@ ProjectStore.resetProjects = function (projects) {
   if (_projects[SessionStore.userMainProject()]){
     _currentProject = _projects[SessionStore.userMainProject()];
     ProjectStore.goToCurrentProject();
+  } else {
+    hashHistory.push(`projects/new`);
   }
 };
 
