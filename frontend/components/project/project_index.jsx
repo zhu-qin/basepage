@@ -50,9 +50,9 @@ const ProjectIndex = React.createClass({
 
     return (
       <div className="project-container">
-        <button className="nav-logout-button nav-list-item" onClick={this._handleLogOut}>Sign Out</button>
+        <button className="sign-out-button button-main" onClick={this._handleLogOut}>Sign Out</button>
         <div className="nav-container">
-          <h1 className="clear-fix">
+          <h1 className="project-title clear-fix">
             {this.state.currentProject.name}
           </h1>
           <ul className="nav-list clear-fix">

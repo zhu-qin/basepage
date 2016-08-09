@@ -66,11 +66,20 @@ const Session = React.createClass({
       return (<li key={index}>{error}</li>);
     });
 
-    let signUpButton = <input className="button-main" onClick={this._handleSignUp} type="button" value="Sign Up" />;
-    let submitButton = <input className="button-main" type="submit" value="Sign In" />;
+    let signIn = (
+      <div className="session-buttons-wrapper clear-fix">
+        <input className="button-main session-button" onClick={this._handleSignUp} type="button" value="Sign Up" />
+        <input className="button-main session-button" type="submit" value="Sign In" />
+        <input className="button-main session-button" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+      </div>
+              );
     if (this.props.route.path === "/sign_up") {
-      submitButton = <input className="button-main" type="submit" value="Sign Up" />;
-      signUpButton = "";
+      signIn = (
+      <div className="session-buttons-wrapper clear-fix">
+        <input className="button-main session-button" onClick={this._handleSignIn} type="button" value="Sign Up" />
+        <input className="button-main session-button" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+      </div>
+    );
     }
 
     return(
@@ -89,11 +98,7 @@ const Session = React.createClass({
               Password:
               <input type="password" value={this.state.password} onChange={this._updateField("password")}/>
             </label>
-            <div className="session-buttons-wrapper clear-fix">
-              {submitButton}
-              {signUpButton}
-              <input className="button-main" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
-            </div>
+            {signIn}
         </form>
         <ul>
           {errors}

@@ -1,0 +1,42 @@
+.post-wrapper form label {
+  padding: 5px;
+  display: block;
+}
+.post-wrapper form input{
+  border: 1px solid #339961;
+  margin: auto;
+  padding: 5px;
+  display: block;
+  width: 250px;
+}
+.button-delete {
+  padding: 5px;
+  margin: 0 10px;
+  border-radius: 5%;
+  background: #3cb371;
+  border: none;
+}
+
+.button-form {
+  margin: 0 30px 0 0;
+  float: left;
+  font-size: 12px;
+  width: 100px;
+  padding: 7px;
+  display: block;
+  border-radius: 7%;
+  cursor: pointer;
+  background: #3cb371;
+  box-shadow: 4px 4px #339961
+}
+
+.post-wrapper {
+  z-index: 100;
+  padding: 10px;
+  right: 200px;
+  width: 300px;
+  height: 280px;
+  background: #f5efe6;
+  border: 1px solid black;
+  border-radius: 5%;
+}

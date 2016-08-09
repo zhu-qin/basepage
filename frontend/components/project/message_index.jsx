@@ -36,7 +36,7 @@ const MessageIndex = React.createClass({
       if (!messages[id].reply_to_id) {
         return (
           <span key={id}>
-            <button className="message-parent-button" onClick={this._handleClickToReply.bind(null, id)}>Reply to: {messages[id].author_name}</button>
+            <button className="parent-button reply-button" onClick={this._handleClickToReply.bind(null, id)}>Reply to: {messages[id].author_name}</button>
             {messages[id].author_name} SAYS: {messages[id].title}
             <MessageItem className="message-item" key={index} message={messages[id]}/>
           </span>

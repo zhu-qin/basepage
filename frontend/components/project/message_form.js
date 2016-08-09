@@ -54,7 +54,7 @@ const MessageForm = React.createClass({
               <input type="textarea" onChange={this._handleChange("body")} value={this.state.body}/>
             </label>
             <input className="button-form" type="submit" value="Post Message"/>
-            <Link to={`/projects/${SessionStore.userMainProject()}/messages_index`}></Link>
+            <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/messages_index`}>Cancel</Link>
           </form>
       </div>
     );

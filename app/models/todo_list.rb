@@ -12,7 +12,7 @@
 #
 
 class TodoList < ActiveRecord::Base
-  validates :title, :project_id, :author_id, presence: true 
+  validates :title, :project_id, :author_id, presence: true
 
   belongs_to(
     :project,
@@ -23,6 +23,7 @@ class TodoList < ActiveRecord::Base
   has_many(
     :todos,
     class_name: "Todo",
-    foreign_key: :todo_list_id
+    foreign_key: :todo_list_id,
+    dependent: :destroy
   )
 end

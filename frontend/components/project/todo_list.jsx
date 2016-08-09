@@ -52,8 +52,7 @@ const TodoList = React.createClass({
 
     return (
       <li>
-        <Link to={`todo_lists/${this.props.todoList.id}/edit`} className="todo-link">
-
+        <Link to={`/todo_lists/${this.props.todoList.id}/edit`} className="todo-link">
           {this.props.todoList.title}
         </Link>
         <ul>

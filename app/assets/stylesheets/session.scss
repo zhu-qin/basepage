@@ -1,42 +1,48 @@
-// Place all the styles related to the sessions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-
-.session-links {
-  float: right;
-  width: 100px;
-  height: 70px;
-}
-.session-links a {
-  margin: 20px;
-  border: 1px solid black;
-  float: left;
-  padding: 10px 20px;
-  display: block;
-  border-radius: 5%;
-  background-color: white;
-}
-
-
-.session-wrapper{
-  padding: 20px;
-  background: yellow;
-}
-
 .session-form {
+  width: 500px;
   margin: auto;
-  width: 350px;
-  height: 250px;
+  padding: 50px;
   background: white;
-  padding: 80px;
-  border-radius: 8%;
-  margin-top: 100px;
+  border-radius: 10%;
 }
 
-.session-button{
-  display: block;
-  padding: 20px;
-  width: 100px;
+.session-buttons-wrapper {
+  width: 420px;
+  margin-top: 45px;
+  margin: auto;
+  text-align: center;
+}
+
+.session-buttons-wrapper > input{
+  margin: 20px 10px ;
   float: left;
+}
+
+.session-form input {
+  box-shadow: 4px 4px #339961;
+  border: 1px solid #339961;
+  padding: 10px;
+}
+
+.session-form span {
+  padding: 5px;
+}
+
+.session-form h1 {
+  margin: auto;
+  display: block;
+  font-size: 34px;
+  font-weight: bolder;
+  color: #339961;
+  text-align: center;
+}
+
+.sign-out-button {
+  float: right;
+  position: absolute;
+  right: 50px;
+  padding: 20px;
+  border: 1px solid #ff9933;
+  background: #ff9933;
+  box-shadow: 4px 4px #ff6600;
 }

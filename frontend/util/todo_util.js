@@ -38,7 +38,7 @@ const TodoUtil = {
       type: "DELETE",
       url: `api/todos/${id}`,
       success: function (response) {
-    
+
         successCallback(response);
       }
     });
@@ -51,6 +51,16 @@ const TodoUtil = {
       type: "POST",
       url: `api/projects/${todoListData.project_id}/todo_lists`,
       data: {todo_list: todoListData},
+      success: function (response) {
+        successCallback(response);
+      }
+    });
+  },
+
+  destroyList: function (todoListId, successCallback) {
+    $.ajax ({
+      type: "DELETE",
+      url: `api/todo_lists/${todoListId}`,
       success: function (response) {
         successCallback(response);
       }

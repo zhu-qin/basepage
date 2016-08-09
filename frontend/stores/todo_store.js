@@ -27,6 +27,10 @@ TodoStore.todoCount = function(){
   return `${count}/${length}`;
 };
 
+TodoStore.findList = function (id) {
+  return Object.assign({}, _todos[id]);
+};
+
 TodoStore.resetTodos = function (todos) {
   _todos = todos;
 };
@@ -60,6 +64,10 @@ TodoStore.addOneTodoList = function(todoList) {
   _todos[todoList.id] = todoList;
 };
 
+TodoStore.removeList = function (todoList) {
+  delete _todos[todoList.id];
+};
+
 TodoStore.__onDispatch = function(payload){
   switch (payload.actionType) {
     case TodoConstants.RECEIVE_TODOS:
@@ -69,7 +77,6 @@ TodoStore.__onDispatch = function(payload){
     case TodoConstants.RECEIVE_ONE_TODO:
       TodoStore.updateOneTodo(payload.response);
       TodoStore.__emitChange();
-
       break;
     case TodoConstants.ADD_ONE_TODO:
       TodoStore.addOneTodo(payload.response);
@@ -80,7 +87,11 @@ TodoStore.__onDispatch = function(payload){
       TodoStore.__emitChange();
       break;
     case TodoConstants.RECEIVE_ONE_TODO_LIST:
-      TodoStore.addOneTodoList(payload.response);
+      TodoStore.addOneTodoList(payload.todoList);
+      TodoStore.__emitChange();
+      break;
+    case TodoConstants.REMOVE_TODO_LIST:
+      TodoStore.removeList(payload.todoList);
       TodoStore.__emitChange();
       break;
   }

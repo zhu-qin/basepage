@@ -8,12 +8,12 @@
   text-align: left;
 }
 
-.message-reply-button {
+.reply-button {
   margin-left: 100px;
-  color: red;
   padding: 5px;
   margin: 5px;
   border-radius: 7%;
+  color: white;
 }
 
 .message-reply {
@@ -22,25 +22,16 @@
   text-align: left;
 }
 
-.message-parent-button {
-  color: blue;
-  padding: 5px;
-  margin: 5px;
-  border-radius: 7%;
+.parent-button {
+  background: #000099;
+}
+
+.child-button {
+  background: #cc0000;
 }
 
 .message-reply-place-holder {
   position: absolute;
   top: 180px;
   right: 40px;
-}
-
-.message-reply-form {
-  padding: 10px;
-  top: 180px;
-  right: 40px;
-  width: 300px;
-  height: 280px;
-  border: 1px solid black;
-  border-radius: 5%;
 }

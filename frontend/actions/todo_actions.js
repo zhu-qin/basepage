@@ -56,11 +56,21 @@ const TodoActions = {
 
   receiveOneTodoList: function (todoList) {
     AppDispatcher.dispatch({
-      actionType: TodoConstants.ADD_ONE_TODO_LIST,
+      actionType: TodoConstants.RECEIVE_ONE_TODO_LIST,
+      todoList: todoList
+    });
+  },
+
+  destroyList: function (todoListId) {
+    TodoUtil.destroyList(todoListId, TodoActions.removeList);
+  },
+
+  removeList: function (todoList) {
+    AppDispatcher.dispatch({
+      actionType: TodoConstants.REMOVE_TODO_LIST,
       todoList: todoList
     });
   }
-
 
 };
 
