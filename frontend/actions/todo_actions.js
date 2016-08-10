@@ -70,6 +70,7 @@ const TodoActions = {
   },
 
   removeList: function (todoList) {
+
     AppDispatcher.dispatch({
       actionType: TodoConstants.REMOVE_TODO_LIST,
       todoList: todoList

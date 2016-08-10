@@ -57,11 +57,10 @@ const TodoUtil = {
   },
 
   updateTodoList: function (todoListData, successCallback) {
-
     $.ajax ({
       type: "PATCH",
       url: `api/todo_lists/${todoListData.id}`,
-      data: {todo_list: todoListData}, 
+      data: {todo_list: todoListData},
       success: function (response) {
         successCallback(response);
       }
