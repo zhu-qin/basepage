@@ -57,6 +57,7 @@ const TodoUtil = {
   },
 
   updateTodoList: function (todoListData, successCallback) {
+    delete todoListData.todos;
     $.ajax ({
       type: "PATCH",
       url: `api/todo_lists/${todoListData.id}`,

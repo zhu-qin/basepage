@@ -27,9 +27,7 @@ const TodoIndex = React.createClass({
   },
 
   _todoStoreListener: function () {
-
     this.setState( {todoLists: TodoStore.all() });
-
   },
 
   _redirectToCreateTodoList: function (event){

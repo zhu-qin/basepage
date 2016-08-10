@@ -31,7 +31,12 @@ const TodoList = React.createClass({
 
     let todos = this.props.todoList.todos;
     let completedTodos = 0;
-    let todoList = todos.map( (todo, index) => {
+
+    let checkedTodos = [];
+    let uncheckedTodos = [];
+
+
+    let todoList = todos.forEach((todo, index) => {
       let checkBox;
       let deleteButton;
       if (todo.completion) {
@@ -39,14 +44,21 @@ const TodoList = React.createClass({
         checkBox = "checked";
         deleteButton = <button className="button-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
       }
-        return (
-          <li className="todo-list-item" key={index}>
-            <input className="checkbox" type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
-            {deleteButton}
-            {todo.title}
-          </li>
-        );
-      });
+      let todoToShow = (
+        <li className="todo-list-item" key={todo.id}>
+          <input className="checkbox" type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
+          {deleteButton}
+          {todo.title}
+        </li>
+      );
+
+      if (todo.completion) {
+        checkedTodos.push(todoToShow);
+      } else {
+        uncheckedTodos.push(todoToShow);
+      }
+
+    });
 
       // let todoCompleteCount = <div className="todo-completed-count">{`${completedTodos}/${todos.length}`}</div>;
 
@@ -56,8 +68,9 @@ const TodoList = React.createClass({
           {this.props.todoList.title}
         </Link>
         <ul>
-          {todoList}
+          {uncheckedTodos}
           <button onClick={this._redirectToCreateTodo} className="todo-create-link">Add a to-do</button>
+          {checkedTodos}
         </ul>
       </li>
     );

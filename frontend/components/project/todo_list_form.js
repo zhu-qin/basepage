@@ -9,7 +9,6 @@ const TodoListForm = React.createClass({
   getInitialState: function () {
     return { todoList: {title: "", body: ""},
              redirect: false
-
                                               };
   },
 
