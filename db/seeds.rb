@@ -12,11 +12,11 @@ end
 
 Project.create(name: "Full-Stack Project", description: "Capstone Project", manager_id: 1)
 
-["Most important ToDos", "Not so important Todos"].each do |title|
+["Important", "Not so Important"].each do |title|
   TodoList.create(title: title, body: title, project_id: 1, author_id: 1)
 end
 
-["Get Food", "Sleep", "Do the laundry", "Finish Capstone"].each do |todo|
+["Get Food", "Sleep", "Finish Capstone"].each do |todo|
   Todo.create(title: todo, body: todo, author_id: 1, todo_list_id: 1)
 end
 
@@ -32,6 +32,6 @@ end
   Event.create(title: event, body:event, project_id: 1)
 end
 
-["dog pic"].each do |doc|
+["Dog Pic"].each do |doc|
   ProjectDocument.create(title: doc, project_id: 1)
 end

@@ -61,6 +61,10 @@ const TodoActions = {
     });
   },
 
+  updateTodoList: function (todoList) {
+    TodoUtil.updateTodoList(todoList, TodoActions.receiveOneTodoList);
+  },
+
   destroyList: function (todoListId) {
     TodoUtil.destroyList(todoListId, TodoActions.removeList);
   },

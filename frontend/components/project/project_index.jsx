@@ -7,7 +7,7 @@ const hashHistory = require('react-router').hashHistory;
 
 const ProjectIndex = React.createClass({
   getInitialState: function (){
-    this.navConstants = ["messages", "todos", "events", "uploads"];
+    this.navConstants = ["messages", "todos", "calender_events", "uploads"];
     return { currentProject: {} };
   },
 

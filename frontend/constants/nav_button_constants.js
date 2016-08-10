@@ -1,6 +1,6 @@
 module.exports = {
   "todos": "To-dos",
-  "events": "Schedule",
+  "calender_events": "Schedule",
   "messages": "Message Board",
   "uploads": "Docs & Files",
 };

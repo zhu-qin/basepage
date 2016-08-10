@@ -25,8 +25,6 @@ const MessageActions = {
       message: message
     });
   }
-
-
 };
 
 

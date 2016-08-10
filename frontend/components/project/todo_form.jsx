@@ -24,6 +24,7 @@ const TodoForm = React.createClass({
     this.state.todo_list_id = this.props.params.todoListId;
     this.state.author_id = SessionStore.getCurrentUser().id;
     TodoActions.createOneTodo(this.state);
+    this.setState({title:"", body:""});
   },
 
   render: function () {

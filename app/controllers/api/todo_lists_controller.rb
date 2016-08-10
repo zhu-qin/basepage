@@ -16,7 +16,7 @@ class Api::TodoListsController < ApplicationController
 
   def update
     @todo_list = TodoList.find(params[:id])
-    if @todo_list.update
+    if @todo_list.update(todo_list_params)
       render :show
     else
       render @todo_list.errors.full_messages, status: 400

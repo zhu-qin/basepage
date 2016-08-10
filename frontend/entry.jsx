@@ -13,7 +13,7 @@ const hashHistory = ReactRouter.hashHistory;
 const Session = require('./components/session_comp');
 const ProjectIndex = require('./components/project/project_index');
 const TodoIndex = require('./components/project/todo_index');
-const EventIndex = require('./components/project/event_index');
+const CalenderEventIndex = require('./components/project/calender_event_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
 
@@ -47,7 +47,7 @@ const AppRouter = (
         <Route path="/message_board/:messageId/reply" component={MessageForm} />
       </Route>
 
-      <Route path="events_index" component={EventIndex} />
+      <Route path="calender_events_index" component={CalenderEventIndex} />
       <Route path="uploads_index" component={UploadIndex} />
 
     </Route>

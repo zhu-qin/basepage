@@ -42,6 +42,7 @@ const TodoListForm = React.createClass({
     this.state.project_id = SessionStore.userMainProject();
     this.state.author_id = SessionStore.getCurrentUser().id;
     TodoActions.createOneTodoList(this.state);
+    this.setState( {title: "", body: ""} );
   },
 
   _handleUpdate: function (event) {
