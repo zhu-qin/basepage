@@ -25,7 +25,7 @@ const CalenderEventUtil = {
   createCalenderEvent: function (calender_event, successCallback, failureCallback){
     $.ajax ({
       type: "POST",
-      url: `api/calender_events/${calender_event.calender_event_id}/calender_events`,
+      url: `api/projects/${calender_event.project_id}/calender_events`,
       data: {calender_events: calender_event},
       success: function (response) {
         successCallback(response);

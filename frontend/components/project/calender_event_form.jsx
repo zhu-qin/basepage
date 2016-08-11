@@ -47,9 +47,7 @@ const CalenderEventForm = React.createClass({
     this.state.start = $(".start-time").datepicker().val();
     this.state.finish = $(".finish-time").datepicker().val();
 
-
-    console.log(this.state);
-    // CalenderEventActions.createOneCalenderEvent(this.state);
+    CalenderEventActions.createCalenderEvent(this.state);
   },
 
   _handleUpdate: function (event) {
@@ -66,6 +64,7 @@ const CalenderEventForm = React.createClass({
     $(".start-time").datepicker( {dateFormat: "yy-mm-dd" } );
     $(".finish-time").datepicker( {dateFormat: "yy-mm-dd" } );
   },
+
 
   render: function () {
 

@@ -6,7 +6,7 @@ class Api::CalenderEventsController < ApplicationController
   end
 
   def create
-    @calender_event = Event.new(calender_event_params)
+    @calender_event = CalenderEvent.new(calender_event_params)
     if @calender_event.save
       render :show
     else
@@ -21,6 +21,6 @@ class Api::CalenderEventsController < ApplicationController
   end
 
   def calender_event_params
-    params.require(calender_event).permit
+    params.require(:calender_events).permit(:title, :body, :start, :finish, :id, :project_id)
   end
 end

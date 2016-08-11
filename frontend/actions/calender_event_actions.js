@@ -15,11 +15,11 @@ const CalenderEventActions = {
     });
   },
 
-  createOneCalenderEvent: function(calender_event){
-    CalenderEventUtil.createOneCalenderEvent(calender_event, CalenderEventActions.receiveOneCalenderEvent);
+  createCalenderEvent: function(calender_event){
+    CalenderEventUtil.createCalenderEvent(calender_event, CalenderEventActions.receiveCalenderEvent);
   },
 
-  receiveOneCalenderEvent: function(calender_event){
+  receiveCalenderEvent: function(calender_event){
     AppDispatcher.dispatch({
       actionType: CalenderEventConstants.RECEIVE_ONE_CALENDER_EVENT,
       calender_event: calender_event
