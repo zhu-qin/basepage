@@ -24,7 +24,22 @@ const CalenderEventActions = {
       actionType: CalenderEventConstants.RECEIVE_ONE_CALENDER_EVENT,
       calender_event: calender_event
     });
-  }
+  },
+
+  updateCalenderEvent: function(calender_event) {
+    CalenderEventUtil.updateCalenderEvent(calender_event, CalenderEventActions.receiveCalenderEvent);
+  },
+
+  deleteCalenderEvent: function(calEventId){
+    CalenderEventUtil.deleteCalenderEvent(calEventId, CalenderEventActions.removeCalenderEvent);
+  },
+
+  removeCalenderEvent: function (calender_event) {
+    AppDispatcher.dispatch({
+      actionType: CalenderEventConstants.REMOVE_ONE_CALENDER_EVENT,
+      calender_event: calender_event
+    });
+  },
 };
 
 

@@ -29,6 +29,10 @@ const CalenderEventIndex = React.createClass({
     hashHistory.push(`/schedule/new_calender_event`);
   },
 
+  _handleCalenderEventForm: function (id, event) {
+    hashHistory.push(`/schedule/${id}/edit`);
+  },
+
   organizeEventsByMonth: function () {
     let allEvents = this.state.calenderEvents;
     let eventObj = {};
@@ -44,9 +48,7 @@ const CalenderEventIndex = React.createClass({
             eventObj[month] = [allEvents[calEventId]];
           }
         }
-
       });
-
       return eventObj;
     },
 
@@ -68,9 +70,9 @@ const CalenderEventIndex = React.createClass({
           eventsInMonth = allEvents[month].map((calEvent, index) => {
           return(
             <div key={calEvent.id} className="schedule-event clear-fix">
-              <div className="schedule-event-start">{calEvent.start}</div>
-              <div className="schedule-event-finish">{calEvent.finish}</div>
-              <p className="schedule-event-title">{calEvent.title}</p>
+              <div className="schedule-event-start">{new Date(calEvent.start).toDateString()}</div>
+              <div className="schedule-event-finish">{new Date(calEvent.finish).toDateString()}</div>
+              <p className="schedule-event-title" onClick={this._handleCalenderEventForm.bind(null, calEvent.id)}>{calEvent.title}</p>
             </div>
           );
           });

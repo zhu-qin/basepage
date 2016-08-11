@@ -1,12 +1,9 @@
 body {
   background-color: #f5efe6;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Arimo', sans-serif;
 }
 
-form span {
-  text-align: left;
-  display: block;
-}
+
 
 .button-main {
   border: 1px solid #339961;
@@ -14,12 +11,16 @@ form span {
   width: 100px;
   display: block;
   font-weight: bold;
-  border-radius: 7%;
   cursor: pointer;
   background: #3cb371;
   color: white;
-  box-shadow: 4px 4px #339961
+  box-shadow: 4px 4px #339961;
 }
+
+.button-main:active {
+  border: 2px solid #336600;
+}
+
 
 .nav-list-button {
   float: left;

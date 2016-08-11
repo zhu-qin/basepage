@@ -12,9 +12,9 @@
 .button-delete {
   padding: 5px;
   margin: 0 10px;
-  border-radius: 5%;
   background: #3cb371;
   border: none;
+  cursor: pointer;
 }
 
 .button-form {
@@ -24,7 +24,6 @@
   width: 50px;
   padding: 7px;
   display: block;
-  border-radius: 7%;
   cursor: pointer;
   background: #3cb371;
   box-shadow: 4px 4px #339961
@@ -38,5 +37,4 @@
   min-height: 280px;
   background: #f5efe6;
   border: 1px solid black;
-  border-radius: 5%;
 }

@@ -37,7 +37,7 @@ const TodoListForm = React.createClass({
 
   _todoStoreListener: function (id) {
     let todoList = TodoStore.findList(id);
-    if (Object.keys(todoList).length === 0) {
+    if (Object.keys(todoList).length < 1) {
       hashHistory.push(`projects/${SessionStore.userMainProject()}/todos_index`);
     }
   },
@@ -64,7 +64,7 @@ const TodoListForm = React.createClass({
 
   _handleDelete: function (id, event) {
     event.preventDefault();
-    this.storeListener = TodoStore.addListener(this._todoStoreListener);
+    this.storeListener = TodoStore.addListener(this._todoStoreListener.bind(null, id));
     this.setState({ redirect: true });
     TodoActions.destroyList(id);
   },

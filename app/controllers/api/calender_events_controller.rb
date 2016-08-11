@@ -15,9 +15,18 @@ class Api::CalenderEventsController < ApplicationController
   end
 
   def update
+    @calender_event = CalenderEvent.find(params[:id])
+    if @calender_event.update(calender_event_params)
+      render :show
+    else
+      render @calender_event.error.full_messages, status: 400
+    end
   end
 
   def destroy
+    @calender_event = CalenderEvent.find(params[:id])
+    @calender_event.destroy
+    render :show
   end
 
   def calender_event_params

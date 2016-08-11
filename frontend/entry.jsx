@@ -50,6 +50,7 @@ const AppRouter = (
 
       <Route path="calender_events_index" component={CalenderEventIndex} >
         <Route path="/schedule/new_calender_event" component={CalenderEventForm}/>
+        <Route path="/schedule/:calenderEventId/edit" component={CalenderEventForm}/>
       </Route>
       <Route path="uploads_index" component={UploadIndex} />
 
