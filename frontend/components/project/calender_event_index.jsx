@@ -29,22 +29,19 @@ const CalenderEventIndex = React.createClass({
     hashHistory.push(`/schedule/new_calender_event`);
   },
 
-  organizeEventsByMonth: function () {
-    let allEvents = this.state.calender_events;
-    let eventObj = {};
+  // organizeEventsByMonth: function () {
+  //   let allEvents = this.state.calender_events;
+  //   let eventObj = {};
+  //
+  //   Object.keys(allEvents).map((calEvent, index)=>{
+  //
+  //   });
+  // },
 
-    Object.keys(allEvents).map((calEvent, index)=>{
-      
-    });
-
-
+  render: function(){
     let currentMonth = new Date().getMonth();
     let months = [0,1,2,3,4,5,6,7,8,9,10,11];
     let monthsArray = months.slice(currentMonth).concat(months.slice(0, currentMonth)) ;
-  },
-
-  render: function(){
-
 
 
     let calenderEventList = monthsArray.map((month, index) => {
