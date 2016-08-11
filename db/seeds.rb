@@ -6,27 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-["Qin", "Larry", "Roger"].each do |name|
-  User.create(username: name, password: "password",email: "fake@fake.com", main_project: 1)
+["Qin", "Larry", "Lord Commander"].each do |name|
+  User.create(username: name, password: "password", email: "fake@fake.com", main_project: 1)
 end
 
-Project.create(name: "Full-Stack Project", description: "Capstone Project", manager_id: 1)
-
-["Important", "Not so Important"].each do |title|
-  TodoList.create(title: title, body: title, project_id: 1, author_id: 1)
-end
-
-["Get Food", "Sleep", "Finish Capstone"].each do |todo|
-  Todo.create(title: todo, body: todo, author_id: 1, todo_list_id: 1)
-end
-
-["Defend the Wall", "Where is Lord Commander?"].each_with_index do |message, index|
-  Message.create(title: message, author_id: 1, project_id: 1)
-end
-
-["What?", "What time is it?"].each_with_index do |message, index|
-  Message.create(title: message, body: message, author_id: 2, project_id: 1, reply_to_id: 1)
-end
+Project.create(name: "Night's Watch", description: "Capstone Project", manager_id: 1)
 
 ["Party!", "New Year!", "Christmas!"].each do |event|
   Event.create(title: event, body:event, project_id: 1)

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :todo_lists,          only: [:create, :index]
       resources :project_documents,   only: [:create, :index]
       resources :messages,            only: [:create, :index]
+      resources :calender_events,     only: [:create, :index]
     end
 
     resources :todo_lists,           only: [:update, :show, :destroy] do

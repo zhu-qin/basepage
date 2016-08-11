@@ -6,7 +6,7 @@
 #  username        :string           not null
 #  password_digest :string           not null
 #  session_token   :string           not null
-#  email           :string           not null
+#  email           :string
 #  main_project    :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

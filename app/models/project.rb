@@ -39,8 +39,8 @@ class Project < ActiveRecord::Base
   )
 
   has_many(
-    :events,
-    class_name: "Event",
+    :calender_events,
+    class_name: "CalenderEvent",
     foreign_key: :project_id
   )
 
@@ -56,13 +56,4 @@ class Project < ActiveRecord::Base
     source: :todos
   )
 
-  def get_todos_completion_count
-    todos = self.todos
-    count = 0
-    todos.each do |todo|
-      count += 1 if todo.completion == true
-    end
-    [count, todos.length]
-  end
-  
 end

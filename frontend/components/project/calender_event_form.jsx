@@ -9,6 +9,8 @@ const CalenderEventForm = React.createClass({
     return {
       title: "",
       body: "",
+      start: "",
+      finish: ""
     };
   },
 
@@ -26,32 +28,43 @@ const CalenderEventForm = React.createClass({
       let calender_event = CalenderEventStore.findCalenderEvent(id);
       this.setState(calender_event);
     } else {
-      this.setState( {title: "", body: ""} );
+      this.setState( {title: "", body: "", start:"", finish:""} );
     }
   },
 
-  _handleChange: function(field, calender_event){
-    return (calender_event) =>{
-      calender_event.prcalender_eventDefault();
-      this.setState({[field]: calender_event.target.value});
+  _handleChange: function(field, event){
+    return (event) =>{
+      event.preventDefault();
+      this.setState({[field]: event.target.value});
     };
   },
 
-  _handleSubmit: function(calender_event){
-    calender_event.prcalender_eventDefault();
+  _handleSubmit: function(event){
+    event.preventDefault();
+
     this.state.project_id = SessionStore.userMainProject();
     this.state.author_id = SessionStore.getCurrentUser().id;
-    CalenderEventActions.createOneCalenderEvent(this.state);
+    this.state.start = $(".start-time").datepicker().val();
+    this.state.finish = $(".finish-time").datepicker().val();
+
+
+    console.log(this.state);
+    // CalenderEventActions.createOneCalenderEvent(this.state);
   },
 
-  _handleUpdate: function (calender_event) {
-    calender_event.prcalender_eventDefault();
+  _handleUpdate: function (event) {
+    event.preventDefault();
     CalenderEventActions.updateCalenderEvent(this.state);
   },
 
-  _handleDelete: function (id, calender_event) {
-    calender_event.prcalender_eventDefault();
+  _handleDelete: function (id, event) {
+    event.preventDefault();
     CalenderEventActions.destroyCalenderEvent(id);
+  },
+
+  _handleDateSelect: function (event){
+    $(".start-time").datepicker( {dateFormat: "yy-mm-dd" } );
+    $(".finish-time").datepicker( {dateFormat: "yy-mm-dd" } );
   },
 
   render: function () {
@@ -67,15 +80,21 @@ const CalenderEventForm = React.createClass({
     }
 
     return(
-      <div className="post-wrapper">
+      <div className="post-wrapper" onMouseEnter={this._handleDateSelect}>
         <div>
           <h2>{buttonValue}</h2>
-          <form className="calender_event-form" onSubmit={callback}>
+          <form className="calender_event-form clear-fix" onSubmit={callback} >
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
             <label>Body:
               <input type="textarea" onChange={this._handleChange("body")} value={this.state.body}/>
+            </label>
+            <label>Start:
+              <input type="datetime" className="start-time" />
+            </label>
+            <label>Finish:
+              <input type="datetime" className="finish-time" />
             </label>
             <input className="button-form" type="submit" value={buttonValue}/>
             <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/calender_events_index`} >Cancel</Link>
@@ -87,5 +106,6 @@ const CalenderEventForm = React.createClass({
   }
 
 });
+
 
 module.exports = CalenderEventForm;

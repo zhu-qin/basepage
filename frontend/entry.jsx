@@ -21,6 +21,7 @@ const UploadIndex = require('./components/project/upload_index');
 const TodoForm = require('./components/project/todo_form');
 const TodoListForm = require('./components/project/todo_list_form');
 const MessageForm = require('./components/project/message_form');
+const CalenderEventForm = require('./components/project/calender_event_form');
 
 // Stores
 const SessionStore = require('./stores/session_store');
@@ -47,7 +48,9 @@ const AppRouter = (
         <Route path="/message_board/:messageId/reply" component={MessageForm} />
       </Route>
 
-      <Route path="calender_events_index" component={CalenderEventIndex} />
+      <Route path="calender_events_index" component={CalenderEventIndex} >
+        <Route path="/schedule/new_calender_event" component={CalenderEventForm}/>
+      </Route>
       <Route path="uploads_index" component={UploadIndex} />
 
     </Route>
@@ -68,15 +71,17 @@ const TodoActions = require('./actions/todo_actions');
 const TodoStore = require('./stores/todo_store');
 const MessageActions = require('./actions/message_actions');
 const MessageStore = require('./stores/message_store');
+const CalenderEventActions = require('./actions/calender_event_actions');
+const CalenderEventStore = require('./stores/calender_event_store');
 const UploadStore = require('./stores/upload_store');
 
-const ProjectActions = require('./actions/project_actions');
 
 window.ProjectStore = ProjectStore;
-window.ProjectActions = ProjectActions;
 window.UploadStore = UploadStore;
 window.TodoStore = TodoStore;
 window.TodoActions = TodoActions;
 window.MessageStore = MessageStore;
 window.MessageActions = MessageActions;
+window.CalenderEventStore = CalenderEventStore;
+window.CalenderEventActions = CalenderEventActions;
 window.SessionStore = SessionStore;

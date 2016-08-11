@@ -10,7 +10,7 @@ const CalenderEventActions = {
 
   receiveAllCalenderEvents: function (calender_events) {
     AppDispatcher.dispatch({
-      actionType: CalenderEventConstants.RECEIVE_ALL_MESSAGES,
+      actionType: CalenderEventConstants.RECEIVE_ALL_CALENDER_EVENTS,
       calender_events: calender_events
     });
   },
@@ -21,7 +21,7 @@ const CalenderEventActions = {
 
   receiveOneCalenderEvent: function(calender_event){
     AppDispatcher.dispatch({
-      actionType: CalenderEventConstants.RECEIVE_ONE_MESSAGE,
+      actionType: CalenderEventConstants.RECEIVE_ONE_CALENDER_EVENT,
       calender_event: calender_event
     });
   }

@@ -1,0 +1,71 @@
+// Place all the styles related to the api::calender_events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.schedule-block{
+padding: 15px;
+margin: 10px 0 10px 0;
+border-radius: 7%;
+}
+
+.calender-event-place-holder {
+position: absolute;
+top: 180px;
+right: 40px;
+}
+
+.schedule-month-0 {
+background: #d8f1fd;
+color: #03a9f4;
+}
+
+.schedule-month-1 {
+background: #d8f4f8;
+color: #00bcd4;
+}
+
+.schedule-month-2 {
+background: #d8eeec;
+color: #009688;
+}
+.schedule-month-3 {
+background: #e3f2e3;
+color: #4caf50;
+}
+
+.schedule-month-4 {
+background: #e7f3db;
+color: #8bc34a;
+}
+
+.schedule-month-5 {
+background: #f2f6cd;
+color: #afb42b;
+}
+
+.schedule-month-6 {
+background: #fef5d8;
+color: #ffc107;
+}
+
+.schedule-month-7 {
+background: #feefd8;
+color: #ff9800;}
+
+.schedule-month-8{
+background: #fee5dd;
+color: #ff7043;}
+
+.schedule-month-9{
+background: #f3dbd3;
+color: #d16f50;}
+
+.schedule-month-10{
+background: #eae5e3;
+color: #8d6e63;}
+
+.schedule-month-11{
+background: #dceefc;
+color: #2196f3;
+}

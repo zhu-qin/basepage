@@ -12,7 +12,8 @@
 #  updated_at :datetime         not null
 #
 
-class Event < ActiveRecord::Base
+class CalenderEvent < ActiveRecord::Base
+  validates :title, :project_id, presence: true
   belongs_to(
     :project,
     class_name: "Project",

@@ -4,6 +4,7 @@ const SessionActions = require('../../actions/session_actions');
 const SessionStore = require('../../stores/session_store');
 const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
+const ProjectActions = require('../../actions/project_actions');
 
 const ProjectIndex = React.createClass({
   getInitialState: function (){
@@ -46,7 +47,6 @@ const ProjectIndex = React.createClass({
           button={tab} />
       );
     });
-
 
     return (
       <div className="project-container">
