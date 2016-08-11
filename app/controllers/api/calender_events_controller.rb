@@ -21,6 +21,6 @@ class Api::CalenderEventsController < ApplicationController
   end
 
   def calender_event_params
-    params.require(:calender_events).permit(:title, :body, :start, :finish, :id, :project_id)
+    params.require(:calender_events).permit(:title, :body, :start, :finish, :id, :project_id, :author_id)
   end
 end

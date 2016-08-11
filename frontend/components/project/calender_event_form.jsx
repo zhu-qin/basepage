@@ -44,8 +44,15 @@ const CalenderEventForm = React.createClass({
 
     this.state.project_id = SessionStore.userMainProject();
     this.state.author_id = SessionStore.getCurrentUser().id;
+
     this.state.start = $(".start-time").datepicker().val();
     this.state.finish = $(".finish-time").datepicker().val();
+
+    ["start", "finish"].forEach((date, index, array)=>{
+      if (this.state[date].length < 1 && this.state[array[index+1]].length < 1 || undefined){
+        this.state[date] = new Date();
+      }
+    });
 
     CalenderEventActions.createCalenderEvent(this.state);
   },

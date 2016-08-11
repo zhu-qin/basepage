@@ -6,7 +6,7 @@
 .schedule-block{
 padding: 15px;
 margin: 10px 0 10px 0;
-border-radius: 7%;
+border-radius: 3%;
 }
 
 .calender-event-place-holder {
@@ -68,4 +68,42 @@ color: #8d6e63;}
 .schedule-month-11{
 background: #dceefc;
 color: #2196f3;
+}
+
+
+
+
+
+
+
+
+
+.schedule-event {
+  padding: 5px;
+}
+
+.schedule-event > div {
+  float: left;
+  padding: 10px;
+  margin: 0 10px;
+  border-radius: 5%;
+  color: white;
+}
+
+.schedule-event-title {
+  float: left;
+  font-weight: bold;
+  padding: 10px;
+  color: blue;
+  font-size: 24;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.schedule-event-start {
+  background: #ff9966;
+}
+
+.schedule-event-finish {
+  background: #ff6600;
 }

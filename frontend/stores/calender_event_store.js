@@ -18,23 +18,6 @@ CalenderEventStore.resetCalenderEvents = function (calender_events) {
 
 CalenderEventStore.addOneCalenderEvent = function (calender_event) {
   _calender_events[calender_event.id] = calender_event;
-  _saved = true;
-  hashHistory.push(`projects/${SessionStore.userMainProject()}/calender_events_index`);
-};
-
-CalenderEventStore.find = function(id) {
-  return Object.assign({}, _calender_events[id]);
-};
-
-CalenderEventStore.findChildren = function (id) {
-  let childCalenderEvents = [];
-  Object.keys(_calender_events).forEach( (calender_eventId, index) => {
-    if (parseInt(_calender_events[calender_eventId].reply_to_id) === id) {
-      childCalenderEvents.push(_calender_events[calender_eventId]);
-    }
-  });
-
-  return childCalenderEvents;
 };
 
 CalenderEventStore.__onDispatch = function(payload) {
