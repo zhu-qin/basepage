@@ -22,6 +22,7 @@ const TodoForm = require('./components/project/todo_form');
 const TodoListForm = require('./components/project/todo_list_form');
 const MessageForm = require('./components/project/message_form');
 const CalenderEventForm = require('./components/project/calender_event_form');
+const UploadForm = require('./components/project/upload_form');
 
 // Stores
 const SessionStore = require('./stores/session_store');
@@ -53,7 +54,10 @@ const AppRouter = (
         <Route path="/schedule/new_calender_event" component={CalenderEventForm}/>
         <Route path="/schedule/:calenderEventId/edit" component={CalenderEventForm}/>
       </Route>
-      <Route path="uploads_index" component={UploadIndex} />
+
+      <Route path="uploads_index" component={UploadIndex} >
+        <Route path="/uploads/new_file" component={UploadForm} />
+      </Route>
 
     </Route>
 

@@ -1,0 +1,34 @@
+img {
+  width: 100%;
+}
+
+.upload-preview {
+  margin:auto;
+  min-height: 150px;
+  padding: 5px;
+  resize: none;
+  width: 240px;
+  text-align: left;
+  border: 1px solid gray;
+}
+
+.upload-list-item {
+  position: relative;
+  display: block;
+  width: 160px;
+  float:left;
+  border: 1px solid #339961;
+  margin: 10px;
+}
+
+.upload-list-item > a > div {
+  display: block;
+  height: 25px;
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+}
+
+.upload-list-item > a > img {
+  width: 100%;
+}

@@ -16,6 +16,7 @@ const UploadActions = {
   },
 
   uploadFile: function(file){
+    
     UploadUtil.uploadFile(file, UploadActions.receiveOneFile);
   },
 
