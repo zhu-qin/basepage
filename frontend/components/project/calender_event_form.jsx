@@ -60,10 +60,12 @@ const CalenderEventForm = React.createClass({
     let finish = new Date();
     let userStart = $(".start-time").datepicker().val();
     let userFinish = $(".finish-time").datepicker().val();
-    if (userStart.length > 0 || userFinish.length > 0){
-      start = userStart || userFinish;
-      finish = userStart || userFinish;
-    }
+    if (userStart.length > 0){
+      start = userStart; }
+
+    if (userFinish.length > 0){
+      finish = userFinish; }
+
     this.state.calEvent.start = start;
     this.state.calEvent.finish = finish;
   },
