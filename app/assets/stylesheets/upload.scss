@@ -18,7 +18,7 @@ img {
   width: 160px;
   float:left;
   border: 1px solid #339961;
-  margin: 10px;
+  margin: 5px;
 }
 
 .upload-list-item > a > div {
@@ -31,4 +31,8 @@ img {
 
 .upload-list-item > a > img {
   width: 100%;
+}
+
+.upload-file-wrapper {
+  width: 600px;
 }

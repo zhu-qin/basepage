@@ -56,7 +56,9 @@ const UploadIndex = React.createClass({
             <div className="form-place-holder">
               {this.props.children}
             </div>
-            {fullView}
+            <div className="upload-file-wrapper">
+              {fullView}
+            </div>
         </div>
       </div>
     );
