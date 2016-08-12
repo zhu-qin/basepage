@@ -31,18 +31,19 @@ const TodoForm = React.createClass({
     return(
       <div className="post-wrapper">
           <h2>Create a to-do</h2>
-          <form className="todo-form" onSubmit={this._handleSubmit}>
+          <form className="todo-form clear-fix" onSubmit={this._handleSubmit}>
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
-            <label>Body:
-              <input type="textarea" onChange={this._handleChange("body")} value={this.state.body}/>
-            </label>
+            <label>Body:</label>
+            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
             <label>Assign To:
               <input type="text" onChange={this._handleChange("assign_to_id")} value={this.state.assign_to_id}/>
             </label>
-            <input className="button-form" type="submit" value="Add a to-do"/>
-            <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/todos_index`}>Cancel</Link>
+            <div className="button-wrapper clear-fix">
+              <input className="button-form" type="submit" value="Add to-do"/>
+              <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/todos_index`}>Cancel</Link>
+            </div>
           </form>
       </div>
     );

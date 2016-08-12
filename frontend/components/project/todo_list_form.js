@@ -71,31 +71,32 @@ const TodoListForm = React.createClass({
 
   render: function () {
 
-    let buttonValue = "Create To-do List";
+    let buttonValue = "Create";
     let callback = this._handleSubmit;
     let destroyList = "";
 
 
     if (this.state.todoList.id) {
-      buttonValue = "Update To-do List";
+      buttonValue = "Update";
       callback = this._handleUpdate;
-      destroyList = (<button className="button-form" onClick={this._handleDelete.bind(null, this.state.todoList.id)}>Delete List</button>);
+      destroyList = (<button className="button-form" onClick={this._handleDelete.bind(null, this.state.todoList.id)}>Delete</button>);
     }
 
     return(
       <div className="post-wrapper">
         <div>
-          <h2>{buttonValue}</h2>
-          <form className="todo-form" onSubmit={callback}>
+          <h2>{buttonValue} To-do List</h2>
+          <form className="todo-form clear-fix" onSubmit={callback}>
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.todoList.title}/>
             </label>
-            <label>Body:
-              <input type="textarea" onChange={this._handleChange("body")} value={this.state.todoList.body}/>
-            </label>
-            <input className="button-form" type="submit" value={buttonValue}/>
-            <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/todos_index`} >Cancel</Link>
-            {destroyList}
+            <label>Body:</label>
+            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <div className="button-wrapper clear-fix">
+              <input className="button-form" type="submit" value={buttonValue}/>
+              <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/todos_index`} >Cancel</Link>
+              {destroyList}
+            </div>
           </form>
         </div>
       </div>

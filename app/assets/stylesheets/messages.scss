@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .message-list {
   display: block;
   text-align: left;
@@ -14,6 +13,8 @@
   padding: 5px;
   margin: 5px;
   color: white;
+  float: left;
+  display:block;
 }
 
 .message-reply {
@@ -34,4 +35,24 @@
   position: absolute;
   top: 180px;
   right: 40px;
+}
+
+.message-title-button {
+  display: block;
+
+}
+
+.message-title {
+  display: block;
+  padding: 10px;
+}
+
+.message-text {
+  padding: 10px;
+}
+
+.message-text-form span{
+  overflow-wrap: break-word;
+  display:block;
+  padding: 5px;
 }

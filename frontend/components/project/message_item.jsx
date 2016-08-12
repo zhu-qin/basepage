@@ -9,14 +9,25 @@ const MessageItem = React.createClass({
     hashHistory.push(`/message_board/${id}/reply`);
   },
 
+
   render: function () {
     let childMessages = MessageStore.findChildren(this.props.message.id);
     let messageList = childMessages.map( (message, index) => {
 
       return (
         <span key={message.id}>
-          <button className="child-button reply-button" onClick={this._handleClickToReply.bind(null, message.id)}>Reply to: {message.author_name}</button>
-          {message.author_name} SAYS: {message.title}
+          <div className="message-text-block clear-fix">
+
+
+            <div className="message-title-button">
+              <button className="child-button reply-button" onClick={this._handleClickToReply.bind(null, message.id)}>Reply => {message.author_name}Says: </button>
+              <div className="message-title">{message.title}</div>
+              <div className="message-text">{message.body}</div>
+            </div>
+
+          </div>
+
+
           <MessageItem className="message-item" key={index} message={message}/>
         </span>
       );

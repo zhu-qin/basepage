@@ -67,13 +67,8 @@ const CalenderEventForm = React.createClass({
     if (userFinish.length > 0) {
       finish = userFinish;
     }
-
-    if( new Date(start) > new Date(finish) ) {
-      this.setState( {errors: "Start date needs to be earlier than end date"} );
-    } else {
-      this.state.calEvent.start = start;
-      this.state.calEvent.finish = finish;
-    }
+    this.state.calEvent.start = start;
+    this.state.calEvent.finish = finish;
   },
 
   _handleUpdate: function (event) {
@@ -105,14 +100,14 @@ const CalenderEventForm = React.createClass({
 
   render: function () {
 
-    let buttonValue = "Add an Event";
+    let buttonValue = "Add event";
     let callback = this._handleSubmit;
     let deleteCalenderEvent = "";
 
     if (this.props.params.calenderEventId) {
-      buttonValue = "Update Event";
+      buttonValue = "Update";
       callback = this._handleUpdate;
-      deleteCalenderEvent = (<button className="button-form" onClick={this._handleDelete.bind(null, this.props.params.calenderEventId)}>Delete Event</button>);
+      deleteCalenderEvent = (<button className="button-form" onClick={this._handleDelete.bind(null, this.props.params.calenderEventId)}>Delete</button>);
     }
 
     let errors = this.state.errors;
@@ -121,22 +116,23 @@ const CalenderEventForm = React.createClass({
       <div className="post-wrapper" onMouseEnter={this._handleDateSelect}>
         <div>
           <h2>{buttonValue}</h2>
-          <form className="calEvent-form clear-fix" onSubmit={callback} >
+          <form className="calender-event-form clear-fix" onSubmit={callback} >
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.calEvent.title}/>
             </label>
-            <label>Body:
-              <input type="textarea" onChange={this._handleChange("body")} value={this.state.calEvent.body}/>
-            </label>
+            <label>Body:</label>
+            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
             <label>Start:
               <input type="datetime" className="start-time" value={this.state.calEvent.start}/>
             </label>
             <label>Finish:
               <input type="datetime" className="finish-time" value={this.state.calEvent.finish}/>
             </label>
-            <input className="button-form" type="submit" value={buttonValue}/>
-            <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/calender_events_index`} >Cancel</Link>
-            {deleteCalenderEvent}
+            <div className="button-wrapper clear-fix">
+              <input className="button-form" type="submit" value={buttonValue}/>
+              <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/calender_events_index`} >Cancel</Link>
+              {deleteCalenderEvent}
+            </div>
           </form>
         </div>
         {errors}

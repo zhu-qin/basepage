@@ -35,24 +35,33 @@ const MessageIndex = React.createClass({
     let messageList = Object.keys(messages).map((id, index) => {
       if (!messages[id].reply_to_id) {
         return (
-          <span key={id}>
-            <button className="parent-button reply-button" onClick={this._handleClickToReply.bind(null, id)}>Reply to: {messages[id].author_name}</button>
-            {messages[id].author_name} SAYS: {messages[id].title}
+          <div key={id} className="message-text-block clear-fix">
+
+
+              <div className="clear-fix">
+                  <button className="parent-button reply-button" onClick={this._handleClickToReply.bind(null, id)}>Reply => {messages[id].author_name} Says:</button>
+                  <div className="message-title">{messages[id].title} </div>
+                  <div className="message-text">{messages[id].body}</div>
+              </div>
+
+
             <MessageItem className="message-item" key={index} message={messages[id]}/>
-          </span>
+          </div>
         );
       }
     });
 
     return(
       <div className="feature-wrapper clear-fix">
-        <div className="message-wrapper">
+        <div className="message-wrapper clear-fix">
           <h2>Message Board</h2>
           <button className="feature-add-button" onClick={this._handleClickToReply.bind(null, 0)}>Post a Message</button>
-          <div className="message-reply-place-holder">{this.props.children}</div>
+          <div className="form-place-holder">{this.props.children}</div>
+
           <ul className="message-list group">
             {messageList}
           </ul>
+
         </div>
       </div>
     );

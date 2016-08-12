@@ -96,8 +96,10 @@ const CalenderEventIndex = React.createClass({
       <div className="feature-wrapper clear-fix">
         <div className="calender-event-wrapper">
           <h2>Schedule</h2>
-          <button className="feature-add-button" onClick={this._handleClickToAddCalenderEvent.bind(null, 0)}>Post a Calender Event</button>
-          <div className="calender-event-place-holder">{this.props.children}</div>
+          <button className="feature-add-button" onClick={this._handleClickToAddCalenderEvent.bind(null, 0)}>Add an Event</button>
+          <div className="form-place-holder">
+            {this.props.children}
+          </div>
           <ul className="calender-event-list group">
             {calenderEventList}
           </ul>

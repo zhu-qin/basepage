@@ -48,7 +48,9 @@ const TodoIndex = React.createClass({
         <div className="todo-wrapper">
           <h2>To-dos {this.state.todoCount}</h2>
           <button className="feature-add-button" onClick={this._redirectToCreateTodoList}>Add a To-do List</button>
-          <div className="todo-create-place-holder">{this.props.children}</div>
+          <div className="form-place-holder">
+            {this.props.children}
+          </div>
           <ul className="todo-lists">
             {allLists}
           </ul>

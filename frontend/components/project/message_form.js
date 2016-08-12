@@ -42,19 +42,20 @@ const MessageForm = React.createClass({
 
     return(
       <div className="post-wrapper">
-          <h2>{message.author_name} Said:
+          <div className="message-text-form">
           {message.title}
           {message.body}
-          </h2>
+        </div>
           <form className="message-form" onSubmit={this._handleSubmit}>
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
-            <label>Body:
-              <input type="textarea" onChange={this._handleChange("body")} value={this.state.body}/>
-            </label>
-            <input className="button-form" type="submit" value="Post Message"/>
-            <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/messages_index`}>Cancel</Link>
+            <label>Body:</label>
+            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <div className="button-wrapper clear-fix">
+              <input className="button-form" type="submit" value="Post"/>
+              <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/messages_index`}>Cancel</Link>
+            </div>
           </form>
       </div>
     );

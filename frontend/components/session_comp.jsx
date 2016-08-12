@@ -83,27 +83,31 @@ const Session = React.createClass({
     }
 
     return(
-      <div className="session-form">
-        <h1> Sign In</h1>
-          <form onSubmit={this._handleSignIn}>
-            <label>
-              Username:
-              <input type="text" value={this.state.username} onChange={this._updateField("username")}/>
-            </label>
-            <label>
-              Email:
-              <input type="password" value={this.state.email} onChange={this._updateField("email")}/>
-            </label>
-            <label>
-              Password:
-              <input type="password" value={this.state.password} onChange={this._updateField("password")}/>
-            </label>
-            {signIn}
-        </form>
-        <ul>
-          {errors}
-        </ul>
-      </div>
+      <div className="session-wrapper">
+        <div className="session-color-block"><h1>BASE PAGE</h1></div>
+          <div className="session-form">
+            <h2>Sign In</h2>
+              <form onSubmit={this._handleSignIn}>
+                <label>
+                  Username:
+                  <input type="text" className="session-text" value={this.state.username} onChange={this._updateField("username")}/>
+                </label>
+                <label>
+                  Email:
+                  <input type="text" className="session-text" value={this.state.email} onChange={this._updateField("email")}/>
+                </label>
+                <label>
+                  Password:
+                  <input type="password" className="session-text" value={this.state.password} onChange={this._updateField("password")}/>
+                </label>
+                {signIn}
+            </form>
+            <ul>
+              {errors}
+            </ul>
+          </div>
+        </div>
+
     );
   }
 
