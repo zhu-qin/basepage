@@ -27,6 +27,14 @@ const TodoList = React.createClass({
     hashHistory.push(`todo_lists/${this.props.todoList.id}/todos`);
   },
 
+  // work on this later to update single todos
+  // _redirectToUpdateTodo: function (id, event) {
+  //   event.preventDefault();
+  //   hashHistory.push(`todos/${id}/edit`);
+  // },
+  //
+  // onClick={this._redirectToUpdateTodo.bind(null, todo.id)}
+
   render: function () {
     let todos = this.props.todoList.todos;
 
@@ -40,10 +48,10 @@ const TodoList = React.createClass({
         deleteButton = <button className="button-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
       }
       let todoToShow = (
-        <li className="todo-list-item" key={todo.id}>
-          <input className="checkbox" type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
+        <li className="todo-list-item clear-fix" key={todo.id}>
+          <input  type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
           {deleteButton}
-          {todo.title}
+          <p className="todo-list-link" >{todo.title}</p>
         </li>
       );
 

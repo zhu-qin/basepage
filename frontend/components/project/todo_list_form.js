@@ -35,13 +35,6 @@ const TodoListForm = React.createClass({
     }
   },
 
-  _todoStoreListener: function (id) {
-    let todoList = TodoStore.findList(id);
-    if (Object.keys(todoList).length < 1) {
-      hashHistory.push(`projects/${SessionStore.userMainProject()}/todos_index`);
-    }
-  },
-
   _handleChange: function(field, event){
     return (event) =>{
       event.preventDefault();
@@ -57,14 +50,20 @@ const TodoListForm = React.createClass({
     this.setState( {todoList: {title: "", body: ""}} );
   },
 
-  _handleUpdate: function (event) {
+  _todoStoreListener: function () {
+    hashHistory.push(`projects/${SessionStore.userMainProject()}/todos_index`);
+  },
+
+  _handleUpdate: function (id, event) {
     event.preventDefault();
+    this.storeListener = TodoStore.addListener(this._todoStoreListener);
+    this.setState({ redirect: true });
     TodoActions.updateTodoList(this.state.todoList);
   },
 
   _handleDelete: function (id, event) {
     event.preventDefault();
-    this.storeListener = TodoStore.addListener(this._todoStoreListener.bind(null, id));
+    this.storeListener = TodoStore.addListener(this._todoStoreListener);
     this.setState({ redirect: true });
     TodoActions.destroyList(id);
   },
@@ -78,7 +77,7 @@ const TodoListForm = React.createClass({
 
     if (this.state.todoList.id) {
       buttonValue = "Update";
-      callback = this._handleUpdate;
+      callback = this._handleUpdate.bind(null, this.state.todoList.id);
       destroyList = (<button className="button-form" onClick={this._handleDelete.bind(null, this.state.todoList.id)}>Delete</button>);
     }
 
@@ -91,7 +90,7 @@ const TodoListForm = React.createClass({
               <input type="text" onChange={this._handleChange("title")} value={this.state.todoList.title}/>
             </label>
             <label>Body:</label>
-            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <textarea onChange={this._handleChange("body")} value={this.state.todoList.body}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
               <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/todos_index`} >Cancel</Link>

@@ -40,6 +40,7 @@ const AppRouter = (
 
       <Route path="todos_index" component={TodoIndex} >
         <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
+        <Route path="/todos/:todoId/edit" component={TodoForm} />
         <Route path="/projects/:projectId/todo_list_new" component={TodoListForm}/>
         <Route path="/todo_lists/:todoListId/edit" component={TodoListForm}/>
       </Route>
