@@ -13,8 +13,8 @@ const NavigationContainer = React.createClass({
   render: function(){
     let button = this.props.button;
     return (
-      <li onClick={this.showDetail} className="nav-list-button button-main">
-        {NavButtonConstants[button]}<br/>
+      <li onClick={this.showDetail} className="nav-list-button">
+        {NavButtonConstants[button]}
       </li>
     );
   }

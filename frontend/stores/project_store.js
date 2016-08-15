@@ -17,18 +17,11 @@ ProjectStore.resetProjects = function (projects) {
   _projects = projects;
   if (_projects[SessionStore.userMainProject()]){
     _currentProject = _projects[SessionStore.userMainProject()];
-    ProjectStore.goToCurrentProject();
-  } else {
-    hashHistory.push(`projects/new`);
   }
 };
 
 ProjectStore.getCurrentProject = function () {
   return Object.assign({}, _currentProject);
-};
-
-ProjectStore.goToCurrentProject = function (){
-  hashHistory.push(`projects/${_currentProject.id}`);
 };
 
 ProjectStore.addOneProject = function (project) {

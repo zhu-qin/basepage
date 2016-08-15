@@ -1,68 +1,72 @@
 const React = require('react');
-const NavigationContainer = require('./navigation_container');
-const SessionActions = require('../../actions/session_actions');
 const SessionStore = require('../../stores/session_store');
 const ProjectStore = require('../../stores/project_store');
-const hashHistory = require('react-router').hashHistory;
 const ProjectActions = require('../../actions/project_actions');
+const hashHistory = require('react-router').hashHistory;
 
 const ProjectIndex = React.createClass({
-  getInitialState: function (){
-    this.navConstants = ["messages", "todos", "calender_events", "uploads"];
-    return { currentProject: {} };
+  getInitialState: function () {
+    return { projects: null };
   },
 
-  componentDidMount: function(){
-    this.projectListener = ProjectStore.addListener(this._projectStoreListener);
-    this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
+  componentDidMount: function () {
+    this.storeListener = ProjectStore.addListener(this._projectStoreListener);
     ProjectActions.getAllProjects();
   },
 
   _projectStoreListener: function () {
-    this.setState({currentProject: ProjectStore.getCurrentProject()});
-  },
-
-  _sessionStoreListener: function () {
-    if (!SessionStore.isSignedIn()) {
-      hashHistory.push('/');
-    }
+    this.setState( {projects: ProjectStore.all()} );
   },
 
   componentWillUnmount: function () {
-    this.projectListener.remove();
-    this.sessionListener.remove();
+    this.storeListener.remove();
   },
 
-
-  _handleLogOut: function () {
-    SessionActions.signOut();
+  _redirectToUpLoad: function (){
+    hashHistory.push('/projects/new');
   },
 
-  render: function () {
-    let navigation = this.navConstants.map((tab, index) => {
-      return (
-        <NavigationContainer
-          key={tab}
-          className="nav-small-container"
-          button={tab} />
-      );
-    });
+  _goToProject: function (id, event) {
+    hashHistory.push(`/projects/${id}`);
+  },
 
-    return (
-      <div className="project-container">
-        <button className="sign-out-button button-main" onClick={this._handleLogOut}>Sign Out</button>
-        <div className="nav-container">
-          <h1 className="project-title clear-fix">
-            {this.state.currentProject.name}
-          </h1>
-          <ul className="nav-list clear-fix">
-            {navigation}
-          </ul>
+  render: function() {
+
+    let view = function () {
+      let projectList = Object.keys(this.state.projects).map((id, index) => {
+        return (
+          <li key={id} className="project-list-item" onClick={this._goToProject.bind(null, id)}>
+              <div>{this.state.projects[id].name}</div>
+          </li>
+        );
+      });
+      return projectList;
+    }.bind( this );
+
+    let fullView = "";
+
+    if (this.state.projects) {
+      fullView = view();
+    }
+
+
+
+    return(
+      <div className="feature-wrapper clear-fix">
+        <div className="project-wrapper">
+          <h2>Projects</h2>
+            <button className="feature-add-button" onClick={this._redirectToUpLoad}>Add Projects</button>
+            <div className="form-place-holder">
+              {this.props.children}
+            </div>
+            <div className="project-wrapper">
+              {fullView}
+            </div>
         </div>
-        {this.props.children}
       </div>
     );
   }
+
 });
 
 module.exports = ProjectIndex;

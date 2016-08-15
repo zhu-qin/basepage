@@ -1,16 +1,15 @@
 .feature-wrapper {
   position: relative;
   box-shadow: 4px 4px gray;
-  max-width: 800px;
+  max-width: 1000px;
   min-height: 500px;
-  margin: 20px auto;
+  margin: 20px;
   background-color: white;
   padding: 50px;
 }
 
 .feature-wrapper > div > h2 {
   margin: auto;
-  width: 700px;
   font-size: 30px;
   font-weight: bolder;
   margin-bottom: 20px;

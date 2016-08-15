@@ -2,23 +2,51 @@
   text-align: center;
 }
 
-.nav-container > h1 {
-  font-size: 46px;
+.project-title {
+  font-size: 36px;
+  float: left;
   font-weight: bolder;
   text-align: center;
-  margin-bottom: 10px;
-
-  
+  display: block;
+}
+.project-nav-top {
+  margin: auto;
 }
 
 .nav-list {
-  margin: auto;
-  max-width: 700px;
+  position: fixed;
+  z-index: 1000;
+  top: 120px;
+  left: 0px;
+  width: 0px;
 }
 
-.nav-logout-button {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 24px;
+
+.projects-button {
+  float: right;
+}
+
+.sign-out-button {
+  background: #ff9933;
+  float: right;
+  margin-left: 50px;
+}
+
+
+.nav-list-button {
+  -webkit-transform: rotate(90deg);
+   -moz-transform: rotate(90deg);
+   -o-transform: rotate(90deg);
+   -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  float: left;
+  display: block;
+  height: 50px;
+  width: 100px;
+  color: black;
+  font-weight: bold;
+  border: 1px solid black;
+  background: white;
+  margin: 30px 20px 20px -40px;
+
 }

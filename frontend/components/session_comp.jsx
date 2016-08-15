@@ -27,8 +27,10 @@ const Session = React.createClass({
   },
 
   _sessionListener: function(){
-    if (SessionStore.isSignedIn()){
-      ProjectActions.getAllProjects();
+    if (SessionStore.userMainProject()){
+      hashHistory.push(`/projects/${SessionStore.userMainProject()}`);
+    } else {
+      hashHistory.push('/projects/index');
     }
   },
 

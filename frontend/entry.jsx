@@ -11,11 +11,12 @@ const hashHistory = ReactRouter.hashHistory;
 
 // Components
 const Session = require('./components/session_comp');
-const ProjectIndex = require('./components/project/project_index');
+const ProjectView = require('./components/project/project_view');
 const TodoIndex = require('./components/project/todo_index');
 const CalenderEventIndex = require('./components/project/calender_event_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
+const ProjectIndex = require('./components/project/project_index');
 
 // Components Forms
 const TodoForm = require('./components/project/todo_form');
@@ -23,6 +24,7 @@ const TodoListForm = require('./components/project/todo_list_form');
 const MessageForm = require('./components/project/message_form');
 const CalenderEventForm = require('./components/project/calender_event_form');
 const UploadForm = require('./components/project/upload_form');
+const ProjectForm = require('./components/project/project_form');
 
 // Stores
 const SessionStore = require('./stores/session_store');
@@ -36,7 +38,15 @@ const AppRouter = (
   <Router history={hashHistory}>
     <Route path="/" component={Session}/>
     <Route path="/sign_up" component={Session}/>
-    <Route path="projects/:projectId" component={ProjectIndex} >
+
+    <Route path="/projects" component={ProjectView}>
+      <IndexRoute component={ProjectIndex}/>
+      <Route path="index" component={ProjectIndex}>
+        <Route path="/projects/new" component={ProjectForm}/>
+      </Route>
+    </Route>
+
+    <Route path="/projects/:projectId" component={ProjectView} >
       <IndexRoute component={MessageIndex} />
 
       <Route path="todos_index" component={TodoIndex} >
