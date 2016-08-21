@@ -7,7 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ["Qin", "Larry", "Joe"].each do |name|
-  User.create(username: name, password: "password", email: "fake@fake.com", main_project: 1)
+  User.create(username: name, password: "password", email: "fake@fake.com")
 end
-
-Project.create(name: "Capstone Project", description: "Capstone Project", manager_id: 1)
