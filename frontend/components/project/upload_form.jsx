@@ -2,6 +2,7 @@ const React = require('react');
 const UploadActions = require('../../actions/upload_actions');
 const UploadStore = require('../../stores/upload_store');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const Link = require('react-router').Link;
 const hashHistory = require('react-router').hashHistory;
 
@@ -15,7 +16,7 @@ const UploadForm = React.createClass({
 
   componentDidMount: function () {
     this.storeListener = UploadStore.addListener(this._uploadStoreListener);
-    UploadActions.getAllFiles(SessionStore.userMainProject());
+    UploadActions.getAllFiles(ProjectStore.getCurrentProject().id);
   },
 
   _uploadStoreListener: function () {
@@ -48,13 +49,13 @@ const UploadForm = React.createClass({
 
   _handleSubmit: function (event) {
     event.preventDefault();
-    let project_id = SessionStore.userMainProject();
+    let project_id = ProjectStore.getCurrentProject().id ;
     let formData = new FormData();
     formData.append("project_documents[title]", this.state.title);
     formData.append("project_documents[project_doc]", this.state.file);
     formData.append("project_documents[project_id]", project_id);
     UploadActions.uploadFile(formData);
-    hashHistory.push(`/projects/${SessionStore.userMainProject()}/uploads_index`);
+    hashHistory.push(`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`);
   },
 
   render: function () {
@@ -76,7 +77,7 @@ const UploadForm = React.createClass({
               </label>
 
               {button}
-              <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/uploads_index`}>Cancel</Link>
+              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`}>Cancel</Link>
             </div>
           </form>
       </div>

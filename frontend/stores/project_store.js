@@ -15,9 +15,10 @@ ProjectStore.all = function () {
 
 ProjectStore.resetProjects = function (projects) {
   _projects = projects;
-  if (_projects[SessionStore.userMainProject()]){
-    _currentProject = _projects[SessionStore.userMainProject()];
-  }
+};
+
+ProjectStore.setCurrentProject = function (projectId){
+  _currentProject = _projects[projectId];
 };
 
 ProjectStore.getCurrentProject = function () {
@@ -43,6 +44,9 @@ ProjectStore.__onDispatch = function(payload) {
       ProjectStore.resetProjects(payload.projects);
       ProjectStore.__emitChange();
       break;
+    case ProjectConstants.SET_CURRENT_PROJECT:
+      ProjectStore.setCurrentProject(payload.projectId);
+      ProjectStore.__emitChange();
   }
 };
 

@@ -27,7 +27,7 @@ class Api::ProjectsController < ApplicationController
 
 
   def project_params
-    params.require(:project).permit(:name, :description, :manager_id)
+    params.require(:project).permit(:title, :description, :manager_id)
   end
 
 end

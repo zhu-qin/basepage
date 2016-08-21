@@ -2,6 +2,7 @@ const React = require('react');
 const MessageActions = require('../../actions/message_actions');
 const MessageStore = require('../../stores/message_store');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const Link = require('react-router').Link;
 
 
@@ -32,7 +33,7 @@ const MessageForm = React.createClass({
       body: this.state.body,
       author_id: SessionStore.getCurrentUser().id,
       reply_to_id: this.state.parentMessage.id || null,
-      project_id: SessionStore.userMainProject()
+      project_id: ProjectStore.getCurrentProject().id
     };
     MessageActions.createOneMessage(reply);
   },
@@ -54,7 +55,7 @@ const MessageForm = React.createClass({
             <textarea onChange={this._handleChange("body")} value={this.state.body}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value="Post"/>
-              <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/messages_index`}>Cancel</Link>
+              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/messages_index`}>Cancel</Link>
             </div>
           </form>
       </div>

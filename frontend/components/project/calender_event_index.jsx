@@ -4,6 +4,7 @@ const CalenderEventActions = require('../../actions/calender_event_actions');
 const CalenderEventForm = require('./calender_event_index');
 const CalenderEventConstants = require('../../constants/calender_event_constants');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
 
 
@@ -14,7 +15,7 @@ const CalenderEventIndex = React.createClass({
 
   componentDidMount: function () {
     this.calenderEventListener = CalenderEventStore.addListener(this._calenderEventStoreListener);
-    CalenderEventActions.getAllCalenderEvents( SessionStore.userMainProject() );
+    CalenderEventActions.getAllCalenderEvents( ProjectStore.getCurrentProject().id);
   },
 
   _calenderEventStoreListener: function () {

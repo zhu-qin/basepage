@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resource :session,               only: [:create, :destroy]
     resources :users,                only: [:create]
 
-    resources :projects,             only: [:show, :index] do
+    resources :projects,             only: [:show, :index, :create] do
       resources :todo_lists,          only: [:create, :index]
       resources :project_documents,   only: [:create, :index]
       resources :messages,            only: [:create, :index]
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
 
     resources :todos,                only: [:update, :show, :destroy]
-    resources :projects,             only: [:update, :destroy, :index, :create]
+    # resources :projects,             only: [:update, :destroy]
     resources :messages,             only: [:update, :destroy]
     resources :calender_events,      only: [:update, :destroy]
 

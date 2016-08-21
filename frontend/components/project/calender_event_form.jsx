@@ -48,7 +48,7 @@ const CalenderEventForm = React.createClass({
   _handleSubmit: function(event){
     event.preventDefault();
     let calEvent = this.state.calEvent;
-    calEvent.project_id = SessionStore.userMainProject();
+    calEvent.project_id = ProjectStore.getCurrentProject().id;
     calEvent.author_id = SessionStore.getCurrentUser().id;
     this.getDates();
     CalenderEventActions.createCalenderEvent(this.state.calEvent);
@@ -87,7 +87,7 @@ const CalenderEventForm = React.createClass({
     let calEvent = CalenderEventStore.findCalenderEvent(id);
 
     if (Object.keys(calEvent).length < 1) {
-      hashHistory.push(`projects/${SessionStore.userMainProject()}/calender_events_index`);
+      hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`);
     }
   },
 
@@ -129,7 +129,7 @@ const CalenderEventForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/calender_events_index`} >Cancel</Link>
+              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`} >Cancel</Link>
               {deleteCalenderEvent}
             </div>
           </form>

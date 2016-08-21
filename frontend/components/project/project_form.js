@@ -8,9 +8,9 @@ const Link = require('react-router').Link;
 const ProjectForm = React.createClass({
   getInitialState: function () {
     return {
-      parentProject: ProjectStore.find(this.props.params.projectId),
+      project: ProjectStore.find(this.props.params.projectId),
       title: "",
-      body: "",
+      description: "",
     };
   },
 
@@ -22,21 +22,29 @@ const ProjectForm = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps){
-    this.setState ({parentProject: ProjectStore.find(newProps.params.projectId)});
+    this.setState ({project: ProjectStore.find(newProps.params.projectId)});
   },
 
   _handleSubmit: function(event){
     event.preventDefault();
-    let reply = {
+    let project = {
       title: this.state.title,
-      body: this.state.body,
+      description: this.state.description,
       manager_id: SessionStore.getCurrentUser().id,
     };
-    ProjectActions.createOneProject(reply);
+    ProjectActions.createProject(project);
   },
 
   render: function () {
-    let project = this.state.parentProject;
+    let project = this.state.project;
+    let submit = this._handleSubmit;
+    let buttonValue = "Create";
+    if (this.props.params.projectId) {
+      submit = this.handleUpdate;
+      buttonValue = "Update";
+    }
+
+
 
     return(
       <div className="post-wrapper">
@@ -44,14 +52,14 @@ const ProjectForm = React.createClass({
           {project.title}
           {project.body}
         </div>
-          <form className="project-form" onSubmit={this._handleSubmit}>
+          <form className="project-form" onSubmit={submit}>
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
             <label>Body:</label>
-            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <textarea onChange={this._handleChange("description")} value={this.state.description}/>
             <div className="button-wrapper clear-fix">
-              <input className="button-form" type="submit" value="Post"/>
+              <input className="button-form" type="submit" value={buttonValue}/>
               <Link className="button-form" to={`/projects/index`}>Cancel</Link>
             </div>
           </form>

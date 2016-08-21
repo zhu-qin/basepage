@@ -1,6 +1,7 @@
 const React = require('react');
 const SessionStore = require('../../stores/session_store');
 const UploadStore = require('../../stores/upload_store');
+const ProjectStore = require('../../stores/project_store');
 const UploadActions = require('../../actions/upload_actions');
 const hashHistory = require('react-router').hashHistory;
 
@@ -11,7 +12,7 @@ const UploadIndex = React.createClass({
 
   componentDidMount: function () {
     this.storeListener = UploadStore.addListener(this._uploadStoreListener);
-    UploadActions.getAllFiles(SessionStore.userMainProject());
+    UploadActions.getAllFiles(ProjectStore.getCurrentProject().id);
   },
 
   _uploadStoreListener: function () {

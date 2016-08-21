@@ -2,6 +2,7 @@ const React = require('react');
 const TodoActions = require('../../actions/todo_actions');
 const TodoStore = require('../../stores/todo_store');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const Link = require('react-router').Link;
 
 const TodoForm = React.createClass({
@@ -51,7 +52,7 @@ const TodoForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               {button}
-              <Link className="button-form" to={`/projects/${SessionStore.userMainProject()}/todos_index`}>Cancel</Link>
+              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/todos_index`}>Cancel</Link>
             </div>
           </form>
       </div>

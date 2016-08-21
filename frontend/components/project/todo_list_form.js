@@ -2,6 +2,7 @@ const React = require('react');
 const TodoListActions = require('../../actions/todo_actions');
 const TodoStore = require('../../stores/todo_store');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const Link = require('react-router').Link;
 const hashHistory = require('react-router').hashHistory;
 
@@ -44,14 +45,14 @@ const TodoListForm = React.createClass({
 
   _handleSubmit: function(event){
     event.preventDefault();
-    this.state.todoList.project_id = SessionStore.userMainProject();
+    this.state.todoList.project_id = ProjectStore.getCurrentProject().id;
     this.state.todoList.author_id = SessionStore.getCurrentUser().id;
     TodoActions.createOneTodoList(this.state.todoList);
     this.setState( {todoList: {title: "", body: ""}} );
   },
 
   _todoStoreListener: function () {
-    hashHistory.push(`projects/${SessionStore.userMainProject()}/todos_index`);
+    hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/todos_index`);
   },
 
   _handleUpdate: function (id, event) {
@@ -93,7 +94,7 @@ const TodoListForm = React.createClass({
             <textarea onChange={this._handleChange("body")} value={this.state.todoList.body}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`projects/${SessionStore.userMainProject()}/todos_index`} >Cancel</Link>
+              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/todos_index`}>Cancel</Link>
               {destroyList}
             </div>
           </form>

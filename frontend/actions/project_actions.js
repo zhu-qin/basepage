@@ -3,6 +3,12 @@ const ProjectConstants = require('../constants/project_constants');
 const AppDispatcher = require('../dispatcher/dispatcher');
 
 const ProjectActions = {
+  setCurrentProject: function (projectId){
+    AppDispatcher.dispatch({
+      actionType: ProjectConstants.SET_CURRENT_PROJECT,
+      projectId: projectId
+    });
+  },
 
   getAllProjects: function () {
     ProjectUtil.getAllProjects(ProjectActions.receiveAllProjects);
@@ -24,6 +30,10 @@ const ProjectActions = {
       actionType: ProjectConstants.RECEIVE_ONE_PROJECT,
       project: project
     });
+  },
+
+  createProject: function (project) {
+    ProjectUtil.createProject(project, ProjectActions.receiveOneProject);
   }
 
 

@@ -1,5 +1,6 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
+const Projects = require('./project_store');
 const MessageConstants = require('../constants/message_constants');
 const hashHistory = require('react-router').hashHistory;
 const SessionStore = require('./session_store');
@@ -18,7 +19,7 @@ MessageStore.resetMessages = function (messages) {
 
 MessageStore.addOneMessage = function (message) {
   _messages[message.id] = message;
-  hashHistory.push(`projects/${SessionStore.userMainProject()}/messages_index`);
+  hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/messages_index`);
 };
 
 MessageStore.find = function(id) {

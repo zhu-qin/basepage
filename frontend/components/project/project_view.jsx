@@ -48,7 +48,7 @@ const ProjectView = React.createClass({
 
   render: function () {
     let navigation;
-    let title = 'Go To Projects';
+    let title = 'All Projects';
     if (this.props.route.path === "/projects/:projectId"){
       navigation = this.navConstants.map((tab, index) => {
         return (
@@ -59,7 +59,7 @@ const ProjectView = React.createClass({
         );
       });
 
-      title = this.state.currentProject.name;
+      title = this.state.currentProject.title;
     }
 
 

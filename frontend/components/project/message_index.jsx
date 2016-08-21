@@ -4,6 +4,7 @@ const MessageActions = require('../../actions/message_actions');
 const MessageItem = require('./message_item');
 const MessageForm = require('./message_index');
 const SessionStore = require('../../stores/session_store');
+const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
 
 
@@ -14,7 +15,7 @@ const MessageIndex = React.createClass({
 
   componentDidMount: function () {
     this.messageListener = MessageStore.addListener(this._messageStoreListener);
-    MessageActions.getAllMessages(SessionStore.userMainProject());
+    MessageActions.getAllMessages(ProjectStore.getCurrentProject().id);
   },
 
   _messageStoreListener: function () {

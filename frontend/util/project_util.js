@@ -10,6 +10,17 @@ const ProjectUtil = {
         successCallback(response);
       }
     });
+  },
+
+  createProject: function (project, successCallback) {
+    $.ajax({
+      type: "POST",
+      url: "api/projects",
+      data: { project: project },
+      success: function (response) {
+        successCallback(response);
+      }
+    });
   }
 
 };

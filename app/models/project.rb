@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   has_attached_file :avatar, default_url: "dog-keyboard.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  validates :name, :manager_id, presence: true
+  validates :title, :manager_id, presence: true
 
   belongs_to(
     :manager,

@@ -4,6 +4,7 @@ const SessionStore = require('../../stores/session_store');
 const TodoActions = require('../../actions/todo_actions');
 const TodoConstants = require('../../constants/todo_constants');
 const TodoList = require('./todo_list');
+const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
 
 const TodoIndex = React.createClass({
@@ -14,7 +15,7 @@ const TodoIndex = React.createClass({
   componentDidMount: function () {
     this.todoListener = TodoStore.addListener(this._todoStoreListener);
     this.countListener = TodoStore.addListener(this._countListener);
-    TodoActions.getTodos(SessionStore.userMainProject());
+    TodoActions.getTodos(ProjectStore.getCurrentProject().id);
   },
 
   componentWillUnmount: function (){
@@ -32,7 +33,7 @@ const TodoIndex = React.createClass({
 
   _redirectToCreateTodoList: function (event){
     event.preventDefault();
-    hashHistory.push(`projects/${SessionStore.userMainProject()}/todo_list_new`);
+    hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/todo_list_new`);
   },
 
   render: function () {

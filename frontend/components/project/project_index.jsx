@@ -22,21 +22,21 @@ const ProjectIndex = React.createClass({
     this.storeListener.remove();
   },
 
-  _redirectToUpLoad: function (){
+  _redirectToAddProject: function (){
     hashHistory.push('/projects/new');
   },
 
   _goToProject: function (id, event) {
+    ProjectActions.setCurrentProject(id);
     hashHistory.push(`/projects/${id}`);
   },
 
   render: function() {
-
     let view = function () {
       let projectList = Object.keys(this.state.projects).map((id, index) => {
         return (
           <li key={id} className="project-list-item" onClick={this._goToProject.bind(null, id)}>
-              <div>{this.state.projects[id].name}</div>
+              <div>{this.state.projects[id].title}</div>
           </li>
         );
       });
@@ -50,18 +50,17 @@ const ProjectIndex = React.createClass({
     }
 
 
-
     return(
       <div className="feature-wrapper clear-fix">
         <div className="project-wrapper">
           <h2>Projects</h2>
-            <button className="feature-add-button" onClick={this._redirectToUpLoad}>Add Projects</button>
+            <button className="feature-add-button" onClick={this._redirectToAddProject}>Add Project</button>
             <div className="form-place-holder">
               {this.props.children}
             </div>
-            <div className="project-wrapper">
+            <ul className="project-wrapper">
               {fullView}
-            </div>
+            </ul>
         </div>
       </div>
     );
