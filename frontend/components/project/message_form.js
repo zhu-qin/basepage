@@ -44,8 +44,8 @@ const MessageForm = React.createClass({
     return(
       <div className="post-wrapper">
           <div className="message-text-form">
+          {message.author_name}
           {message.title}
-          {message.body}
         </div>
           <form className="message-form" onSubmit={this._handleSubmit}>
             <label>Title:

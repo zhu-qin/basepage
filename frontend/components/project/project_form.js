@@ -62,9 +62,8 @@ const ProjectForm = React.createClass({
 
     return(
       <div className="post-wrapper">
-          <div className="project-text-form">
-          {this.state.title}
-          {this.state.description}
+        <div className="project-text-form">
+          {buttonValue} Project
         </div>
           <form className="project-form" onSubmit={submit}>
             <label>Title:
