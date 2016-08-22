@@ -35,25 +35,29 @@ class Project < ActiveRecord::Base
   has_many(
     :messages,
     class_name: "Message",
-    foreign_key: :project_id
+    foreign_key: :project_id,
+    dependent: :destroy
   )
 
   has_many(
     :calender_events,
     class_name: "CalenderEvent",
-    foreign_key: :project_id
+    foreign_key: :project_id,
+    dependent: :destroy
   )
 
   has_many(
     :todo_lists,
     class_name: "TodoList",
-    foreign_key: :project_id
+    foreign_key: :project_id,
+    dependent: :destroy
   )
 
   has_many(
     :todos,
     through: :todo_lists,
-    source: :todos
+    source: :todos,
+    dependent: :destroy
   )
 
 end

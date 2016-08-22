@@ -33,18 +33,20 @@ const ProjectStore = require('./stores/project_store');
 // Actions
 const SessionActions = require('./actions/session_actions');
 
-function redirectUnlessSignedIn(){
+let redirectConditions = function () {
   if (!SessionStore.isSignedIn()) {
     hashHistory.push("/");
+  } else if (!ProjectStore.getCurrentProject().id) {
+    hashHistory.push('/projects/index');
   }
-}
+};
 
 const AppRouter = (
   <Router history={hashHistory}>
     <Route path="/" component={Session}/>
     <Route path="/sign_up" component={Session}/>
 
-    <Route path="/projects" component={ProjectView}>
+    <Route path="/projects" component={ProjectView} >
       <IndexRoute component={ProjectIndex}/>
       <Route path="index" component={ProjectIndex}>
         <Route path="/projects/new" component={ProjectForm}/>
@@ -52,8 +54,8 @@ const AppRouter = (
       </Route>
     </Route>
 
-    <Route path="/projects/:projectId" component={ProjectView} >
-      <IndexRoute component={MessageIndex} />
+    <Route path="/projects/:projectId" component={ProjectView} onEnter={redirectConditions}>
+      <IndexRoute component={MessageIndex} onEnter={redirectConditions}/>
 
       <Route path="todos_index" component={TodoIndex} >
         <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
