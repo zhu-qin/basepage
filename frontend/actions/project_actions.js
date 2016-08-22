@@ -34,6 +34,21 @@ const ProjectActions = {
 
   createProject: function (project) {
     ProjectUtil.createProject(project, ProjectActions.receiveOneProject);
+  },
+
+  updateProject: function (project) {
+    ProjectUtil.updateProject(project, ProjectActions.receiveOneProject);
+  },
+
+  deleteProject: function (project) {
+    ProjectUtil.deleteProject(project, ProjectActions.removeProject);
+  },
+
+  removeProject: function (project) {
+    AppDispatcher.dispatch({
+      actionType: ProjectConstants.REMOVE_ONE_PROJECT,
+      project: project
+    });
   }
 
 

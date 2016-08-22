@@ -42,7 +42,6 @@ const ProjectIndex = React.createClass({
           <li key={id} className="project-list-item clear-fix" >
               <div className="project-list-item-text" onClick={this._goToProject.bind(null, id)}>
                 <h2>{this.state.projects[id].title}</h2>
-                <p>{this.state.projects[id].description}</p>
               </div>
 
               <div className="project-list-item-edit" onClick={this._redirectToEditProject.bind(null, id)}>

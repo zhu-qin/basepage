@@ -27,6 +27,12 @@ ProjectStore.getCurrentProject = function () {
 
 ProjectStore.addOneProject = function (project) {
   _projects[project.id] = project;
+  hashHistory.push('/projects/index');
+};
+
+ProjectStore.removeProject = function (project) {
+  delete _projects[project.id];
+  hashHistory.push('/projects/index');
 };
 
 ProjectStore.find = function(id) {
@@ -47,7 +53,13 @@ ProjectStore.__onDispatch = function(payload) {
     case ProjectConstants.SET_CURRENT_PROJECT:
       ProjectStore.setCurrentProject(payload.projectId);
       ProjectStore.__emitChange();
+      break;
+    case ProjectConstants.REMOVE_ONE_PROJECT:
+      ProjectStore.removeProject(payload.project);
+      ProjectStore.__emitChange();
+      break;
   }
+
 };
 
 

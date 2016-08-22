@@ -21,6 +21,27 @@ const ProjectUtil = {
         successCallback(response);
       }
     });
+  },
+
+  updateProject: function (project, successCallback) {
+    $.ajax({
+      type: "PATCH",
+      url: `api/projects/${project.id}`,
+      data: {project: project},
+      success:  function (response){
+        successCallback(response);
+      }
+    });
+  },
+
+  deleteProject: function (project, successCallback) {
+    $.ajax({
+      type: "DELETE",
+      url: `api/projects/${project.id}`,
+      success: function (response){
+        successCallback(response);
+      }
+    });
   }
 
 };

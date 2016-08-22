@@ -2,11 +2,9 @@
 
 }
 
-
 .project-list-item {
   display: block;
   height: 80px;
-  border: 1px solid black;
   text-align: left;
   height: 100px;
   font-size: 36px;
@@ -15,20 +13,23 @@
 
 
 .project-list-item > div {
-  border: 1px solid black;
   cursor: pointer;
-  padding: 20px;
-  height: 60px;
+  padding: 30px;
+  height: 40px;
 }
 
 .project-list-item-text {
+  background: #feefd8;
+  color: #ff9800;
   float:left;
-  width: 60%;
+  width: 55%;
 }
 
 
 .project-list-item-edit {
+  background: #3cb371;
+  color: white;
   float:right;
-  text-align: left;
-  width: 20%;
+  text-align: center;
+  width: 15%;
 }
