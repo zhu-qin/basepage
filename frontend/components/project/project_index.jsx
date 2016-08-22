@@ -26,6 +26,10 @@ const ProjectIndex = React.createClass({
     hashHistory.push('/projects/new');
   },
 
+  _redirectToEditProject: function (projectId, event) {
+    hashHistory.push(`/projects/${projectId}/edit`);
+  },
+
   _goToProject: function (id, event) {
     ProjectActions.setCurrentProject(id);
     hashHistory.push(`/projects/${id}`);
@@ -35,8 +39,15 @@ const ProjectIndex = React.createClass({
     let view = function () {
       let projectList = Object.keys(this.state.projects).map((id, index) => {
         return (
-          <li key={id} className="project-list-item" onClick={this._goToProject.bind(null, id)}>
-              <div>{this.state.projects[id].title}</div>
+          <li key={id} className="project-list-item clear-fix" >
+              <div className="project-list-item-text" onClick={this._goToProject.bind(null, id)}>
+                <h2>{this.state.projects[id].title}</h2>
+                <p>{this.state.projects[id].description}</p>
+              </div>
+
+              <div className="project-list-item-edit" onClick={this._redirectToEditProject.bind(null, id)}>
+                Edit
+              </div>
           </li>
         );
       });

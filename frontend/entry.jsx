@@ -33,6 +33,11 @@ const ProjectStore = require('./stores/project_store');
 // Actions
 const SessionActions = require('./actions/session_actions');
 
+function redirectUnlessSignedIn(){
+  if (!SessionStore.isSignedIn()) {
+    hashHistory.push("/");
+  }
+}
 
 const AppRouter = (
   <Router history={hashHistory}>
@@ -43,6 +48,7 @@ const AppRouter = (
       <IndexRoute component={ProjectIndex}/>
       <Route path="index" component={ProjectIndex}>
         <Route path="/projects/new" component={ProjectForm}/>
+        <Route path="/projects/:projectId/edit" component={ProjectForm}/>
       </Route>
     </Route>
 
@@ -80,24 +86,3 @@ document.addEventListener("DOMContentLoaded", function(){
   let root = document.getElementById('root');
   ReactDOM.render(AppRouter, root);
 });
-
-
-// testing
-const TodoActions = require('./actions/todo_actions');
-const TodoStore = require('./stores/todo_store');
-const MessageActions = require('./actions/message_actions');
-const MessageStore = require('./stores/message_store');
-const CalenderEventActions = require('./actions/calender_event_actions');
-const CalenderEventStore = require('./stores/calender_event_store');
-const UploadStore = require('./stores/upload_store');
-
-
-window.ProjectStore = ProjectStore;
-window.UploadStore = UploadStore;
-window.TodoStore = TodoStore;
-window.TodoActions = TodoActions;
-window.MessageStore = MessageStore;
-window.MessageActions = MessageActions;
-window.CalenderEventStore = CalenderEventStore;
-window.CalenderEventActions = CalenderEventActions;
-window.SessionStore = SessionStore;

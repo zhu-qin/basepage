@@ -1,5 +1,5 @@
 const React = require('react');
-const TodoListActions = require('../../actions/todo_actions');
+const TodoActions = require('../../actions/todo_actions');
 const TodoStore = require('../../stores/todo_store');
 const SessionStore = require('../../stores/session_store');
 const ProjectStore = require('../../stores/project_store');

@@ -1,6 +1,7 @@
 const React = require('react');
 const CalenderEventActions = require('../../actions/calender_event_actions');
 const CalenderEventStore = require('../../stores/calender_event_store');
+const ProjectStore = require('../../stores/project_store');
 const SessionStore = require('../../stores/session_store');
 const Link = require('react-router').Link;
 const hashHistory = require('react-router').hashHistory;

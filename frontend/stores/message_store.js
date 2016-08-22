@@ -1,6 +1,6 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
-const Projects = require('./project_store');
+const ProjectStore = require('./project_store');
 const MessageConstants = require('../constants/message_constants');
 const hashHistory = require('react-router').hashHistory;
 const SessionStore = require('./session_store');

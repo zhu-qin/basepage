@@ -7,11 +7,17 @@ const Link = require('react-router').Link;
 
 const ProjectForm = React.createClass({
   getInitialState: function () {
-    return {
-      project: ProjectStore.find(this.props.params.projectId),
-      title: "",
-      description: "",
-    };
+    return { title: "", description: "" };
+  },
+
+  componentDidMount: function (){
+    if (this.props.params.projectId) {
+      this.setState(ProjectStore.find(this.props.params.projectId));
+    }
+  },
+
+  componentWillReceiveProps: function (newProps){
+    this.setState (ProjectStore.find(newProps.params.projectId));
   },
 
   _handleChange: function(field, event){
@@ -19,10 +25,6 @@ const ProjectForm = React.createClass({
       event.preventDefault();
       this.setState({[field]: event.target.value});
     };
-  },
-
-  componentWillReceiveProps: function (newProps){
-    this.setState ({project: ProjectStore.find(newProps.params.projectId)});
   },
 
   _handleSubmit: function(event){
@@ -35,8 +37,11 @@ const ProjectForm = React.createClass({
     ProjectActions.createProject(project);
   },
 
+  _handleUpdate: function () {
+    ProjectActions.updateProject(this.state);
+  },
+
   render: function () {
-    let project = this.state.project;
     let submit = this._handleSubmit;
     let buttonValue = "Create";
     if (this.props.params.projectId) {
@@ -49,14 +54,14 @@ const ProjectForm = React.createClass({
     return(
       <div className="post-wrapper">
           <div className="project-text-form">
-          {project.title}
-          {project.body}
+          {this.state.title}
+          {this.state.description}
         </div>
           <form className="project-form" onSubmit={submit}>
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
-            <label>Body:</label>
+            <label>Description:</label>
             <textarea onChange={this._handleChange("description")} value={this.state.description}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
