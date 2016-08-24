@@ -57,23 +57,23 @@ const AppRouter = (
     <Route path="/projects/:projectId" component={ProjectView} onEnter={redirectConditions}>
       <IndexRoute component={MessageIndex} onEnter={redirectConditions}/>
 
-      <Route path="todos_index" component={TodoIndex} >
+      <Route path="todos_index" component={TodoIndex} onEnter={redirectConditions}>
         <Route path="/todo_lists/:todoListId/todos" component={TodoForm} />
         <Route path="/todos/:todoId/edit" component={TodoForm} />
         <Route path="/projects/:projectId/todo_list_new" component={TodoListForm}/>
         <Route path="/todo_lists/:todoListId/edit" component={TodoListForm}/>
       </Route>
 
-      <Route path="messages_index" component={MessageIndex}>
+      <Route path="messages_index" component={MessageIndex} onEnter={redirectConditions}>
         <Route path="/message_board/:messageId/reply" component={MessageForm} />
       </Route>
 
-      <Route path="calender_events_index" component={CalenderEventIndex} >
+      <Route path="calender_events_index" component={CalenderEventIndex} onEnter={redirectConditions}>
         <Route path="/schedule/new_calender_event" component={CalenderEventForm}/>
         <Route path="/schedule/:calenderEventId/edit" component={CalenderEventForm}/>
       </Route>
 
-      <Route path="uploads_index" component={UploadIndex} >
+      <Route path="uploads_index" component={UploadIndex} onEnter={redirectConditions}>
         <Route path="/uploads/new_file" component={UploadForm} />
       </Route>
 

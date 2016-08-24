@@ -59,8 +59,8 @@ const CalenderEventForm = React.createClass({
   getDates: function (){
     let start = new Date();
     let finish = new Date();
-    let userStart = $(".start-time").datepicker().val();
-    let userFinish = $(".finish-time").datepicker().val();
+    let userStart = this.state.calEvent.start;
+    let userFinish = this.state.calEvent.finish;
     if (userStart.length > 0){
       start = userStart; }
 
@@ -92,10 +92,6 @@ const CalenderEventForm = React.createClass({
     }
   },
 
-  _handleDateSelect: function (event){
-    $(".start-time").datepicker( {dateFormat: "yy-mm-dd" } );
-    $(".finish-time").datepicker( {dateFormat: "yy-mm-dd" } );
-  },
 
 
   render: function () {
@@ -123,14 +119,14 @@ const CalenderEventForm = React.createClass({
             <label>Body:</label>
             <textarea onChange={this._handleChange("body")} value={this.state.body}/>
             <label>Start:
-              <input type="datetime" className="start-time" value={this.state.calEvent.start}/>
+              <input type="date" className="start-time" value={this.state.calEvent.start} onChange={this._handleChange("start")}/>
             </label>
             <label>Finish:
-              <input type="datetime" className="finish-time" value={this.state.calEvent.finish}/>
+              <input type="date" className="finish-time" value={this.state.calEvent.finish} onChange={this._handleChange("finish")}/>
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`} >Cancel</Link>
+              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`}>Cancel</Link>
               {deleteCalenderEvent}
             </div>
           </form>

@@ -34,30 +34,54 @@ const CalenderEventIndex = React.createClass({
     hashHistory.push(`/schedule/${id}/edit`);
   },
 
+
+
   organizeEventsByMonth: function () {
     let allEvents = this.state.calenderEvents;
     let eventObj = {};
 
       Object.keys(allEvents).map((calEventId, index)=>{
-        let start = new Date(allEvents[calEventId].start).getMonth();
-        let finish = new Date(allEvents[calEventId].finish).getMonth();
 
-        for ( let month = start; month <= finish; month += 1 ){
-          if (eventObj[month]){
-            eventObj[month].push(allEvents[calEventId]);
+        let startDate = new Date(allEvents[calEventId].start);
+        let finishDate = new Date(allEvents[calEventId].finish);
+
+        let start = { month: startDate.getMonth(), year: startDate.getFullYear() };
+        let finishMonth = (finishDate.getMonth() + 1) % 12;
+        let finishYear = finishDate.getFullYear();
+        if (finishMonth === 0) {
+          finishYear += 1;
+
+        }
+
+
+        let finish = { month: finishMonth, year: finishYear };
+
+
+        while ( (start.month !== finish.month) || (start.year !== finish.year) ) {
+
+          if (eventObj[`${start.month}/${start.year}`]){
+            eventObj[`${start.month}/${start.year}`].push(allEvents[calEventId]);
           } else {
-            eventObj[month] = [allEvents[calEventId]];
+            eventObj[`${start.month}/${start.year}`] = [allEvents[calEventId]];
+          }
+
+          start.month = (start.month + 1) % 12;
+          if (start.month === 0) {
+            start.year += 1;
           }
         }
       });
+
       return eventObj;
     },
 
   render: function() {
     let numberOfCalEvents = Object.keys(this.state.calenderEvents).length;
     let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
     let months = [0,1,2,3,4,5,6,7,8,9,10,11];
     let monthsArray = months.slice(currentMonth).concat(months.slice(0, currentMonth)) ;
+    monthsArray = monthsArray.concat(monthsArray);
 
     let allEvents = {};
     if (numberOfCalEvents > 0) {
@@ -66,9 +90,12 @@ const CalenderEventIndex = React.createClass({
 
     let calenderEventList = monthsArray.map((month, index) => {
         let eventsInMonth = "";
+        if (month === 0) {
+          currentYear += 1;
+        }
 
-        if (numberOfCalEvents > 0 && allEvents[month]) {
-          eventsInMonth = allEvents[month].map((calEvent, index) => {
+        if (numberOfCalEvents > 0 && allEvents[`${month}/${currentYear}`]) {
+          eventsInMonth = allEvents[`${month}/${currentYear}`].map((calEvent, index) => {
           return(
             <div key={calEvent.id} className="schedule-event clear-fix">
               <div className="schedule-event-start">{new Date(calEvent.start).toDateString()}</div>
@@ -79,10 +106,10 @@ const CalenderEventIndex = React.createClass({
           });
         }
 
-        return (
-          <li key={month}>
+        let monthBlock = (
+          <li key={index}>
             <div className={`schedule-month-${month} schedule-block`}>
-              {CalenderEventConstants.MONTHS[month]}
+              {CalenderEventConstants.MONTHS[month]} {currentYear}
             </div>
             <div>
               {eventsInMonth}
@@ -90,6 +117,8 @@ const CalenderEventIndex = React.createClass({
           </li>
         );
 
+
+        return monthBlock;
       }
     );
 
