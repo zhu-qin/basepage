@@ -87,6 +87,9 @@ const CalenderEventIndex = React.createClass({
     if (numberOfCalEvents > 0) {
       allEvents = this.organizeEventsByMonth();
     }
+    if (monthsArray[0] === 0) {
+      currentYear -= 1;
+    }
 
     let calenderEventList = monthsArray.map((month, index) => {
         let eventsInMonth = "";
