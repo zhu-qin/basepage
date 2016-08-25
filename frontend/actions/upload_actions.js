@@ -16,12 +16,10 @@ const UploadActions = {
   },
 
   uploadFile: function(file){
-    
     UploadUtil.uploadFile(file, UploadActions.receiveOneFile);
   },
 
   receiveOneFile: function(file){
-    console.log(file);
     AppDispatcher.dispatch({
       actionType: UploadConstants.RECEIVE_ONE_FILE,
       file: file

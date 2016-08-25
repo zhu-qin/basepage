@@ -1,9 +1,10 @@
 @project_documents.each do |doc|
   json.set! doc.id do
-    json.id doc.id
-    json.title doc.title
-    json.body doc.body
-    json.project_doc asset_path(doc.project_doc)
+    json.id               doc.id
+    json.title            doc.title
+    json.body             doc.body
+    json.project_id       doc.project_id
+    json.project_doc      asset_path(doc.project_doc)
   end
 end
 

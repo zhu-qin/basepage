@@ -14,18 +14,18 @@ const UploadForm = React.createClass({
               fileUrl: ""  };
   },
 
-  componentDidMount: function () {
-    this.storeListener = UploadStore.addListener(this._uploadStoreListener);
-    UploadActions.getAllFiles(ProjectStore.getCurrentProject().id);
-  },
-
-  _uploadStoreListener: function () {
-    this.setState( {documents: UploadStore.all()} );
-  },
-
-  componentWillUnmount: function () {
-    this.storeListener.remove();
-  },
+  // componentDidMount: function () {
+  //   this.storeListener = UploadStore.addListener(this._uploadStoreListener);
+  //   UploadActions.getAllFiles(ProjectStore.getCurrentProject().id);
+  // },
+  //
+  // _uploadStoreListener: function () {
+  //   this.setState( {documents: UploadStore.all()} );
+  // },
+  //
+  // componentWillUnmount: function () {
+  //   this.storeListener.remove();
+  // },
 
   _handleChange: function (field, event) {
     return (event) => {
