@@ -22,30 +22,6 @@ Others features include a calender to post events, and an uploads page to share
 files.
 
 ##Future additions
--Notifications
--Live Chat
--Streaming video
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Plans for future features:
 - Notifications
-- User permissions
-- Archiving
+- Live Chat
+- Streaming video
