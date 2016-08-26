@@ -101,8 +101,8 @@ const CalenderEventIndex = React.createClass({
           eventsInMonth = allEvents[`${month}/${currentYear}`].map((calEvent, index) => {
           return(
             <div key={calEvent.id} className="schedule-event clear-fix">
-              <div className="schedule-event-start">{new Date(calEvent.start + "EDT").toDateString()}</div>
-              <div className="schedule-event-finish">{new Date(calEvent.finish + "EDT").toDateString()}</div>
+              <div className="schedule-event-start">{new Date(calEvent.start).toGMTString().slice(0,16)}</div>
+              <div className="schedule-event-finish">{new Date(calEvent.finish).toGMTString().slice(0,16)}</div>
               <p className="schedule-event-title" onClick={this._handleCalenderEventForm.bind(null, calEvent.id)}>{calEvent.title}</p>
             </div>
           );

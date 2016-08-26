@@ -57,8 +57,8 @@ const CalenderEventForm = React.createClass({
   },
 
   getDates: function (){
-    let start = new Date();
-    let finish = new Date();
+    let start;
+    let finish;
     let userStart = this.state.calEvent.start;
     let userFinish = this.state.calEvent.finish;
     if (userStart.length > 0){
@@ -69,7 +69,15 @@ const CalenderEventForm = React.createClass({
       finish = userFinish;
     }
 
-    if (new Date(start) > new Date(finish)) {
+    if (!start) {
+      start = new Date();
+    }
+
+    if (!finish){
+      finish = new Date();
+    }
+
+    if ( start && (new Date(start) > new Date(finish)) ) {
       finish = start;
     }
 
