@@ -33,7 +33,7 @@ const UploadIndex = React.createClass({
       let fileList = Object.keys(this.state.documents).map((id, index) => {
         return (
           <li key={id} className="upload-list-item">
-            <a href={this.state.documents[id].project_doc}>
+            <a href={this.state.documents[id].project_doc} target="_blank">
               <div>{this.state.documents[id].title}</div>
               <img src={this.state.documents[id].project_doc} />
             </a>

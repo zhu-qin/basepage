@@ -1,30 +1,51 @@
-Base Page is a copy of a popular work organizer app, basecamp.com.
-Base Page that aims to facilitate workflow and organization.
-The app includes message boards, todo-list, calenders.
-In the near future it will also allow for adding in team members. notifications, live streaming, file uploads and more.
+Base Page is a inspired of a popular work organizer app, basecamp.com.
+The app includes message boards, todo-list, calenders, file uploads.
+
 
 Base Page is a single page web-app built with a react front end and rails backend.
 
-Models for the Back End:
+##Projects
+Users create projects on the project index page.
 
-- Users and Sessions
-- Projects
-- Todos and Todo-Lists
-- Messages
-- Calender Events
+<img src="./docs/images/projects.png"/>
+<br><br>
 
-Flux cycles for the front end:
+##Messages
+The message board is where communication happens between team members.
+<img src="./docs/images/messages.png"/>
 
-- Authentication
-- Errors
-- Todos and Todo-Lists
-- Messages
-- Calender Events
+##To-dos
+To-do lists and to-dos can be created here.
+<img src="./docs/images/todos.png"/>
+
+Others features include a calender to post events, and an uploads page to share
+files.
+
+##Future additions
+-Notifications
+-Live Chat
+-Streaming video
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Plans for future features:
-
-- Live streaming
 - Notifications
-- File uploads
 - User permissions
 - Archiving

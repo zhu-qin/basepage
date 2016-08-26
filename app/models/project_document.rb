@@ -17,7 +17,23 @@
 class ProjectDocument < ActiveRecord::Base
 
   has_attached_file :project_doc, default_url: "dog-keyboard.png"
-  validates_attachment_content_type :project_doc, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :project_doc,
+  content_type:
+  ['image/jpeg',
+    'image/png',
+    'audio/mpeg',
+    'audio/x-m4a',
+    'video/mp4',
+    'video/avi'
+  ]
+  validates_attachment_file_name :project_doc,
+  matches: [
+    /png\Z/i,
+    /jpe?g\z/i,
+    /m4a\Z/i,
+    /mp3\Z/i,
+    /avi\Z/i
+  ]
 
   validates :title, :project_id, presence: true
 
