@@ -7,7 +7,7 @@ const hashHistory = require('react-router').hashHistory;
 
 const UploadIndex = React.createClass({
   getInitialState: function () {
-    return { documents: null };
+    return { documents: {} };
   },
 
   componentDidMount: function () {
@@ -29,8 +29,10 @@ const UploadIndex = React.createClass({
 
   render: function() {
 
-    let view = function () {
-      let fileList = Object.keys(this.state.documents).map((id, index) => {
+    let fullView;
+
+    if (Object.keys(this.state.documents).length > 0) {
+      fullView = Object.keys(this.state.documents).map((id, index) => {
         return (
           <li key={id} className="upload-list-item">
             <a href={this.state.documents[id].project_doc} target="_blank">
@@ -40,13 +42,6 @@ const UploadIndex = React.createClass({
           </li>
         );
       });
-      return fileList;
-    }.bind( this );
-
-    let fullView = "";
-
-    if (this.state.documents) {
-      fullView = view();
     }
 
     return(

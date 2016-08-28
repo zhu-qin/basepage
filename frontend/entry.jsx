@@ -33,11 +33,13 @@ const ProjectStore = require('./stores/project_store');
 // Actions
 const SessionActions = require('./actions/session_actions');
 
-let redirectConditions = function () {
-  if (!SessionStore.isSignedIn()) {
-    hashHistory.push("/");
-  } else if (!ProjectStore.getCurrentProject().id) {
-    hashHistory.push('/projects/index');
+let redirectConditions = function (nextState, replace) {
+
+  if (!ProjectStore.getCurrentProject().id && SessionStore.isSignedIn()) {
+    replace(`/projects/index`);
+  }
+  if(!SessionStore.isSignedIn()) {
+    replace("/");
   }
 };
 

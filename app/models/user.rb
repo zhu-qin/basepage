@@ -29,6 +29,19 @@ class User < ActiveRecord::Base
     foreign_key: :author_id
   )
 
+  has_many(
+    :project_memberships,
+    class_name: "ProjectMembership",
+    foreign_key: :email,
+    primary_key: :email
+  )
+
+  has_many(
+    :team_projects,
+    through: :project_memberships,
+    source: :projects
+  )
+
 
 
   after_initialize :ensure_session_token

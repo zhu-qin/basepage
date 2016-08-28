@@ -3,4 +3,5 @@ module.exports = {
   "calender_events": "Schedule",
   "messages": "Messages",
   "uploads": "Docs & Files",
+  "team": "Team"
 };

@@ -60,4 +60,17 @@ class Project < ActiveRecord::Base
     dependent: :destroy
   )
 
+  has_many(
+    :project_memberships,
+    class_name: "ProjectMembership",
+    foreign_key: :project_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :users,
+    through: :project_memberships,
+    source: :users
+  )
+
 end

@@ -9,7 +9,7 @@ const ProjectActions = require('../../actions/project_actions');
 
 const ProjectView = React.createClass({
   getInitialState: function (){
-    this.navConstants = ["messages", "todos", "calender_events", "uploads"];
+    this.navConstants = ["messages", "todos", "calender_events", "uploads", "team"];
     return { all_projects: {}, currentProject: {} };
   },
 

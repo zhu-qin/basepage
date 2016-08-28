@@ -36,41 +36,74 @@ const ProjectIndex = React.createClass({
   },
 
   render: function() {
-    let view = function () {
-      let projectList = Object.keys(this.state.projects).map((id, index) => {
-        return (
+
+    let managedProjects = [];
+    let memberProjects = [];
+    if (this.state.projects) {
+      Object.keys(this.state.projects).forEach((id, index) => {
+        let project = this.state.projects[id];
+
+        let edit;
+        if(project.manager_id === SessionStore.getCurrentUser().id){
+          edit = (<div className="project-list-item-edit" onClick={this._redirectToEditProject.bind(null, id)}>Edit</div>);
+        }
+
+        let listItem = (
           <li key={id} className="project-list-item clear-fix" >
               <div className="project-list-item-text" onClick={this._goToProject.bind(null, id)}>
-                <h2>{this.state.projects[id].title}</h2>
+                <h2>{project.title}</h2>
               </div>
-
-              <div className="project-list-item-edit" onClick={this._redirectToEditProject.bind(null, id)}>
-                Edit
-              </div>
+              {edit}
           </li>
         );
+
+        if(project.manager_id === SessionStore.getCurrentUser().id){
+          managedProjects.push(listItem);
+        } else {
+          memberProjects.push(listItem);
+        }
+
+
       });
-      return projectList;
-    }.bind( this );
-
-    let fullView = "";
-
-    if (this.state.projects) {
-      fullView = view();
     }
 
 
+    let managed = (
+      <div className="project-list-wrapper">
+        <h2>Managed Projects</h2 >
+        <ul className="project-wrapper">
+          {managedProjects}
+        </ul>
+      </div>
+    );
+
+    let memberships = (
+      <div className="project-list-wrapper">
+        <h2>Team Projects</h2 >
+        <ul className="project-wrapper">
+          {memberProjects}
+        </ul>
+      </div>
+    );
+
+    if (managedProjects.length === 0) {
+      managed = undefined;
+    }
+
+    if (memberProjects.length === 0) {
+      memberships = undefined;
+    }
+
     return(
       <div className="feature-wrapper clear-fix">
-        <div className="project-wrapper">
+        <div>
           <h2>Projects</h2>
-            <button className="feature-add-button" onClick={this._redirectToAddProject}>Add Project</button>
-            <div className="form-place-holder">
-              {this.props.children}
-            </div>
-            <ul className="project-wrapper">
-              {fullView}
-            </ul>
+          <button className="feature-add-button" onClick={this._redirectToAddProject}>Add Project</button>
+          <div className="form-place-holder">
+            {this.props.children}
+          </div>
+            {managed}
+            {memberships}
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index
-    @projects = current_user.projects
+    @projects = current_user.projects + current_user.team_projects
     render :index
   end
 
