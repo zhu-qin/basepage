@@ -37,6 +37,7 @@ const ProjectMembershipIndex = React.createClass({
   },
 
   render: function() {
+    debugger
     let pending = [];
     let members = [];
     if (this.state.projectMemberships) {
@@ -69,7 +70,6 @@ const ProjectMembershipIndex = React.createClass({
 
       });
     }
-
 
     let signedUpMembers = (
       <div className="projectMembership-list-wrapper">
@@ -105,8 +105,8 @@ const ProjectMembershipIndex = React.createClass({
           <div className="form-place-holder">
             {this.props.children}
           </div>
-            {members}
-            {pending}
+            {signedUpMembers}
+            {pendingSignUp}
         </div>
       </div>
     );

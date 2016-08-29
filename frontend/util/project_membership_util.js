@@ -12,11 +12,11 @@ const ProjectMembershipUtil = {
     });
   },
 
-  createProjectMembership: function (member, successCallback) {
+  createProjectMembership: function (membership, successCallback) {
     $.ajax({
       type: "POST",
-      url: `api/${projectId}/project_memberships`,
-      data: { member: member },
+      url: `api/project_memberships`,
+      data: { project_membership: membership },
       success: function (response) {
         successCallback(response);
       }
@@ -26,8 +26,8 @@ const ProjectMembershipUtil = {
   updateProjectMembership: function (membership, successCallback) {
     $.ajax({
       type: "PATCH",
-      url: `api/project_membership/${membership.id}`,
-      data: {member: member},
+      url: `api/project_memberships/${membership.id}`,
+      data: { project_membership: membership },
       success:  function (response){
         successCallback(response);
       }
@@ -37,7 +37,7 @@ const ProjectMembershipUtil = {
   deleteProjectMembership: function (membership, successCallback) {
     $.ajax({
       type: "DELETE",
-      url: `api/project_membership/${membership.id}`,
+      url: `api/project_memberships/${membership.id}`,
       success: function (response){
         successCallback(response);
       }

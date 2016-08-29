@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       resources :project_documents,   only: [:create, :index]
       resources :messages,            only: [:create, :index]
       resources :calender_events,     only: [:create, :index]
-      resources :project_memberships, only: [:create, :index]
+      resources :project_memberships, only: [:index]
     end
 
     resources :todo_lists,           only: [:update, :show, :destroy] do
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :projects,             only: [:update, :destroy, :create]
     resources :messages,             only: [:update, :destroy]
     resources :calender_events,      only: [:update, :destroy]
+    resources :project_memberships,  only: [:update, :destroy, :create]
 
   end
 

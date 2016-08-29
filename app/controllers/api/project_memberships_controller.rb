@@ -10,13 +10,9 @@ class Api::ProjectMembershipsController < ApplicationController
   end
 
   def index
-    @project_memberships = Project.find(params[:project_id]).project_memberships.joins(:user)
+    @project_memberships = Project.find(params[:project_id])
+    .project_memberships.joins("left outer join users on users.email = project_memberships.email")
     render :index
-  end
-
-  def show
-    @project_membership = ProjectMembership.find(params[:id])
-    render :show
   end
 
   def update
@@ -36,7 +32,7 @@ class Api::ProjectMembershipsController < ApplicationController
 
 
   def project_membership_params
-    params.require(:project_membership).permit(:title, :description, :manager_id)
+    params.require(:project_membership).permit(:id, :alias, :project_id, :email, :user_id)
   end
 
 end

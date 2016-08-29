@@ -8,7 +8,7 @@ const Link = require('react-router').Link;
 
 const ProjectMembershipForm = React.createClass({
   getInitialState: function () {
-    return { username: "", email: "", project_id: ""};
+    return { alias: "", email: "", project_id: ""};
   },
 
   componentDidMount: function (){
@@ -70,8 +70,9 @@ const ProjectMembershipForm = React.createClass({
             <label>Name:
               <input type="text" onChange={this._handleChange("alias")} value={this.state.alias}/>
             </label>
-            <label>Email:</label>
-            <textarea onChange={this._handleChange("email")} value={this.state.email}/>
+            <label>Email:
+              <input type="text" onChange={this._handleChange("email")} value={this.state.email}/>
+            </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
               <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/project_memberships_index`}>Cancel</Link>

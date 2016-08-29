@@ -2,6 +2,7 @@ const AppDispatcher = require('../dispatcher/dispatcher');
 const Store = require('flux/utils').Store;
 const ProjectMembershipConstants = require('../constants/project_membership_constants');
 const SessionStore = require('./session_store');
+const ProjectStore = require('./project_store');
 const hashHistory = require('react-router').hashHistory;
 
 let _memberships = {};
@@ -18,12 +19,12 @@ ProjectMembershipStore.resetProjectMemberships = function (memberships) {
 
 ProjectMembershipStore.addOneProjectMembership = function (membership) {
   _memberships[membership.id] = membership;
-  hashHistory.push('/project_memberships/index');
+  hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/project_memberships_index`);
 };
 
 ProjectMembershipStore.removeProjectMembership = function (membership) {
   delete _memberships[membership.id];
-  hashHistory.push('/project_memberships/index');
+  hashHistory.push(`projects/${ProjectStore.getCurrentProject().id}/project_memberships_index`);
 };
 
 ProjectMembershipStore.find = function(id) {

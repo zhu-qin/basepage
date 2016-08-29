@@ -82,7 +82,7 @@ const AppRouter = (
 
       <Route path="project_memberships_index" component={ProjectMembershipIndex} onEnter={redirectConditions}>
         <Route path="/project_memberships/new" component={ProjectMembershipForm} />
-        <Route path="/project_memberships/:projectMembershipsId/edit" component={ProjectMembershipForm} />
+        <Route path="/project_memberships/:projectMembershipId/edit" component={ProjectMembershipForm} />
       </Route>
 
     </Route>
