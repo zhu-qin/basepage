@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   has_many(
     :team_projects,
     through: :project_memberships,
-    source: :projects
+    source: :project
   )
 
 

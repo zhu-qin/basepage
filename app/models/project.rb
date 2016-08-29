@@ -70,7 +70,7 @@ class Project < ActiveRecord::Base
   has_many(
     :users,
     through: :project_memberships,
-    source: :users
+    source: :user
   )
 
 end

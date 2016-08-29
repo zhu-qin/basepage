@@ -1,0 +1,40 @@
+.projectMembership-list-wrapper > h2 {
+  display: block;
+  text-align: left;
+  font-size: 24px;
+
+  color: #8d6e63;
+  width: 21%;
+}
+
+.projectMembership-list-item {
+  display: block;
+  height: 80px;
+  text-align: left;
+  height: 100px;
+  font-size: 20px;
+  margin: 30px;
+}
+
+
+.projectMembership-list-item > div {
+  cursor: pointer;
+  padding: 20px;
+  height: 40px;
+}
+
+.projectMembership-list-item-text {
+  background: #feefd8;
+  color: #ff9800;
+  float:left;
+  width: 55%;
+}
+
+
+.projectMembership-list-item-edit {
+  background: #3cb371;
+  color: white;
+  float:right;
+  text-align: center;
+  width: 15%;
+}

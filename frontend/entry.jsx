@@ -17,6 +17,7 @@ const CalenderEventIndex = require('./components/project/calender_event_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
 const ProjectIndex = require('./components/project/project_index');
+const ProjectMembershipIndex = require('./components/project/project_membership_index');
 
 // Components Forms
 const TodoForm = require('./components/project/todo_form');
@@ -25,6 +26,7 @@ const MessageForm = require('./components/project/message_form');
 const CalenderEventForm = require('./components/project/calender_event_form');
 const UploadForm = require('./components/project/upload_form');
 const ProjectForm = require('./components/project/project_form');
+const ProjectMembershipForm = require('./components/project/project_membership_form');
 
 // Stores
 const SessionStore = require('./stores/session_store');
@@ -34,7 +36,6 @@ const ProjectStore = require('./stores/project_store');
 const SessionActions = require('./actions/session_actions');
 
 let redirectConditions = function (nextState, replace) {
-
   if (!ProjectStore.getCurrentProject().id && SessionStore.isSignedIn()) {
     replace(`/projects/index`);
   }
@@ -77,6 +78,11 @@ const AppRouter = (
 
       <Route path="uploads_index" component={UploadIndex} onEnter={redirectConditions}>
         <Route path="/uploads/new_file" component={UploadForm} />
+      </Route>
+
+      <Route path="project_memberships_index" component={ProjectMembershipIndex} onEnter={redirectConditions}>
+        <Route path="/project_memberships/new" component={ProjectMembershipForm} />
+        <Route path="/project_memberships/:projectMembershipsId/edit" component={ProjectMembershipForm} />
       </Route>
 
     </Route>

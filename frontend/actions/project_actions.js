@@ -21,10 +21,6 @@ const ProjectActions = {
     });
   },
 
-  getOneProject: function(project){
-    ProjectUtil.getOneProject(project, ProjectActions.receiveOneProject);
-  },
-
   receiveOneProject: function(project){
     AppDispatcher.dispatch({
       actionType: ProjectConstants.RECEIVE_ONE_PROJECT,

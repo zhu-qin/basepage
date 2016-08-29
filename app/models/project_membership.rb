@@ -1,14 +1,16 @@
 class ProjectMembership < ActiveRecord::Base
 
+  validates :email, :project_id, presence: true
+
   belongs_to(
-    :projects,
+    :project,
     class_name: "Project",
     foreign_key: :project_id,
     primary_key: :id
   )
 
   belongs_to(
-    :users,
+    :user,
     class_name: "User",
     foreign_key: :email,
     primary_key: :email
