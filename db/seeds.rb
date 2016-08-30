@@ -7,11 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-User.create(username: "Qin", password: "password", email: "email@email.com")
-User.create(username: "Joe", password: "password", email: "fake@fake.com")
-User.create(username: "Larry", password: "password", email: "bogus@bogus.com")
+User.create(username: "Qin", password: "password", email: "qin@qin.com")
+User.create(username: "Joe", password: "password", email: "joe@joe.com")
+User.create(username: "Larry", password: "password", email: "larry@larry.com")
 
 
-Project.create(title: "Capstone", description: "Project One", manager_id: 1)
+Project.create(title: "Company restructuring", description: "Business", manager_id: 1)
+Project.create(title: "Fundraiser for local school", description: "School fundraiser", manager_id: 2)
 
-ProjectMembership.create(email: "fake@fake.com", project_id: 1)
+ProjectMembership.create(email: "larry@larry.com", project_id: 1)
+ProjectMembership.create(email: "joe@joe.com", project_id: 1)
