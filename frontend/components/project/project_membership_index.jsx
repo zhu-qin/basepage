@@ -37,7 +37,6 @@ const ProjectMembershipIndex = React.createClass({
   },
 
   render: function() {
-    debugger
     let pending = [];
     let members = [];
     if (this.state.projectMemberships) {
