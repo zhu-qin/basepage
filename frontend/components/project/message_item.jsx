@@ -17,10 +17,8 @@ const MessageItem = React.createClass({
       return (
         <span key={message.id}>
           <div className="message-text-block clear-fix">
-
-
             <div className="message-title-button">
-              <button className="child-button reply-button" onClick={this._handleClickToReply.bind(null, message.id)}>Reply => {message.author_name}Says: </button>
+              <button className="child-button reply-button" onClick={this._handleClickToReply.bind(null, message.id)}>Reply => {message.author_name} Says: </button>
               <div className="message-title">{message.title}</div>
               <div className="message-text">{message.body}</div>
             </div>

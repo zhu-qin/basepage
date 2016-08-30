@@ -1,17 +1,38 @@
+.project-container{
+  text-align: center;
+  min-height: 500px;
+  width: 85%;
+  float: left;
+}
+
+.projects-button {
+  float: right;
+}
+
+.project-title {
+  font-size: 36px;
+  float: left;
+  font-weight: bolder;
+  text-align: center;
+  display: block;
+}
+
+.project-nav-top {
+  height: 60px;
+  padding: 20px 50px 0 50px;
+}
+
 .project-list-wrapper > h2 {
   display: block;
   text-align: left;
   font-size: 24px;
-
   color: #8d6e63;
   width: 21%;
 }
 
 .project-list-item {
   display: block;
-  height: 80px;
   text-align: left;
-  height: 100px;
   font-size: 20px;
   margin: 30px;
 }
@@ -20,6 +41,7 @@
 .project-list-item > div {
   cursor: pointer;
   padding: 20px;
+  line-height: 35px;
   height: 40px;
 }
 
@@ -37,4 +59,10 @@
   float:right;
   text-align: center;
   width: 15%;
+}
+
+.sign-out-button {
+  background: #ff9933;
+  float: right;
+  margin-left: 50px;
 }

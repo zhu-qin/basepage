@@ -64,16 +64,20 @@ const ProjectView = React.createClass({
 
 
     return (
-      <div className="project-container">
-        <nav className="project-nav-top clear-fix">
-          <Link to={`projects/index`} className="project-title">{title}</Link>
-          <button className="sign-out-button button-main" onClick={this._handleLogOut}>Sign Out</button>
-          <button className="projects-button button-main" onClick={this._goToProjects}>Projects</button>
-        </nav>
-        <ul className="nav-list clear-fix">
-          {navigation}
-        </ul>
-        {this.props.children}
+      <div className="full-wrapper">
+        <div className="nav-list-wrapper">
+          <ul className="nav-list clear-fix">
+            {navigation}
+          </ul>
+        </div>
+        <div className="project-container">
+          <nav className="project-nav-top clear-fix">
+            <Link to={`projects/index`} className="project-title">{title}</Link>
+            <button className="sign-out-button button-main" onClick={this._handleLogOut}>Sign Out</button>
+            <button className="projects-button button-main" onClick={this._goToProjects}>Projects</button>
+          </nav>
+          {this.props.children}
+        </div>
       </div>
     );
   }

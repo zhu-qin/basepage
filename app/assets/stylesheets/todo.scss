@@ -1,12 +1,12 @@
 .todo-link {
   color: blue;
   display: block;
-  text-decoration: underline;
   text-align: left;
   font-weight: bold;
-  font-size: 24px;
+  text-decoration: underline;
+  font-size: 28px;
   padding: 10px;
-  width: 400px;
+  width: 70%;
 }
 
 .todo-completed-count {
@@ -14,10 +14,6 @@
   border: 1px solid gray;
   float: right;
   padding: 5px;
-}
-
-.button-add-todo{
-  box-shadow: none;
 }
 
 .todo-list-item {
@@ -28,7 +24,7 @@
 }
 
 .todo-list-link {
-  color: #992600;
   display: inline;
-  font-size: 20px;
+  font-size: 18px;
+  margin-left: 10px;
 }

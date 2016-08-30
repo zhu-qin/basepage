@@ -54,8 +54,8 @@ const ProjectMembershipIndex = React.createClass({
         let listItem = (
           <li key={id} className="projectMembership-list-item clear-fix" >
               <div className="projectMembership-list-item-text" onClick={this._goToProjectMembership.bind(null, id)}>
-                <h2>{name}</h2>
-                <h2>{projectMembership.email}</h2>
+                <h2>Name: {name}</h2>
+                <h2>Email: {projectMembership.email}</h2>
               </div>
               {edit}
           </li>

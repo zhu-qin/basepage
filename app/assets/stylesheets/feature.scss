@@ -1,11 +1,10 @@
 .feature-wrapper {
-  position: relative;
-  box-shadow: 4px 4px gray;
-  max-width: 1000px;
   min-height: 500px;
   margin: 20px;
   background-color: white;
   padding: 50px;
+  text-align: center;
+  box-shadow: 4px 4px grey;
 }
 
 .feature-wrapper > div > h2 {
@@ -14,12 +13,9 @@
   font-weight: bolder;
   margin-bottom: 20px;
   padding: 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid grey;
 }
 
-.project-container {
-  padding: 30px;
-}
 
 .feature-add-button {
   color: white;
@@ -34,5 +30,5 @@
 }
 
 .feature-add-button:active {
-  border: 2px solid #336600;
+  background: #339961;
 }
