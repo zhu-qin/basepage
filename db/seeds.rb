@@ -13,7 +13,7 @@ User.create(username: "Larry", password: "password", email: "larry@larry.com")
 
 
 Project.create(title: "Company restructuring", description: "Business", manager_id: 1)
-Project.create(title: "Fundraiser for local school", description: "School fundraiser", manager_id: 2)
+Project.create(title: "Fundraiser for local school", description: "School Fundraiser", manager_id: 2)
 
 ProjectMembership.create(email: "larry@larry.com", project_id: 1)
 ProjectMembership.create(email: "joe@joe.com", project_id: 1)
