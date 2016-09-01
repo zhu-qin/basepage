@@ -2,9 +2,9 @@
   json.set! doc.id do
     json.id               doc.id
     json.title            doc.title
-    json.body             doc.body
     json.project_id       doc.project_id
     json.project_doc      asset_path(doc.project_doc)
+    json.content_type     doc.project_doc.content_type
   end
 end
 

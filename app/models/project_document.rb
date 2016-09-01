@@ -27,15 +27,15 @@ class ProjectDocument < ActiveRecord::Base
     'video/mp4',
     'video/avi'
   ]
-  validates_attachment_file_name :project_doc,
-  matches: [
-    /pdf\Z/i,
-    /png\Z/i,
-    /jpe?g\z/i,
-    /m4a\Z/i,
-    /mp3\Z/i,
-    /avi\Z/i
-  ]
+  # validates_attachment_file_name :project_doc,
+  # matches: [
+  #   /pdf\Z/i,
+  #   /png\Z/i,
+  #   /jpe?g\z/i,
+  #   /m4a\Z/i,
+  #   /mp3\Z/i,
+  #   /avi\Z/i
+  # ]
 
   validates :title, :project_id, presence: true
 

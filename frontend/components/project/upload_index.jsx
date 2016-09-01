@@ -33,11 +33,12 @@ const UploadIndex = React.createClass({
 
     if (Object.keys(this.state.documents).length > 0) {
       fullView = Object.keys(this.state.documents).map((id, index) => {
+        let doc = this.state.documents[id];
         return (
           <li key={id} className="upload-list-item">
             <a href={this.state.documents[id].project_doc} target="_blank">
               <div>{this.state.documents[id].title}</div>
-              <img src={this.state.documents[id].project_doc} />
+              <embed src={doc.project_doc} type={doc.content_type} className="upload-preview-embed"/>
             </a>
           </li>
         );
