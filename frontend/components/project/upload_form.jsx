@@ -42,7 +42,7 @@ const UploadForm = React.createClass({
     formData.append("project_documents[project_doc]", this.state.file);
     formData.append("project_documents[project_id]", project_id);
     UploadActions.uploadFile(formData);
-    hashHistory.push(`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`);
+    hashHistory.push(`/projects/${project_id}/uploads_index`);
   },
 
   render: function () {
@@ -62,7 +62,6 @@ const UploadForm = React.createClass({
               <label>File:
                 <input type="file" className="button-form" onChange={this._previewFile}/>
               </label>
-
               {button}
               <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`}>Cancel</Link>
             </div>
