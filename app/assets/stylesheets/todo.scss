@@ -18,13 +18,42 @@
 
 .todo-list-item {
   display: block;
+  line-height: 40px;
   text-align: left;
   padding: 5px;
+  font-size: 20px;
   margin-left: 20px;
 }
 
 .todo-list-link {
-  display: inline;
+  float: left;
+  display: block;
   font-size: 18px;
   margin-left: 10px;
+}
+
+.todo-list-item-box {
+  width: 40px;
+  height: 40px;
+  float:left;
+}
+
+.todo-checked {
+  background-image: image-url("checkbox-checked.png");
+  background-size: 100% 100%;
+}
+
+.todo-unchecked {
+  background-image: image-url("checkbox-unchecked.png");
+  background-size: 100% 100%;
+}
+
+.todo-list-item-delete {
+  float: left;
+  padding: 0 5px;
+  height: 40px;
+  margin-left: 10px;
+  background: #3cb371;
+  border: none;
+  cursor: pointer;
 }

@@ -7,14 +7,14 @@ const Link = require('react-router').Link;
 
 const TodoList = React.createClass({
 
-  handleCheck: function(event){
+  handleCheck: function(todoId, event){
     let completion;
-    if (event.target.checked) {
+    if (event.target.className === "todo-list-item-box todo-unchecked") {
       completion = true;
     } else {
       completion = false;
     }
-    let todoUpdate = {id: event.target.attributes.data.value, completion: completion };
+    let todoUpdate = {id: todoId, completion: completion };
     TodoActions.updateOneTodo(todoUpdate);
   },
 
@@ -41,15 +41,15 @@ const TodoList = React.createClass({
     let checkedTodos = [];
     let uncheckedTodos = [];
     let todoList = todos.forEach((todo, index) => {
-      let checkBox;
       let deleteButton;
+      let checked = "todo-unchecked";
       if (todo.completion) {
-        checkBox = "checked";
-        deleteButton = <button className="button-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
+        checked = "todo-checked";
+        deleteButton = <button className="todo-list-item-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
       }
       let todoToShow = (
         <li className="todo-list-item clear-fix" key={todo.id}>
-          <input  type="checkbox" data={todo.id} defaultChecked={checkBox} onClick={this.handleCheck}/>
+          <div className={`todo-list-item-box ${checked}`} onClick={this.handleCheck.bind(null, todo.id)} ></div>
           {deleteButton}
           <p className="todo-list-link" >{todo.title}</p>
         </li>
