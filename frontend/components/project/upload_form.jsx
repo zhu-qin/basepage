@@ -49,6 +49,11 @@ const UploadForm = React.createClass({
     let button = <input className="button-form" type="submit" value="Upload"/>;
     let callback = this._handleSubmit;
 
+    let embedded;
+    if(this.state.file) {
+      embedded = <embed src={this.state.fileUrl} type={this.state.file.type} className="upload-preview-embed"/>;
+    }
+
     return(
       <div className="post-wrapper">
           <h2>Upload File</h2>
@@ -57,10 +62,10 @@ const UploadForm = React.createClass({
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
             <label>Body:</label>
-            <div className="upload-preview"><img src={this.state.fileUrl} /></div>
+            <div className="upload-preview">{embedded}</div>
             <div className="button-wrapper clear-fix">
               <label>File:
-                <input type="file" className="button-form" onChange={this._previewFile}/>
+                <input type="file" className="upload-preview-button-form" onChange={this._previewFile}/>
               </label>
               {button}
               <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`}>Cancel</Link>
