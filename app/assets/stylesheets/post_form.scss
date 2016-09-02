@@ -34,7 +34,10 @@
 .post-wrapper input[type="submit"]{
   margin: 0 20px 0 0;
   float: left;
-  width: 50px;
+  height: 20px;
+  width: 60px;
+  font-size: 14px;
+  padding: 5px;
   display: block;
   cursor: pointer;
   border: none;
@@ -47,8 +50,9 @@
   margin: 0 20px 0 0;
   float: left;
   height: 20px;
-  width: 50px;
+  width: 60px;
   padding: 5px;
+  font-size: 14px;
   display: block;
   cursor: pointer;
   background: #3cb371;
