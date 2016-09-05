@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
     source: :project
   )
 
+  has_many(
+    :chat_messages,
+    class_name: "Chat",
+    foreign_key: :author_id,
+    primary_key: :id
+  )
+
 
 
   after_initialize :ensure_session_token

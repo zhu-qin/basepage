@@ -21,5 +21,11 @@ class Todo < ActiveRecord::Base
     class_name: "TodoList",
     foreign_key: :todo_list_id
   )
-  
+
+  has_one(
+    :project,
+    through: :todo_list,
+    source: :project
+  )
+
 end

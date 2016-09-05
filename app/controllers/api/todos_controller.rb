@@ -3,6 +3,7 @@ class Api::TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
+      Pusher.trigger("project_#{@todo.project.id}", 'update_todos', {})
       render :show
     else
       render @todo.errors.full_messages, status: 400
@@ -17,6 +18,7 @@ class Api::TodosController < ApplicationController
   def update
     @todo = Todo.find(todo_params[:id])
     if @todo.update(todo_params)
+      Pusher.trigger("project_#{@todo.project.id}", 'update_todos', {})
       render json: @todo
     else
       render json: ["something went wrong"], status: 400
@@ -26,6 +28,7 @@ class Api::TodosController < ApplicationController
   def destroy
     @todo = Todo.find(params[:id])
     @todo.destroy
+    Pusher.trigger("project_#{@todo.project.id}", 'update_todos', {})
     render :show
   end
 

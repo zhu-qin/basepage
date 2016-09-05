@@ -16,11 +16,21 @@ const TodoIndex = React.createClass({
     this.todoListener = TodoStore.addListener(this._todoStoreListener);
     this.countListener = TodoStore.addListener(this._countListener);
     TodoActions.getTodos(ProjectStore.getCurrentProject().id);
+
+    this.pusher = new Pusher('4b389f8a160265cfaaa3', {
+      encrypted: true
+    });
+
+    var channel = this.pusher.subscribe(`project_${ProjectStore.getCurrentProject().id}`);
+    channel.bind('update_todos', function(data) {
+      TodoActions.getTodos(ProjectStore.getCurrentProject().id);
+    });
   },
 
   componentWillUnmount: function (){
     this.todoListener.remove();
     this.countListener.remove();
+    this.pusher.unsubscribe(`project_${ProjectStore.getCurrentProject().id}`);
   },
 
   _countListener: function(array) {

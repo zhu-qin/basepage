@@ -73,4 +73,11 @@ class Project < ActiveRecord::Base
     source: :user
   )
 
+  has_many(
+    :chat_messages,
+    class_name: "Chat",
+    foreign_key: :project_id,
+    primary_key: :id
+  )
+
 end

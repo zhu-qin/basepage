@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :messages,            only: [:create, :index]
       resources :calender_events,     only: [:create, :index]
       resources :project_memberships, only: [:index]
+      resources :chats,               only: [:create, :index]
     end
 
     resources :todo_lists,           only: [:update, :show, :destroy] do

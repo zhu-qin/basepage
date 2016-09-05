@@ -3,5 +3,6 @@ module.exports = {
   "calender_events": "Schedule",
   "messages": "Messages",
   "uploads": "Docs & Files",
-  "project_memberships": "Team"
+  "project_memberships": "Team",
+  "chats": "Chat"
 };

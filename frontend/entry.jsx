@@ -14,6 +14,7 @@ const Session = require('./components/session_comp');
 const ProjectView = require('./components/project/project_view');
 const TodoIndex = require('./components/project/todo_index');
 const CalenderEventIndex = require('./components/project/calender_event_index');
+const ChatIndex = require('./components/project/chat_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
 const ProjectIndex = require('./components/project/project_index');
@@ -65,6 +66,9 @@ const AppRouter = (
         <Route path="/todos/:todoId/edit" component={TodoForm} />
         <Route path="/projects/:projectId/todo_list_new" component={TodoListForm}/>
         <Route path="/todo_lists/:todoListId/edit" component={TodoListForm}/>
+      </Route>
+
+      <Route path="chats_index" component={ChatIndex} onEnter={redirectConditions}>
       </Route>
 
       <Route path="messages_index" component={MessageIndex} onEnter={redirectConditions}>
