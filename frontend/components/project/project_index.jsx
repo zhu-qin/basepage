@@ -6,12 +6,14 @@ const hashHistory = require('react-router').hashHistory;
 
 const ProjectIndex = React.createClass({
   getInitialState: function () {
-    return { projects: null };
+    return { projects: ProjectStore.all() };
   },
 
   componentDidMount: function () {
     this.storeListener = ProjectStore.addListener(this._projectStoreListener);
-    ProjectActions.getAllProjects();
+    if (ProjectStore.length === 0) {
+      ProjectActions.getAllProjects();
+    }
   },
 
   _projectStoreListener: function () {

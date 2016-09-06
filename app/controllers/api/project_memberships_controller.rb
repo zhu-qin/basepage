@@ -1,5 +1,4 @@
 class Api::ProjectMembershipsController < ApplicationController
-
   def create
     @project_membership = ProjectMembership.new(project_membership_params)
     if @project_membership.save

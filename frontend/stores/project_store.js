@@ -13,6 +13,10 @@ ProjectStore.all = function () {
   return Object.assign({}, _projects);
 };
 
+ProjectStore.length = function (){
+  return Object.keys(_projects).length;
+};
+
 ProjectStore.resetProjects = function (projects) {
   _projects = projects;
 };

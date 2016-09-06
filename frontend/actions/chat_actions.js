@@ -13,6 +13,17 @@ const ChatActions = {
       actionType: ChatConstants.RECEIVE_ALL_CHATS,
       chatMessages: response
     });
+  },
+
+  addOneChatMessage: function(chatMessage) {
+    ChatUtil.addOneChatMessage(chatMessage, ChatActions.receiveOneChatMessage);
+  },
+
+  receiveOneChatMessage: function(response) {
+    AppDispatcher.dispatch({
+      actionType:ChatConstants.RECEIVE_ONE_CHAT,
+      chatMessage: response
+    });
   }
 };
 

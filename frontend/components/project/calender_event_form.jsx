@@ -38,7 +38,6 @@ const CalenderEventForm = React.createClass({
     }
   },
 
-
   _handleChange: function(field, event){
     return (event) =>{
       event.preventDefault();
@@ -130,13 +129,14 @@ const CalenderEventForm = React.createClass({
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.calEvent.title}/>
             </label>
-            <label>Body:</label>
-            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <label>Body:
+              <textarea onChange={this._handleChange("body")} value={this.state.calEvent.body}/>
+            </label>
             <label>Start:
-              <input type="date" className="start-time" value={this.state.calEvent.start} onChange={this._handleChange("start")}/>
+              <input type="date" value={this.state.calEvent.start} onChange={this._handleChange("start")}/>
             </label>
             <label>Finish:
-              <input type="date" className="finish-time" value={this.state.calEvent.finish} onChange={this._handleChange("finish")}/>
+              <input type="date" value={this.state.calEvent.finish} onChange={this._handleChange("finish")}/>
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>

@@ -31,10 +31,6 @@ SessionStore.getCurrentUser = function(){
   return Object.assign({}, _user);
 };
 
-SessionStore.userMainProject = function(){
-  return _user.main_project;
-};
-
 SessionStore.isSignedIn = function(){
   if (SessionStore.getCurrentUser().id){
     return true;

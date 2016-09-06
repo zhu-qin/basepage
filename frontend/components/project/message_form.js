@@ -51,8 +51,9 @@ const MessageForm = React.createClass({
             <label>Title:
               <input type="text" onChange={this._handleChange("title")} value={this.state.title}/>
             </label>
-            <label>Body:</label>
-            <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            <label>Body:
+              <textarea onChange={this._handleChange("body")} value={this.state.body}/>
+            </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value="Post"/>
               <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/messages_index`}>Cancel</Link>

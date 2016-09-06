@@ -3,7 +3,7 @@ class Api::ChatsController < ApplicationController
   def create
     @chat = Chat.new(chat_params)
     if @chat.save
-      Pusher.trigger("projects_#{@chat.project_id}", "update_chat", {})
+      Pusher.trigger("project_#{@chat.project_id}", "update_chats", {})
       render :show
     else
       render ["Invalid Message"]
@@ -11,13 +11,13 @@ class Api::ChatsController < ApplicationController
   end
 
   def index
-    @chats = Project.find(params[:project_id]).chat_messages.last(30)
+    @chats = Project.find(params[:project_id]).chat_messages.joins(:author).last(30)
     render :index
   end
 
 
   def chat_params
-    params.require(:chat).permit(:message)
+    params.require(:chat).permit(:message, :project_id, :author_id)
   end
 
 end
