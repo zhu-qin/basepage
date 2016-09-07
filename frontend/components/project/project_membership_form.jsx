@@ -8,7 +8,7 @@ const Link = require('react-router').Link;
 
 const ProjectMembershipForm = React.createClass({
   getInitialState: function () {
-    return { alias: "", email: "", project_id: ""};
+    return { username: "", alias: "", email: "", project_id: ""};
   },
 
   componentDidMount: function (){
@@ -18,7 +18,7 @@ const ProjectMembershipForm = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps){
-    this.setState (ProjectMembershipStore.find(newProps.params.projectMembershipId));
+    this.setState(ProjectMembershipStore.find(newProps.params.projectMembershipId));
   },
 
   _handleChange: function(field, event){
@@ -59,8 +59,6 @@ const ProjectMembershipForm = React.createClass({
       deleteButton = <button className="button-form" onClick={this._handleDelete}>Delete</button>;
     }
 
-
-
     return(
       <div className="post-wrapper">
         <div className="project-text-form">
@@ -68,7 +66,7 @@ const ProjectMembershipForm = React.createClass({
         </div>
           <form className="project-form" onSubmit={submit}>
             <label>Name:
-              <input type="text" onChange={this._handleChange("alias")} value={this.state.alias}/>
+              <input type="text" onChange={this._handleChange("username")} value={this.state.username}/>
             </label>
             <label>Email:
               <input type="text" onChange={this._handleChange("email")} value={this.state.email}/>

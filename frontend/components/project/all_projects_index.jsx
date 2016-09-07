@@ -6,11 +6,11 @@ const hashHistory = require('react-router').hashHistory;
 const Link = require('react-router').Link;
 const ProjectActions = require('../../actions/project_actions');
 const PusherStore = require('../../pusher/pusher_store');
+const ProjectMembershipActions= require('../../actions/project_membership_actions');
 
 const AllProjectsIndex = React.createClass({
-
   getInitialState: function (){
-    return { allProjects: ProjectStore.all() };
+    return { projects: ProjectStore.all() };
   },
 
   componentDidMount: function(){
@@ -22,9 +22,8 @@ const AllProjectsIndex = React.createClass({
   },
 
   _projectStoreListener: function () {
-    this.setState( {allProjects: ProjectStore.all()} );
-    // once all projects are retrieved from database user will subscribe to all
-    // presence channels associated with each project
+    this.setState( {projects: ProjectStore.all()} );
+
     PusherStore.addChannels();
   },
 
@@ -64,8 +63,6 @@ const AllProjectsIndex = React.createClass({
   },
 
   render: function () {
-
-
       let managedProjects = [];
       let memberProjects = [];
       if (this.state.projects) {
@@ -85,17 +82,13 @@ const AllProjectsIndex = React.createClass({
                 {edit}
             </li>
           );
-
           if(project.manager_id === SessionStore.getCurrentUser().id){
             managedProjects.push(listItem);
           } else {
             memberProjects.push(listItem);
           }
-
-
         });
       }
-
 
       let managed = (
         <div className="project-list-wrapper">

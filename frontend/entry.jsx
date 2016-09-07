@@ -17,7 +17,7 @@ const CalenderEventIndex = require('./components/project/calender_event_index');
 const ChatIndex = require('./components/project/chat_index');
 const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
-const ProjectIndex = require('./components/project/project_index');
+
 const ProjectMembershipIndex = require('./components/project/project_membership_index');
 const AllProjectsIndex = require('./components/project/all_projects_index');
 
@@ -51,12 +51,9 @@ const AppRouter = (
     <Route path="/" component={Session}/>
     <Route path="/sign_up" component={Session}/>
 
-    <Route path="/projects" component={ProjectView} >
-      <IndexRoute component={ProjectIndex}/>
-      <Route path="index" component={ProjectIndex}>
-        <Route path="/projects/new" component={ProjectForm}/>
-        <Route path="/projects/:projectId/edit" component={ProjectForm}/>
-      </Route>
+    <Route path="/projects/index" component={AllProjectsIndex} >
+      <Route path="/projects/new" component={ProjectForm}/>
+      <Route path="/projects/:projectId/edit" component={ProjectForm}/>
     </Route>
 
     <Route path="/projects/:projectId" component={ProjectView} onEnter={redirectConditions}>
@@ -90,7 +87,6 @@ const AppRouter = (
       </Route>
 
     </Route>
-
   </Router>
 );
 

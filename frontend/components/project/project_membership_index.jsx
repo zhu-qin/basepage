@@ -28,8 +28,8 @@ const ProjectMembershipIndex = React.createClass({
     hashHistory.push('/project_memberships/new');
   },
 
-  _redirectToEditProjectMembership: function (projectMembershipId, event) {
-    hashHistory.push(`/project_memberships/${projectMembershipId}/edit`);
+  _redirectToEditProjectMembership: function (email, event) {
+    hashHistory.push(`/project_memberships/${email}/edit`);
   },
 
   _goToProjectMembership: function (id, event) {
@@ -41,20 +41,20 @@ const ProjectMembershipIndex = React.createClass({
     let pending = [];
     let members = [];
     if (this.state.projectMemberships) {
-      Object.keys(this.state.projectMemberships).forEach((id, index) => {
-        let projectMembership = this.state.projectMemberships[id];
+      Object.keys(this.state.projectMemberships).forEach((email, index) => {
+        let projectMembership = this.state.projectMemberships[email];
 
         let edit;
         if(ProjectStore.getCurrentProject().manager_id === SessionStore.getCurrentUser().id){
-          edit = (<div className="projectMembership-list-item-edit" onClick={this._redirectToEditProjectMembership.bind(null, id)}>Edit</div>);
+          edit = (<div className="projectMembership-list-item-edit" onClick={this._redirectToEditProjectMembership.bind(null, email)}>Edit</div>);
         }
         let name = projectMembership.alias;
         if (projectMembership.username) {
           name = projectMembership.username;
         }
         let listItem = (
-          <li key={id} className="projectMembership-list-item clear-fix" >
-              <div className="projectMembership-list-item-text" onClick={this._goToProjectMembership.bind(null, id)}>
+          <li key={email} className="projectMembership-list-item clear-fix" >
+              <div className="projectMembership-list-item-text" onClick={this._goToProjectMembership.bind(null, email)}>
                 <h2>Name: {name}</h2>
                 <h2>Email: {projectMembership.email}</h2>
               </div>
