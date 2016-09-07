@@ -102,7 +102,7 @@ const ProjectIndex = React.createClass({
       memberships = undefined;
     }
 
-    return(
+  return (
       <div className="feature-wrapper clear-fix">
         <div>
           <h2>Projects</h2>

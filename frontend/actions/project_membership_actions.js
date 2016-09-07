@@ -38,6 +38,10 @@ const ProjectMembershipActions = {
       actionType: ProjectMembershipConstants.RECEIVE_ONE_MEMBERSHIP,
       membership: membership
     });
+  },
+
+  setMemberOnline: function(memberEmail){
+    
   }
 
 };
