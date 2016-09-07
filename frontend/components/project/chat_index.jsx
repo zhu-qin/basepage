@@ -1,9 +1,11 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const ProjectStore = require('../../stores/project_store');
+const ProjectMembershipStore = require('../../stores/project_membership_store');
 const SessionStore = require('../../stores/session_store');
 const ChatStore = require('../../stores/chat_store');
 const ChatActions = require('../../actions/chat_actions');
+const PusherStore = require('../../pusher/pusher_store');
 
 const ChatIndex = React.createClass({
   getInitialState: function () {
@@ -13,27 +15,23 @@ const ChatIndex = React.createClass({
   },
 
   componentDidMount: function () {
+    let projectId = ProjectStore.getCurrentProject().id;
     this.chatListener = ChatStore.addListener(this.chatStoreListener);
-    ChatActions.getAllChats(ProjectStore.getCurrentProject().id);
-
-    this.pusher = new Pusher('4b389f8a160265cfaaa3', {
-      encrypted: true
+    ChatActions.getAllChats(projectId);
+    this.pusherChannel = PusherStore.getChannel(`project_${projectId}`);
+    this.pusherChannel.bind('update_chats', function (data) {
+      ChatActions.getAllChats(projectId);
     });
-
-    var channel = this.pusher.subscribe(`project_${ProjectStore.getCurrentProject().id}`);
-    channel.bind('update_chats', function(data) {
-      ChatActions.getAllChats(ProjectStore.getCurrentProject().id);
-    });
-
   },
 
   componentWillUnmount: function () {
     this.chatListener.remove();
-    this.pusher.unsubscribe(`project_${ProjectStore.getCurrentProject().id}`);
+    this.pusherChannel.unbind('update_chats');
   },
 
   componentDidUpdate: function () {
-    this.refs[`chatMessage_${this.state.messages.length-1}`].scrollIntoView();
+    let lastChat = this.refs[`chatMessage_${this.state.messages.length - 1}`];
+    lastChat.scrollIntoView({block: "end", behavior: "smooth"});
   },
 
   chatStoreListener: function () {
@@ -58,10 +56,8 @@ const ChatIndex = React.createClass({
   render: function () {
     let messages = this.state.messages.map((message, index) => {
       let date = new Date(message.create_at).toString();
-
       return (
         <li key={message.id} ref={`chatMessage_${index}`}>
-
           <p>{message.author_name} @ {date}:{message.message}</p>
         </li>
       );
@@ -75,7 +71,7 @@ const ChatIndex = React.createClass({
               <ul className="chat-members">
 
               </ul>
-              <ul className="chat-messages">
+              <ul className="chat-messages" ref={"chatMessages"}>
                 {messages}
               </ul>
             </div>

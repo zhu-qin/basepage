@@ -3,10 +3,11 @@ const ProjectConstants = require('../constants/project_constants');
 const AppDispatcher = require('../dispatcher/dispatcher');
 
 const ProjectActions = {
-  setCurrentProject: function (projectId){
+  setCurrentProject: function (projectId, pushToProject){
     AppDispatcher.dispatch({
       actionType: ProjectConstants.SET_CURRENT_PROJECT,
-      projectId: projectId
+      projectId: projectId,
+      pushToProject: pushToProject
     });
   },
 

@@ -7,20 +7,6 @@ const ProjectMembershipActions = {
     ProjectMembershipUtil.getAllProjectMemberships(projectId, ProjectMembershipActions.receiveAllProjectMemberships);
   },
 
-  receiveAllProjectMemberships: function (memberships) {
-    AppDispatcher.dispatch({
-      actionType: ProjectMembershipConstants.RECEIVE_ALL_MEMBERSHIPS,
-      memberships: memberships
-    });
-  },
-
-  receiveOneProjectMembership: function(membership){
-    AppDispatcher.dispatch({
-      actionType: ProjectMembershipConstants.RECEIVE_ONE_MEMBERSHIP,
-      membership: membership
-    });
-  },
-
   createProjectMembership: function (membership) {
     ProjectMembershipUtil.createProjectMembership(membership, ProjectMembershipActions.receiveOneProjectMembership);
   },
@@ -38,8 +24,21 @@ const ProjectMembershipActions = {
       actionType: ProjectMembershipConstants.REMOVE_ONE_MEMBERSHIP,
       membership: membership
     });
-  }
+  },
 
+  receiveAllProjectMemberships: function (memberships) {
+    AppDispatcher.dispatch({
+      actionType: ProjectMembershipConstants.RECEIVE_ALL_MEMBERSHIPS,
+      memberships: memberships
+    });
+  },
+
+  receiveOneProjectMembership: function(membership){
+    AppDispatcher.dispatch({
+      actionType: ProjectMembershipConstants.RECEIVE_ONE_MEMBERSHIP,
+      membership: membership
+    });
+  }
 
 };
 

@@ -53,7 +53,7 @@ const Session = React.createClass({
 
   _handleGuestSignIn: function(event){
     event.preventDefault();
-    SessionActions.signIn({username: "Qin", password: "password"});
+    SessionActions.signIn({username: "Joe", password: "password"});
   },
 
   _handleSignUp: function(event){
@@ -110,8 +110,6 @@ const Session = React.createClass({
 
     );
   }
-
-
 
 });
 

@@ -6,22 +6,38 @@ const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
 const Link = require('react-router').Link;
 const ProjectActions = require('../../actions/project_actions');
+const PusherStore = require('../../pusher/pusher_store');
+
 
 const ProjectView = React.createClass({
   getInitialState: function (){
     this.navConstants = ["chats", "messages", "todos", "calender_events", "uploads", "project_memberships"];
-    return { all_projects: {}, currentProject: {} };
+    return { currentProject: ProjectStore.getCurrentProject() };
   },
 
   componentDidMount: function(){
     this.projectListener = ProjectStore.addListener(this._projectStoreListener);
     this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
-    ProjectActions.getAllProjects();
+
+    // bind client update online status for this particular project so users who subscribe to this channel and
+    // project get notified when other users sign on to base-page
+    // this channel binds only if this component mounts from a route containing a specific project
+
+  },
+
+  componentWillReceiveProps: function (newProps) {
+    if (newProps.route.path === "/projects/:projectId") {
+      this.pusherChannel = PusherStore.getChannel(`project_${ProjectStore.getCurrentProject().id}`);
+      this.pusherChannel.bind('client-update_online_status', function (data) {
+        console.log(data);
+      });
+    } else {
+      // this.pusherChannel.unbind('client-update_online_status');
+    }
   },
 
   _projectStoreListener: function () {
     this.setState({
-      allProjects: ProjectStore.all(),
       currentProject: ProjectStore.getCurrentProject()
     });
   },

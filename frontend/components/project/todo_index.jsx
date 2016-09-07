@@ -6,6 +6,7 @@ const TodoConstants = require('../../constants/todo_constants');
 const TodoList = require('./todo_list');
 const ProjectStore = require('../../stores/project_store');
 const hashHistory = require('react-router').hashHistory;
+const PusherStore = require('../../pusher/pusher_store');
 
 const TodoIndex = React.createClass({
   getInitialState: function () {
@@ -13,24 +14,21 @@ const TodoIndex = React.createClass({
   },
 
   componentDidMount: function () {
+    let projectId = ProjectStore.getCurrentProject().id;
     this.todoListener = TodoStore.addListener(this._todoStoreListener);
     this.countListener = TodoStore.addListener(this._countListener);
-    TodoActions.getTodos(ProjectStore.getCurrentProject().id);
+    TodoActions.getTodos(projectId);
 
-    this.pusher = new Pusher('4b389f8a160265cfaaa3', {
-      encrypted: true
-    });
-
-    var channel = this.pusher.subscribe(`project_${ProjectStore.getCurrentProject().id}`);
-    channel.bind('update_todos', function(data) {
-      TodoActions.getTodos(ProjectStore.getCurrentProject().id);
+    this.pusherChannel = PusherStore.getChannel(`project_${projectId}`);
+    this.pusherChannel.bind('update_todos', function(data) {
+      TodoActions.getTodos(projectId);
     });
   },
 
   componentWillUnmount: function (){
     this.todoListener.remove();
     this.countListener.remove();
-    this.pusher.unsubscribe(`project_${ProjectStore.getCurrentProject().id}`);
+    this.pusherChannel.unbind('update_todos');
   },
 
   _countListener: function(array) {

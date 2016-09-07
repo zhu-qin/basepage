@@ -19,6 +19,7 @@ const MessageIndex = require('./components/project/message_index');
 const UploadIndex = require('./components/project/upload_index');
 const ProjectIndex = require('./components/project/project_index');
 const ProjectMembershipIndex = require('./components/project/project_membership_index');
+const AllProjectsIndex = require('./components/project/all_projects_index');
 
 // Components Forms
 const TodoForm = require('./components/project/todo_form');
@@ -68,8 +69,7 @@ const AppRouter = (
         <Route path="/todo_lists/:todoListId/edit" component={TodoListForm}/>
       </Route>
 
-      <Route path="chats_index" component={ChatIndex} onEnter={redirectConditions}>
-      </Route>
+      <Route path="chats_index" component={ChatIndex} onEnter={redirectConditions} />
 
       <Route path="messages_index" component={MessageIndex} onEnter={redirectConditions}>
         <Route path="/message_board/:messageId/reply" component={MessageForm} />

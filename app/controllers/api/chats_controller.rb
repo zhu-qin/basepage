@@ -3,7 +3,7 @@ class Api::ChatsController < ApplicationController
   def create
     @chat = Chat.new(chat_params)
     if @chat.save
-      Pusher.trigger("project_#{@chat.project_id}", "update_chats", {})
+      Pusher.trigger("presence-project_#{@chat.project_id}", "update_chats", {})
       render :show
     else
       render ["Invalid Message"]

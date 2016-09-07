@@ -2,7 +2,9 @@ const React = require('react');
 const SessionStore = require('../../stores/session_store');
 const ProjectStore = require('../../stores/project_store');
 const ProjectActions = require('../../actions/project_actions');
+const ProjectMembershipActions = require('../../actions/project_membership_actions');
 const hashHistory = require('react-router').hashHistory;
+const PusherStore = require('../../pusher/pusher_store');
 
 const ProjectIndex = React.createClass({
   getInitialState: function () {
@@ -11,13 +13,14 @@ const ProjectIndex = React.createClass({
 
   componentDidMount: function () {
     this.storeListener = ProjectStore.addListener(this._projectStoreListener);
-    if (ProjectStore.length === 0) {
+    if (ProjectStore.length() === 0) {
       ProjectActions.getAllProjects();
     }
   },
 
   _projectStoreListener: function () {
     this.setState( {projects: ProjectStore.all()} );
+    PusherStore.addChannels();
   },
 
   componentWillUnmount: function () {
@@ -33,8 +36,11 @@ const ProjectIndex = React.createClass({
   },
 
   _goToProject: function (id, event) {
-    ProjectActions.setCurrentProject(id);
-    hashHistory.push(`/projects/${id}`);
+    let pushToProject = function () {
+      hashHistory.push(`/projects/${id}`);
+    };
+    ProjectActions.setCurrentProject(id, pushToProject);
+    ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
   },
 
   render: function() {

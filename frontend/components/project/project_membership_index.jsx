@@ -4,15 +4,16 @@ const ProjectStore = require('../../stores/project_store');
 const ProjectMembershipStore = require('../../stores/project_membership_store');
 const ProjectMembershipActions = require('../../actions/project_membership_actions');
 const hashHistory = require('react-router').hashHistory;
+const PusherStore = require('../../pusher/pusher_store');
 
 const ProjectMembershipIndex = React.createClass({
   getInitialState: function () {
-    return { projectMemberships: null };
+    return { projectMemberships: ProjectMembershipStore.all() };
   },
 
   componentDidMount: function () {
     this.storeListener = ProjectMembershipStore.addListener(this.projectMembershipStoreListener);
-    ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
+    // ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
   },
 
   projectMembershipStoreListener: function () {

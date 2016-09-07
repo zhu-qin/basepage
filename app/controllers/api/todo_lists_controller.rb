@@ -3,7 +3,7 @@ class Api::TodoListsController < ApplicationController
   def create
     @todo_list = TodoList.new(todo_list_params)
     if @todo_list.save
-      Pusher.trigger("project_#{@todo_list.project_id}", "update_todos", {})
+      Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {})
       render :show
     else
       render @todo_list.errors.full_messages, status: 400
@@ -18,7 +18,7 @@ class Api::TodoListsController < ApplicationController
   def update
     @todo_list = TodoList.find(params[:id])
     if @todo_list.update(todo_list_params)
-      Pusher.trigger("project_#{@todo_list.project_id}", "update_todos", {})
+      Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {})
       render :show
     else
       render @todo_list.errors.full_messages, status: 400
@@ -27,7 +27,7 @@ class Api::TodoListsController < ApplicationController
 
   def destroy
     @todo_list = TodoList.find(params[:id])
-    Pusher.trigger("project_#{@todo_list.project_id}", "update_todos", {})
+    Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {})
     if @todo_list.destroy
       render :show
     else

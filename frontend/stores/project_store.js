@@ -21,8 +21,9 @@ ProjectStore.resetProjects = function (projects) {
   _projects = projects;
 };
 
-ProjectStore.setCurrentProject = function (projectId){
+ProjectStore.setCurrentProject = function (projectId, pushToProject){
   _currentProject = _projects[projectId];
+  pushToProject();
 };
 
 ProjectStore.getCurrentProject = function () {
@@ -55,7 +56,7 @@ ProjectStore.__onDispatch = function(payload) {
       ProjectStore.__emitChange();
       break;
     case ProjectConstants.SET_CURRENT_PROJECT:
-      ProjectStore.setCurrentProject(payload.projectId);
+      ProjectStore.setCurrentProject(payload.projectId, payload.pushToProject);
       ProjectStore.__emitChange();
       break;
     case ProjectConstants.REMOVE_ONE_PROJECT:
