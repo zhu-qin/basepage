@@ -1,51 +1,62 @@
 const ProjectStore = require('../stores/project_store');
-const ProjectMembershipActions = require('../actions/project_membership_actions');
 const SessionStore = require('../stores/session_store');
 
-var _channels = {};
+let _channels = {};
+let _listeners = [];
 
-module.exports = {
-  pusher: {},
+const PusherStore = {
 
-  addChannels: function() {
-    this.pusher = new Pusher('4b389f8a160265cfaaa3', {
+  pusher: new Pusher('4b389f8a160265cfaaa3', {
     authEndpoint: '/pusher/auth',
     auth: {
       headers: {
         'X-CSRF-Token': "<%= form_authenticity_token %>"
         }
       }
-    });
+  }),
 
-    let user = SessionStore.getCurrentUser();
-
+  addChannels: function() {
     Object.keys(ProjectStore.all()).forEach((channelId) => {
-      if (!_channels[`project_${channelId}`]){
-        let channel = this.pusher.subscribe(`presence-project_${channelId}`);
-        _channels[`project_${channelId}`] = channel;
-        channel.bind('pusher:subscription_succeeded', function () {
-
-          channel.trigger('client-update_online_status', {
-            user_id: user.id,
-            username: user.username,
-            email: user.email
-          });
-
-
-        });
-      }
+      let project_id = `presence-project_${channelId}`;
+      let channel = PusherStore.pusher.subscribe(project_id);
+      _channels[project_id] = channel;
+      // channel.bind("pusher:subscription_succeeded", (data) => {
+      //
+      // });
     });
   },
 
   removeChannels: function () {
     Object.keys(_channels).forEach((channelId)=>{
-      this.pusher.unsubscribe(channelId);
+      PusherStore.pusher.unsubscribe(channelId);
     });
   },
 
-  getChannel: function(channelId) {
-    return _channels[channelId];
+  getChannelForCurrentProject: function() {
+    return _channels[`presence-project_${ProjectStore.getCurrentProject().id}`];
+  },
+
+  addPusherListener: function (listener) {
+    let listenersLength = _listeners.length;
+    _listeners.push(listener);
+
+    return {
+      remove: function() {
+        delete _listeners[listenersLength];
+      }
+    };
+  },
+
+  getOnlineMembers: function() {
+    return _channels[`presence-project_${ProjectStore.getCurrentProject().id}`].members.members;
+  },
+
+  triggerCallbacks: function () {
+    _listeners.forEach((callback)=>{
+      callback();
+    });
   }
 
-
 };
+
+module.exports = PusherStore;

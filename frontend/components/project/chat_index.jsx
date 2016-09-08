@@ -10,15 +10,17 @@ const PusherStore = require('../../pusher/pusher_store');
 const ChatIndex = React.createClass({
   getInitialState: function () {
     return {  messages: [],
-              chatMessage: ""
+              chatMessage: "",
+              members: PusherStore.getOnlineMembers()
             };
   },
 
   componentDidMount: function () {
     let projectId = ProjectStore.getCurrentProject().id;
-    this.chatListener = ChatStore.addListener(this.chatStoreListener);
     ChatActions.getAllChats(projectId);
-    this.pusherChannel = PusherStore.getChannel(`project_${projectId}`);
+    this.chatListener = ChatStore.addListener(this.chatStoreListener);
+    this.pusherListener = PusherStore.addPusherListener(this.pusherListener);
+    this.pusherChannel = PusherStore.getChannelForCurrentProject();
     this.pusherChannel.bind('update_chats', function (data) {
       ChatActions.getAllChats(projectId);
     });
@@ -26,6 +28,7 @@ const ChatIndex = React.createClass({
 
   componentWillUnmount: function () {
     this.chatListener.remove();
+    this.pusherListener.remove();
     this.pusherChannel.unbind('update_chats');
   },
 
@@ -36,6 +39,10 @@ const ChatIndex = React.createClass({
 
   chatStoreListener: function () {
     this.setState({ messages: ChatStore.all() });
+  },
+
+  pusherListener: function () {
+    this.setState({ members: PusherStore.getOnlineMembers() });
   },
 
   _handleChange: function (event) {
@@ -63,13 +70,22 @@ const ChatIndex = React.createClass({
       );
     });
 
+    let onlineMembers = Object.keys(this.state.members).map((memberId, index) => {
+      let member = this.state.members[memberId];
+      return (
+        <li key={memberId}>
+          {member.name}
+        </li>
+      );
+    });
+
     return (
       <div className="feature-wrapper clear-fix">
         <div className="chat-wrapper">
             <h2>Chat</h2>
             <div className="chat-members-and-messages clear-fix">
               <ul className="chat-members">
-
+                {onlineMembers}
               </ul>
               <ul className="chat-messages" ref={"chatMessages"}>
                 {messages}

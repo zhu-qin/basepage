@@ -19,11 +19,11 @@ const AllProjectsIndex = React.createClass({
     if (ProjectStore.length() === 0) {
       ProjectActions.getAllProjects();
     }
+    PusherStore.addChannels();
   },
 
   _projectStoreListener: function () {
     this.setState( {projects: ProjectStore.all()} );
-
     PusherStore.addChannels();
   },
 
@@ -39,6 +39,7 @@ const AllProjectsIndex = React.createClass({
   },
 
   _handleLogOut: function () {
+    PusherStore.removeChannels();
     SessionActions.signOut();
   },
 
@@ -59,7 +60,6 @@ const AllProjectsIndex = React.createClass({
       hashHistory.push(`/projects/${id}`);
     };
     ProjectActions.setCurrentProject(id, pushToProject);
-    ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
   },
 
   render: function () {

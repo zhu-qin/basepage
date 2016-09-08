@@ -19,7 +19,7 @@ const TodoIndex = React.createClass({
     this.countListener = TodoStore.addListener(this._countListener);
     TodoActions.getTodos(projectId);
 
-    this.pusherChannel = PusherStore.getChannel(`project_${projectId}`);
+    this.pusherChannel = PusherStore.getChannelForCurrentProject();
     this.pusherChannel.bind('update_todos', function(data) {
       TodoActions.getTodos(projectId);
     });

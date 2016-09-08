@@ -31,16 +31,6 @@ ProjectMembershipStore.find = function(id) {
   return Object.assign({}, _memberships[id]);
 };
 
-ProjectMembershipStore.setOnline = function(emailHash) {
-  Object.keys(_memberships).forEach((membershipId) => {
-    let memberEmail = _memberships[membershipId].email;
-    if (emailHash[memberEmail]) {
-      _memberships[membershipId].online = true;
-    }
-  });
-};
-
-
 ProjectMembershipStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
     case ProjectMembershipConstants.RECEIVE_ONE_MEMBERSHIP:

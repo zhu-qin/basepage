@@ -7,8 +7,6 @@ const hashHistory = require('react-router').hashHistory;
 const Link = require('react-router').Link;
 const ProjectActions = require('../../actions/project_actions');
 const PusherStore = require('../../pusher/pusher_store');
-const ProjectMembershipActions = require('../../actions/project_membership_actions');
-
 
 const ProjectView = React.createClass({
   getInitialState: function () {
@@ -17,23 +15,18 @@ const ProjectView = React.createClass({
   },
 
   componentDidMount: function(){
-    this.projectListener = ProjectStore.addListener(this._projectStoreListener);
     this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
-
     // bind client update online status for this particular project so users who subscribe to this channel and
     // project get notified when other users sign on to base-page
-    // this channel binds only if this component mounts from a route containing a specific project
-    this.pusherChannel = PusherStore.getChannel(`project_${ProjectStore.getCurrentProject().id}`);
-    this.pusherChannel.bind('client-update_online_status', function (data) {
-
+    // this channel binds actions for currentProject.
+    this.pusherChannel = PusherStore.getChannelForCurrentProject();
+    this.pusherChannel.bind("pusher:member_added", (member) => {
+      PusherStore.triggerCallbacks();
+    });
+    this.pusherChannel.bind("pusher:member_removed", (member) => {
+      PusherStore.triggerCallbacks();
     });
 
-  },
-
-  _projectStoreListener: function () {
-    this.setState({
-      currentProject: ProjectStore.getCurrentProject()
-    });
   },
 
   _sessionStoreListener: function () {
@@ -43,13 +36,15 @@ const ProjectView = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.projectListener.remove();
     this.sessionListener.remove();
+    this.pusherChannel.unbind('pusher:member_added');
+    this.pusherChannel.unbind('pusher:member_removed');
   },
 
 
   _handleLogOut: function () {
     SessionActions.signOut();
+    PusherStore.removeChannels();
   },
 
   _goToProjects: function (){

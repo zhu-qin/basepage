@@ -4,6 +4,7 @@ const SessionStore = require('../stores/session_store');
 const ErrorStore = require('../stores/error_store');
 const ProjectActions = require('../actions/project_actions');
 const hashHistory = require('react-router').hashHistory;
+const PusherStore = require('../pusher/pusher_store');
 
 
 const Session = React.createClass({
@@ -51,9 +52,14 @@ const Session = React.createClass({
     }
   },
 
-  _handleGuestSignIn: function(event){
+  _handleGuestJoeSignIn: function(event){
     event.preventDefault();
     SessionActions.signIn({username: "Joe", password: "password"});
+  },
+
+  _handleGuestLarrySignIn: function(event){
+    event.preventDefault();
+    SessionActions.signIn({username: "Larry", password: "password"});
   },
 
   _handleSignUp: function(event){
@@ -70,14 +76,16 @@ const Session = React.createClass({
       <div className="session-buttons-wrapper clear-fix">
         <input className="button-main session-button" onClick={this._handleSignUp} type="button" value="Sign Up" />
         <input className="button-main session-button" type="submit" value="Sign In" />
-        <input className="button-main session-button" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+        <input className="button-main session-button" onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry" />
+        <input className="button-main session-button" onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe" />
       </div>
               );
     if (this.props.route.path === "/sign_up") {
       signIn = (
       <div className="session-buttons-wrapper clear-fix">
         <input className="button-main session-button" onClick={this._handleSignIn} type="button" value="Sign Up" />
-        <input className="button-main session-button" onClick={this._handleGuestSignIn} type="button" value="Guest Sign In" />
+        <input className="button-main session-button" onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry Sign In" />
+        <input className="button-main session-button" onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe Sign In" />
       </div>
     );
     }

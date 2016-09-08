@@ -40,8 +40,11 @@ const ProjectMembershipActions = {
     });
   },
 
-  setMemberOnline: function(memberEmail){
-    
+  setOnline: function(emailHash){
+    AppDispatcher.dispatch({
+      actionType: ProjectMembershipConstants.SYNC_ONLINE,
+      emailHash: emailHash
+    });
   }
 
 };
