@@ -8,16 +8,17 @@ const PusherStore = require('../../pusher/pusher_store');
 
 const ProjectMembershipIndex = React.createClass({
   getInitialState: function () {
-    return { projectMemberships: ProjectMembershipStore.all() };
+    return { projectMemberships: null};
   },
 
   componentDidMount: function () {
     this.storeListener = ProjectMembershipStore.addListener(this.projectMembershipStoreListener);
-    // ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
+    ProjectMembershipActions.getAllProjectMemberships(ProjectStore.getCurrentProject().id);
   },
 
   projectMembershipStoreListener: function () {
     this.setState( {projectMemberships: ProjectMembershipStore.all()} );
+
   },
 
   componentWillUnmount: function () {
@@ -28,33 +29,35 @@ const ProjectMembershipIndex = React.createClass({
     hashHistory.push('/project_memberships/new');
   },
 
-  _redirectToEditProjectMembership: function (email, event) {
-    hashHistory.push(`/project_memberships/${email}/edit`);
+  _redirectToEditProjectMembership: function (membershipId, event) {
+    hashHistory.push(`/project_memberships/${membershipId}/edit`);
   },
 
-  _goToProjectMembership: function (id, event) {
-    ProjectMembershipActions.setCurrentProjectMembership(id);
-    hashHistory.push(`/project_memberships/${id}`);
+  _goToProjectMembership: function (membershipId, event) {
+    ProjectMembershipActions.setCurrentProjectMembership(membershipId);
+    hashHistory.push(`/project_memberships/${membershipId}`);
   },
 
   render: function() {
     let pending = [];
     let members = [];
+    let manager = [];
+
     if (this.state.projectMemberships) {
-      Object.keys(this.state.projectMemberships).forEach((email, index) => {
-        let projectMembership = this.state.projectMemberships[email];
+      Object.keys(this.state.projectMemberships).forEach((membershipId, index) => {
+        let projectMembership = this.state.projectMemberships[membershipId];
 
         let edit;
-        if(ProjectStore.getCurrentProject().manager_id === SessionStore.getCurrentUser().id){
-          edit = (<div className="projectMembership-list-item-edit" onClick={this._redirectToEditProjectMembership.bind(null, email)}>Edit</div>);
+        if(ProjectStore.getCurrentProject().manager_id === SessionStore.getCurrentUser().id && membershipId !== "manager"){
+          edit = (<div className="projectMembership-list-item-edit" onClick={this._redirectToEditProjectMembership.bind(null, membershipId)}>Edit</div>);
         }
         let name = projectMembership.alias;
         if (projectMembership.username) {
           name = projectMembership.username;
         }
         let listItem = (
-          <li key={email} className="projectMembership-list-item clear-fix" >
-              <div className="projectMembership-list-item-text" onClick={this._goToProjectMembership.bind(null, email)}>
+          <li key={membershipId} className="projectMembership-list-item clear-fix" >
+              <div className="projectMembership-list-item-text" onClick={this._goToProjectMembership.bind(null, membershipId)}>
                 <h2>Name: {name}</h2>
                 <h2>Email: {projectMembership.email}</h2>
               </div>
@@ -62,7 +65,9 @@ const ProjectMembershipIndex = React.createClass({
           </li>
         );
 
-        if (projectMembership.username) {
+        if (membershipId === "manager") {
+          manager.push(listItem);
+        } else if (projectMembership.username) {
           members.push(listItem);
         } else {
           pending.push(listItem);
@@ -70,6 +75,15 @@ const ProjectMembershipIndex = React.createClass({
 
       });
     }
+
+    let projectManager = (
+      <div className="projectMembership-list-wrapper">
+        <h2>Manager</h2 >
+        <ul className="projectMembership-wrapper">
+          {manager}
+        </ul>
+      </div>
+    );
 
     let signedUpMembers = (
       <div className="projectMembership-list-wrapper">
@@ -105,6 +119,7 @@ const ProjectMembershipIndex = React.createClass({
           <div className="form-place-holder">
             {this.props.children}
           </div>
+            {projectManager}
             {signedUpMembers}
             {pendingSignUp}
         </div>

@@ -29,4 +29,10 @@ class ProjectMembership < ActiveRecord::Base
     primary_key: :email
   )
 
+  has_one(
+    :manager,
+    through: :project,
+    source: :manager
+  )
+
 end

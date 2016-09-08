@@ -9,8 +9,10 @@ class Api::ProjectMembershipsController < ApplicationController
   end
 
   def index
-    @project_memberships = Project.find(params[:project_id])
-    .project_memberships.joins("left outer join users on users.email = project_memberships.email")
+    project = Project.find(params[:project_id])
+    @project_memberships = [project.manager] + project.project_memberships.joins(
+    "left outer join users on users.email = project_memberships.email"
+    )
     render :index
   end
 
