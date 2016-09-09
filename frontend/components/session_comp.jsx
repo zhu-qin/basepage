@@ -56,14 +56,14 @@ const Session = React.createClass({
     SessionActions.signUp(this.state);
   },
 
-  _handleGuestJoeSignIn: function(event){
+  _handleGuestJackSignIn: function(event){
     event.preventDefault();
-    SessionActions.signIn({email: "joe@joe.com", password: "password"});
+    SessionActions.signIn({email: "jack@jack.com", password: "password"});
   },
 
-  _handleGuestLarrySignIn: function(event){
+  _handleGuestJillSignIn: function(event){
     event.preventDefault();
-    SessionActions.signIn({email: "larry@larry.com", password: "password"});
+    SessionActions.signIn({email: "jill@jill.com", password: "password"});
   },
 
   render: function(){
@@ -78,8 +78,8 @@ const Session = React.createClass({
     let signIn = (
       <div className="session-buttons-wrapper clear-fix">
         <input type="submit" value="Sign In" />
-        <input onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry" />
-        <input onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe" />
+        <input onClick={this._handleGuestJillSignIn} type="button" value="Guest Jill" />
+        <input onClick={this._handleGuestJackSignIn} type="button" value="Guest Jack" />
         <Link to="/sign_up" className="session-link">Sign Up To Start</Link>
       </div>
               );

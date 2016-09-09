@@ -10,11 +10,13 @@
 }
 
 .project-title {
-  font-size: 36px;
+  font-size: 30px;
   float: left;
   font-weight: bolder;
   text-align: center;
   display: block;
+  color: rgb(16, 79, 48);
+  line-height: 60px;
 }
 
 .project-nav-top {
@@ -33,36 +35,39 @@
 .project-list-item {
   display: block;
   text-align: left;
-  font-size: 20px;
+  font-size: 18px;
   margin: 30px;
+  color: rgb(16, 79, 48);
 }
 
 
 .project-list-item > div {
   cursor: pointer;
-  padding: 20px;
-  line-height: 35px;
-  height: 40px;
+  min-height: 20px;
+  padding: 20px 10px;
 }
 
 .project-list-item-text {
-  background: #feefd8;
-  color: #ff9800;
+  background: rgb(230, 136, 30);
+  border-radius: 5px;
   float:left;
   width: 55%;
 }
 
 
 .project-list-item-edit {
-  background: #3cb371;
-  color: white;
-  float:right;
+  margin: auto;
+  width: 20%;
+  cursor: pointer;
+  color: rgb(207, 235, 221);
+  border-radius: 5px;
+  background: rgb(16, 79, 48);
   text-align: center;
-  width: 15%;
+  float: right;
 }
 
 .sign-out-button {
-  background: #ff9933;
+  background: rgb(230, 136, 30);
   float: right;
-  margin-left: 50px;
+  margin-left: 10px;
 }

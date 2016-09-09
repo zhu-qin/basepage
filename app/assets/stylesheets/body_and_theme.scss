@@ -1,17 +1,19 @@
 body {
-  background-color: #f5efe6;
   font-family: 'Josefin Sans', sans-serif;
+  background: rgba(1, 44, 22, 0.2);
 }
 
 .button-main {
-  margin-bottom: 20px;
-  padding: 10px;
-  width: 100px;
-  display: block;
-  font-weight: bold;
+  color: rgb(207, 235, 221);
+  padding: 10px 5px;
+  margin: 5px 5px;
+  width: 85px;
+  border-radius: 5px;
+  float: left;
+  height: 35px;
+  background: rgb(16, 79, 48);
+  text-align: center;
   cursor: pointer;
-  background: #3cb371;
-  color: white;
 }
 
 .button-main:active {
