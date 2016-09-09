@@ -4,6 +4,7 @@ const SessionStore = require('../stores/session_store');
 const ErrorStore = require('../stores/error_store');
 const ProjectActions = require('../actions/project_actions');
 const hashHistory = require('react-router').hashHistory;
+const Link = require('react-router').Link;
 const PusherStore = require('../pusher/pusher_store');
 
 
@@ -35,6 +36,8 @@ const Session = React.createClass({
 
   _errorStoreListener: function(){
     this.setState( {errors: ErrorStore.all()} );
+    setTimeout(function () {this.setState({errors: []});}.bind(this), 3000);
+
   },
 
   _updateField: function(field, event){
@@ -44,81 +47,87 @@ const Session = React.createClass({
   },
 
   _handleSignIn: function(event){
-      event.preventDefault();
-    if (this.props.route.path === "/") {
-      SessionActions.signIn(this.state);
-    } else if (this.props.route.path === "/sign_up"){
-      SessionActions.signUp(this.state);
-    }
+    event.preventDefault();
+    SessionActions.signIn(this.state);
+  },
+
+  _handleNewUser: function (event) {
+    event.preventDefault();
+    SessionActions.signUp(this.state);
   },
 
   _handleGuestJoeSignIn: function(event){
     event.preventDefault();
-    SessionActions.signIn({username: "Joe", password: "password"});
+    SessionActions.signIn({email: "joe@joe.com", password: "password"});
   },
 
   _handleGuestLarrySignIn: function(event){
     event.preventDefault();
-    SessionActions.signIn({username: "Larry", password: "password"});
-  },
-
-  _handleSignUp: function(event){
-    event.preventDefault();
-    hashHistory.push('/sign_up');
+    SessionActions.signIn({email: "larry@larry.com", password: "password"});
   },
 
   render: function(){
     let errors = this.state.errors.map((error, index) =>{
-      return (<li key={index}>{error}</li>);
+      return (
+        <li key={index}>{error}</li>
+        );
     });
+
+    let userName;
 
     let signIn = (
       <div className="session-buttons-wrapper clear-fix">
-        <input className="button-main session-button" onClick={this._handleSignUp} type="button" value="Sign Up" />
-        <input className="button-main session-button" type="submit" value="Sign In" />
-        <input className="button-main session-button" onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry" />
-        <input className="button-main session-button" onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe" />
+        <input type="submit" value="Sign In" />
+        <input onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry" />
+        <input onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe" />
+        <Link to="/sign_up" className="session-link">Sign Up To Start</Link>
       </div>
               );
     if (this.props.route.path === "/sign_up") {
       signIn = (
-      <div className="session-buttons-wrapper clear-fix">
-        <input className="button-main session-button" onClick={this._handleSignIn} type="button" value="Sign Up" />
-        <input className="button-main session-button" onClick={this._handleGuestLarrySignIn} type="button" value="Guest Larry Sign In" />
-        <input className="button-main session-button" onClick={this._handleGuestJoeSignIn} type="button" value="Guest Joe Sign In" />
-      </div>
-    );
+        <div className="session-buttons-wrapper clear-fix">
+          <input onClick={this._handleNewUser} type="submit" value="Sign Up" />
+          <Link to="/" className="session-link">Back to Sign In</Link>
+        </div>
+      );
+
+      userName = (
+        <div className="session-input-box">
+          <label>Name:</label>
+          <input type="text" value={this.state.username} placeholder="Name" autoComplete="off" onChange={this._updateField("username")}/>
+        </div>
+      );
     }
 
     return(
       <div className="session-wrapper">
         <div className="session-color-block"><h1>BASE PAGE</h1></div>
-          <div className="session-form">
-            <h2>Sign In</h2>
+          <div className="session-form clear-fix">
               <form onSubmit={this._handleSignIn}>
-                <label>
-                  Username:
-                  <input type="text" className="session-text" value={this.state.username} onChange={this._updateField("username")}/>
-                </label>
-                <label>
-                  Email:
-                  <input type="text" className="session-text" value={this.state.email} onChange={this._updateField("email")}/>
-                </label>
-                <label>
-                  Password:
-                  <input type="password" className="session-text" value={this.state.password} onChange={this._updateField("password")}/>
-                </label>
-                {signIn}
+
+                <div className="session-input-wrapper">
+                  <div className="session-input-box">
+                    <label>Email:</label>
+                    <input type="text" value={this.state.email} placeholder="Email" autoComplete="off" onChange={this._updateField("email")}/>
+                  </div>
+                  {userName}
+                  <div className="session-input-box">
+                    <label>Password:</label>
+                    <input type="password" value={this.state.password} placeholder="Password" autoComplete="off" onChange={this._updateField("password")}/>
+                  </div>
+                </div>
+
+                <div className="session-buttons-box">
+                  {signIn}
+                </div>
             </form>
-            <ul>
+            <ul className="session-errors-box">
               {errors}
             </ul>
           </div>
         </div>
-
     );
   }
-
 });
 
 module.exports = Session;

@@ -1,6 +1,6 @@
 body {
   background-color: #f5efe6;
-  font-family: "Helvetica", sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .button-main {
@@ -16,4 +16,8 @@ body {
 
 .button-main:active {
   background: #339961;
+}
+
+#root {
+  height: inherit;
 }

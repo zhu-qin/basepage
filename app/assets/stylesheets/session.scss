@@ -1,63 +1,91 @@
 .session-wrapper {
-  background: #339961
+  background: image-url('rocket_ship.jpg');
+  background-size: cover;
+  height: inherit;
+
 }
 
 .session-form {
-  width: 450px;
+  width: 60%;
   margin: auto;
-  padding: 40px;
-  background: white;
-}
-
-.session-form label {
-  display: block;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-align: left;
-  color: #339961;
+  padding: 20px;
+  background: rgba(1, 44, 22, 0.2);
+  border-radius: 10px;
 }
 
 .session-color-block {
   padding: 20px;
-  height: 120px;
-  background: #f5efe6;
+  height: 60%;
 }
 
 .session-color-block > h1 {
-  text-align: center;
-  color:black;
-  font-size: 90px;
-  font-weight: bold;
-  color: #07992c;
+  background: rgba(1, 44, 22, 0.2);
+  display: block;
+  text-align: left;
+  color: rgb(16, 79, 48);
+  font-size: 25px;
+  padding: 15px;
+  width: 65px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.session-color-block > h1:hover {
+  background: rgb(16, 79, 48);
+  color: rgb(207, 235, 221);
+
 }
 
 .session-buttons-wrapper {
-  width: 100%;
-  margin-top: 45px;
+  width: 425px;
   margin: auto;
-  text-align: center;
 }
 
-.session-buttons-wrapper > input{
-  width: 80px;
-  margin: 20px 5px ;
+.session-buttons-wrapper > * {
+  color: rgb(207, 235, 221);
+  padding: 10px 5px;
+  margin: 5px 5px;
+  width: 85px;
+  border-radius: 5px;
+  float: left;
+  height: 35px;
+  background: rgb(16, 79, 48);
+  text-align: center;
+  cursor: pointer;
+}
+
+.session-input-wrapper {
+  height: 50px;
+  width: 100%;
+}
+
+.session-input-box {
+  width: 45%;
+  padding: 5px;
   float: left;
 }
 
-.session-text{
-  box-shadow: 4px 4px #339961;
-  border: 1px solid #339961;
-  padding: 10px;
+.session-input-box > label {
   display: block;
-  margin: auto;
-  width: 100%;
+  width: 80px;
+  float: left;
+  text-align: right;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: rgb(16, 79, 48);
 }
 
-.session-form h2 {
-  margin: auto;
+.session-input-box > input {
+  border: 1px solid rgb(16, 79, 48);
+  border-radius: 5px;
+  padding: 10px;
   display: block;
-  font-size: 34px;
-  font-weight: bolder;
-  color: #339961;
+  width: 45%;
+  float: left;
+}
+
+.session-errors-box > li{
   text-align: center;
+  color: rgb(207, 235, 221);
+  padding-top: 5px;
 }
