@@ -6,7 +6,7 @@ class Api::TodosController < ApplicationController
       Pusher.trigger(
       "presence-project_#{@todo.project.id}",
       "update_todos",
-      {action: "CREATE", todo_id: @todo.id}
+      {action: "CREATE_TODO", todo_id: @todo.id}
        )
       render :show
     else
@@ -25,11 +25,11 @@ class Api::TodosController < ApplicationController
       Pusher.trigger(
       "presence-project_#{@todo.project.id}",
       "update_todos",
-      {action: "UPDATE", todo_id: @todo.id}
+      {action: "UPDATE_TODO", todo_id: @todo.id}
        )
       render json: @todo
     else
-      render json: ["something went wrong"], status: 400
+      render json: ["Something went wrong"], status: 400
     end
   end
 
@@ -39,9 +39,18 @@ class Api::TodosController < ApplicationController
     Pusher.trigger(
     "presence-project_#{@todo.project.id}",
     "update_todos",
-    {action: "DESTROY", todo_id: @todo.id}
+    {action: "DESTROY_TODO", todo_list_id: @todo.todo_list_id, todo_id: @todo.id}
      )
     render :show
+  end
+
+  def show
+    @todo = Todo.find(params[:id])
+    if @todo
+      render :show
+    else
+      render json: ["To-do not found"]
+    end
   end
 
 

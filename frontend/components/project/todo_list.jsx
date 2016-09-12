@@ -36,31 +36,35 @@ const TodoList = React.createClass({
   // onClick={this._redirectToUpdateTodo.bind(null, todo.id)}
 
   render: function () {
-    let todos = this.props.todoList.todos;
 
     let checkedTodos = [];
     let uncheckedTodos = [];
-    let todoList = todos.forEach((todo, index) => {
-      let deleteButton;
-      let checked = "todo-unchecked";
-      if (todo.completion) {
-        checked = "todo-checked";
-        deleteButton = <button className="todo-list-item-delete" onClick={this.handleDelete.bind(null, todo.id)}>Delete</button>;
-      }
-      let todoToShow = (
-        <li className="todo-list-item clear-fix" key={todo.id}>
-          <div className={`todo-list-item-box ${checked}`} onClick={this.handleCheck.bind(null, todo.id)} ></div>
-          {deleteButton}
-          <p className="todo-list-link" >{todo.title}</p>
-        </li>
-      );
+    let todosInList;
+    let todos = this.props.todoList.todos;
+    if (Object.keys(todos).length > 0) {
+       todosInList = Object.keys(todos).forEach((todoId, index) => {
+        let deleteButton;
+        let checked = "todo-unchecked";
+        if (todos[todoId].completion) {
+          checked = "todo-checked";
+          deleteButton = <button className="todo-list-item-delete" onClick={this.handleDelete.bind(null, todoId)}>Delete</button>;
+        }
+        let todoToShow = (
+          <li className="todo-list-item clear-fix" key={todoId}>
+            <div className={`todo-list-item-box ${checked}`} onClick={this.handleCheck.bind(null, todoId)} ></div>
+            {deleteButton}
+            <p className="todo-list-link" >{todos[todoId].title}</p>
+          </li>
+        );
 
-      if (todo.completion) {
-        checkedTodos.push(todoToShow);
-      } else {
-        uncheckedTodos.push(todoToShow);
-      }
-    });
+        if (todos[todoId].completion) {
+          checkedTodos.push(todoToShow);
+        } else {
+          uncheckedTodos.push(todoToShow);
+        }
+      });
+    }
+
     return (
       <li>
         <Link to={`/todo_lists/${this.props.todoList.id}/edit`} className="todo-link">
@@ -68,7 +72,9 @@ const TodoList = React.createClass({
         </Link>
         <ul>
           {uncheckedTodos}
-          <button onClick={this._redirectToCreateTodo} className="button-add-todo button-main">Add a to-do</button>
+          <div className="clear-fix">
+            <button onClick={this._redirectToCreateTodo} className="button-add-todo button-main">Add a to-do</button>
+          </div>
           {checkedTodos}
         </ul>
       </li>

@@ -21,7 +21,7 @@ const TodoIndex = React.createClass({
 
     this.pusherChannel = PusherStore.getChannelForCurrentProject();
     this.pusherChannel.bind('update_todos', function(data) {
-      TodoActions.getTodos(projectId);
+      TodoActions.getPusherTodoStatus(data);
     });
   },
 
@@ -31,7 +31,7 @@ const TodoIndex = React.createClass({
     this.pusherChannel.unbind('update_todos');
   },
 
-  _countListener: function(array) {
+  _countListener: function() {
     this.setState({todoCount: TodoStore.todoCount()});
   },
 
@@ -46,10 +46,13 @@ const TodoIndex = React.createClass({
 
   render: function () {
     let todoLists = this.state.todoLists;
+
     let allLists = Object.keys(todoLists).map((listId, index) => {
-      return (
-        <TodoList key={listId} todoList={todoLists[parseInt(listId)]} />
-      );
+      if (parseInt(listId)) {
+        return (
+          <TodoList key={listId} todoList={todoLists[parseInt(listId)]} />
+        );
+      }
     });
 
     return (

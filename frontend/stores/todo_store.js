@@ -1,30 +1,20 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const TodoConstants = require('../constants/todo_constants');
 const Store = require('flux/utils').Store;
-
 const TodoStore = new Store(AppDispatcher);
 
-// object that has keys to todo list
-// todo list object contains individual todos
+// todos and todolists have key value pairs with the keys being their ids
+// todos are nested in todo lists as expected
 let _todos = {};
+let _completed = 0;
+let _all_todos = 0;
 
 TodoStore.all = function () {
   return Object.assign({}, _todos);
 };
 
 TodoStore.todoCount = function(){
-  let count = 0;
-  let length = 0;
-
-  Object.keys(_todos).forEach((todoListKey) => {
-    _todos[todoListKey].todos.forEach((todo) => {
-      if (todo.completion){
-        count += 1;
-      }
-      length += 1;
-    });
-  });
-  return `${count}/${length}`;
+  return `${_completed}/${_all_todos}`;
 };
 
 TodoStore.findList = function (id) {
@@ -32,32 +22,33 @@ TodoStore.findList = function (id) {
 };
 
 TodoStore.resetTodos = function (todos) {
+  _completed = todos.completed_todos;
+  _all_todos = todos.all_todos;
   _todos = todos;
 };
 
-TodoStore.findIndex = function (todoToFind) {
-  let todos = _todos[todoToFind.todo_list_id].todos;
-  let ind;
-  todos.forEach((todo, index) => {
-    if (todoToFind.id === todo.id){
-      ind = index;
-    }
-  });
-  return ind;
-};
+TodoStore.updateOneTodo = function(todo) {
+  let prevTodo = _todos[todo.todo_list_id].todos[todo.id];
+  _todos[todo.todo_list_id].todos[todo.id] = todo;
 
-TodoStore.updateOneTodo = function(todoToUpdate) {
-  let todosList = _todos[todoToUpdate.todo_list_id];
-  todosList.todos[TodoStore.findIndex(todoToUpdate)] = todoToUpdate;
+  if (!prevTodo.completion && todo.completion) {
+    _completed += 1;
+  } else if (prevTodo.completion && !todo.completion) {
+    _completed -= 1;
+  }
 };
 
 TodoStore.addOneTodo = function(todo) {
-  _todos[todo.todo_list_id].todos.push(todo);
+  _todos[todo.todo_list_id].todos[todo.id] = todo;
+  _all_todos += 1;
 };
 
-TodoStore.deleteTodo = function(todoToDelete) {
-  let todosList = _todos[todoToDelete.todo_list_id];
-  delete todosList.todos[TodoStore.findIndex(todoToDelete)];
+TodoStore.deleteTodo = function(todo) {
+  delete _todos[todo.todo_list_id].todos[todo.id];
+  if (_todos[todo.todo_list_id].todos[todo.id].completion) {
+    _completed -= 1;
+  }
+  _all_todos -= 1;
 };
 
 TodoStore.addOneTodoList = function(todoList) {

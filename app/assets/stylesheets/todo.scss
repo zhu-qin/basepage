@@ -54,6 +54,11 @@
   height: 40px;
   margin-left: 10px;
   background: #3cb371;
-  border: none;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+.todo-add-todo {
+  display: block;
+  min-height: 100px;
 }

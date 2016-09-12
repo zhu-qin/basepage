@@ -76,6 +76,27 @@ const TodoUtil = {
         successCallback(response);
       }
     });
+  },
+
+  // Pusher Util
+  getTodoListStatus: function (todoListId, successCallback){
+    $.ajax({
+      type: "GET",
+      url:`api/todo_lists/${todoListId}`,
+      success: function (response) {
+        successCallback(response);
+      }
+    });
+  },
+
+  getTodoStatus: function(todoId, successCallback) {
+    $.ajax({
+      type: "GET",
+      url: `api/todos/${todoId}`,
+      success: function (response) {
+        successCallback(response);
+      }
+    });
   }
 
 };

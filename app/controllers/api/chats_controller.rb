@@ -6,7 +6,9 @@ class Api::ChatsController < ApplicationController
       Pusher.trigger(
       "presence-project_#{@chat.project_id}",
        "update_chats",
-       {chat_message_id: @chat.id}
+         {
+           chat_message_id: @chat.id
+         }
        )
       render :show
     else

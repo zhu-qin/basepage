@@ -3,7 +3,11 @@ class Api::TodoListsController < ApplicationController
   def create
     @todo_list = TodoList.new(todo_list_params)
     if @todo_list.save
-      Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {todo_list_id: @todo_list.id})
+      Pusher.trigger(
+       "presence-project_#{@todo_list.project_id}",
+       "update_todos",
+       {action: "CREATE_TODO_LIST", todo_list_id: @todo_list.id}
+        )
       render :show
     else
       render @todo_list.errors.full_messages, status: 400
@@ -18,7 +22,11 @@ class Api::TodoListsController < ApplicationController
   def update
     @todo_list = TodoList.find(params[:id])
     if @todo_list.update(todo_list_params)
-      Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {todo_list_id: @todo_list.id})
+      Pusher.trigger(
+      "presence-project_#{@todo_list.project_id}",
+       "update_todos",
+        {action: "UPDATE_TODO_LIST", todo_list_id: @todo_list.id}
+        )
       render :show
     else
       render @todo_list.errors.full_messages, status: 400
@@ -27,11 +35,24 @@ class Api::TodoListsController < ApplicationController
 
   def destroy
     @todo_list = TodoList.find(params[:id])
-    Pusher.trigger("presence-project_#{@todo_list.project_id}", "update_todos", {todo_list_id: @todo_list.id})
+    Pusher.trigger(
+     "presence-project_#{@todo_list.project_id}",
+     "update_todos",
+      {action: "DESTROY_TODO_LIST", todo_list_id: @todo_list.id}
+      )
     if @todo_list.destroy
       render :show
     else
       render @todo_list.errors.full_messages, status: 400
+    end
+  end
+
+  def show
+    @todo_list = TodoList.find(params[:id])
+    if @todo_list
+      render :show
+    else
+      render json: ["To-do List not found"]
     end
   end
 
