@@ -21,6 +21,15 @@ class Api::ChatsController < ApplicationController
     render :index
   end
 
+  def show
+    @chat = Chat.find(params[:id])
+    if @chat
+      render :show
+    else
+      render :json ["Chat Message Not Found"]
+    end
+  end
+
 
   def chat_params
     params.require(:chat).permit(:message, :project_id, :author_id)

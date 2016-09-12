@@ -19,6 +19,16 @@ const ChatUtil = {
         successCallback(response);
       }
     });
+  },
+
+  getPusherChats: function (data, successCallback) {
+    $.ajax({
+      type: "GET",
+      url: `api/chats/${data.chat_message_id}`,
+      success: function (response) {
+        successCallback(response);
+      }
+    });
   }
 };
 

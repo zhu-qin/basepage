@@ -68,9 +68,9 @@ const UploadForm = React.createClass({
                 <input type="file" className="upload-preview-button-form" onChange={this._previewFile}/>
               </label>
               {button}
-              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`}>Cancel</Link>
             </div>
           </form>
+          <Link className="form-x-box" to={`/projects/${ProjectStore.getCurrentProject().id}/uploads_index`}></Link>
       </div>
     );
   }

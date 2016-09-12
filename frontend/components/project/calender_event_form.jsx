@@ -140,10 +140,10 @@ const CalenderEventForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`}>Cancel</Link>
               {deleteCalenderEvent}
             </div>
           </form>
+          <Link className="form-x-box" to={`projects/${ProjectStore.getCurrentProject().id}/calender_events_index`}></Link>
         </div>
         {errors}
       </div>

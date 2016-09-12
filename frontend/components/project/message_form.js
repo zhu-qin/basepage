@@ -43,7 +43,9 @@ const MessageForm = React.createClass({
 
     return(
       <div className="post-wrapper">
+        <h2>Post a message</h2>
           <div className="message-text-form">
+
           {message.author_name}
           {message.title}
         </div>
@@ -56,9 +58,9 @@ const MessageForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value="Post"/>
-              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/messages_index`}>Cancel</Link>
             </div>
           </form>
+          <Link className="form-x-box" to={`/projects/${ProjectStore.getCurrentProject().id}/messages_index`}></Link>
       </div>
     );
   }

@@ -73,10 +73,10 @@ const ProjectForm = React.createClass({
             <textarea onChange={this._handleChange("description")} value={this.state.description}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`/projects/index`}>Cancel</Link>
               {deleteButton}
             </div>
           </form>
+          <Link className="form-x-box" to={`/projects/index`}></Link>
       </div>
     );
   }

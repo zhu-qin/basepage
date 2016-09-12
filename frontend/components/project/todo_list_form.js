@@ -94,10 +94,10 @@ const TodoListForm = React.createClass({
             <textarea onChange={this._handleChange("body")} value={this.state.todoList.body}/>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`projects/${ProjectStore.getCurrentProject().id}/todos_index`}>Cancel</Link>
               {destroyList}
             </div>
           </form>
+          <Link className="form-x-box" to={`projects/${ProjectStore.getCurrentProject().id}/todos_index`}></Link>
         </div>
       </div>
     );

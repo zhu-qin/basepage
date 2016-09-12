@@ -20,11 +20,12 @@ Rails.application.routes.draw do
       resources :todos,               only: [:create, :index]
     end
 
-    resources :todos,                only: [:update, :show, :destroy]
+    resources :todos,                only: [:update, :destroy, :show]
     resources :projects,             only: [:update, :destroy, :create]
     resources :messages,             only: [:update, :destroy]
     resources :calender_events,      only: [:update, :destroy]
     resources :project_memberships,  only: [:update, :destroy, :create]
+    resources :chats,                only: [:show]
 
   end
 

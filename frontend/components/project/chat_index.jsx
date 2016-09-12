@@ -22,7 +22,7 @@ const ChatIndex = React.createClass({
     this.pusherListener = PusherStore.addPusherListener(this.pusherListener);
     this.pusherChannel = PusherStore.getChannelForCurrentProject();
     this.pusherChannel.bind('update_chats', function (data) {
-      ChatActions.getAllChats(projectId);
+      ChatActions.getPusherChats(data);
     });
   },
 
@@ -65,7 +65,7 @@ const ChatIndex = React.createClass({
       let date = new Date(message.create_at).toString();
       return (
         <li key={message.id} ref={`chatMessage_${index}`}>
-          <p>{message.author_name} @ {date}:{message.message}</p>
+          <p>{message.author_name} @ {date.slice(0,21)}: {message.message}</p>
         </li>
       );
     });

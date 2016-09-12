@@ -52,9 +52,9 @@ const TodoForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               {button}
-              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/todos_index`}>Cancel</Link>
             </div>
           </form>
+          <Link className="form-x-box" to={`/projects/${ProjectStore.getCurrentProject().id}/todos_index`}></Link>
       </div>
     );
   }

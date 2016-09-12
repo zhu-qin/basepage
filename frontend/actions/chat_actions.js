@@ -24,6 +24,10 @@ const ChatActions = {
       actionType:ChatConstants.RECEIVE_ONE_CHAT,
       chatMessage: response
     });
+  },
+
+  getPusherChats: function (data) {
+    ChatUtil.getPusherChats(data, ChatActions.receiveOneChatMessage);
   }
 };
 
