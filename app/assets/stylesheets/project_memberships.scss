@@ -23,17 +23,21 @@
 }
 
 .projectMembership-list-item-text {
-  background: #f3dbd3;
-  color: #d16f50;
+  background: rgb(230, 136, 30);
+  border-radius: 5px;
   float:left;
   width: 55%;
+  color: rgb(16, 79, 48);
 }
 
 
 .projectMembership-list-item-edit {
-  background: #3cb371;
-  color: white;
-  float:right;
+  margin: auto;
+  width: 20%;
+  cursor: pointer;
+  color: rgb(207, 235, 221);
+  border-radius: 5px;
+  background: rgb(16, 79, 48);
   text-align: center;
-  width: 15%;
+  float: right;
 }

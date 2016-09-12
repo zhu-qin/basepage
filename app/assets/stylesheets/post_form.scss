@@ -63,14 +63,15 @@
   margin: 0 20px 0 0;
   float: left;
   height: 20px;
-  width: 50px;
-  padding: 5px;
-  line-height: 20px;
+  width: 60px;
   font-size: 14px;
+  padding: 5px;
   display: block;
   cursor: pointer;
+  border: none;
   background: rgb(16, 79, 48);
   color: rgb(207, 235, 221);
+  border-radius: 5px;
 }
 
 .form-x-box {

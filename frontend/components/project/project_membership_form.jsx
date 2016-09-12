@@ -73,10 +73,10 @@ const ProjectMembershipForm = React.createClass({
             </label>
             <div className="button-wrapper clear-fix">
               <input className="button-form" type="submit" value={buttonValue}/>
-              <Link className="button-form" to={`/projects/${ProjectStore.getCurrentProject().id}/project_memberships_index`}>Cancel</Link>
               {deleteButton}
             </div>
           </form>
+          <Link className="form-x-box" to={`/projects/${ProjectStore.getCurrentProject().id}/project_memberships_index`}></Link>
       </div>
     );
   }
