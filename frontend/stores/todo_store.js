@@ -6,48 +6,29 @@ const TodoStore = new Store(AppDispatcher);
 // todos and todolists have key value pairs with the keys being their ids
 // todos are nested in todo lists as expected
 let _todos = {};
-let _completed = 0;
-let _all_todos = 0;
+
 
 TodoStore.all = function () {
   return Object.assign({}, _todos);
 };
-
-// TodoStore.todoCount = function(){
-//   return `${_completed}/${_all_todos}`;
-// };
 
 TodoStore.findList = function (id) {
   return Object.assign({}, _todos[id]);
 };
 
 TodoStore.resetTodos = function (todos) {
-  _completed = todos.completed_todos;
-  _all_todos = todos.all_todos;
   _todos = todos;
 };
 
 TodoStore.updateOneTodo = function(todo) {
-  let prevTodo = _todos[todo.todo_list_id].todos[todo.id];
   _todos[todo.todo_list_id].todos[todo.id] = todo;
-
-  // if (!prevTodo.completion && todo.completion) {
-  //   _completed += 1;
-  // } else if (prevTodo.completion && !todo.completion) {
-  //   _completed -= 1;
-  // }
 };
 
 TodoStore.addOneTodo = function(todo) {
   _todos[todo.todo_list_id].todos[todo.id] = todo;
-  // _all_todos += 1;
 };
 
 TodoStore.deleteTodo = function(todo) {
-  // if (_todos[todo.todo_list_id].todos[todo.id].completion) {
-  //   _completed -= 1;
-  // }
-  // _all_todos -= 1;
   delete _todos[todo.todo_list_id].todos[todo.id];
 };
 
