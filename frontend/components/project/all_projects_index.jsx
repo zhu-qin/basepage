@@ -10,15 +10,13 @@ const ProjectMembershipActions= require('../../actions/project_membership_action
 
 const AllProjectsIndex = React.createClass({
   getInitialState: function (){
-    return { projects: ProjectStore.all() };
+    return { projects: {} };
   },
 
   componentDidMount: function(){
     this.projectListener = ProjectStore.addListener(this._projectStoreListener);
     this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
-    if (ProjectStore.length() === 0) {
-      ProjectActions.getAllProjects();
-    }
+    ProjectActions.getAllProjects();
     PusherStore.addChannels();
   },
 

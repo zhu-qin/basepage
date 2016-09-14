@@ -48,7 +48,7 @@ let redirectConditions = function (nextState, replace) {
 
 const AppRouter = (
   <Router history={hashHistory}>
-    <Route path="/" component={Session}/>
+    <Route path="/" component={Session} />
     <Route path="/sign_up" component={Session}/>
 
     <Route path="/projects/index" component={AllProjectsIndex} >
@@ -90,9 +90,8 @@ const AppRouter = (
   </Router>
 );
 
-
 document.addEventListener("DOMContentLoaded", function(){
-  SessionActions.receive("SIGN_IN", window.currentUser)();
+  SessionActions.receiveUser(window.currentUser);
   let root = document.getElementById('root');
   ReactDOM.render(AppRouter, root);
 });

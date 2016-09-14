@@ -14,19 +14,6 @@ let _signOut = function(){
   _user = {};
 };
 
-SessionStore.__onDispatch = function(payload){
-  switch (payload.actionType) {
-    case SessionConstants.SIGN_IN:
-      _signIn(payload.response);
-      SessionStore.__emitChange();
-      break;
-    case SessionConstants.SIGN_OUT:
-      _signOut();
-      SessionStore.__emitChange();
-      break;
-  }
-};
-
 SessionStore.getCurrentUser = function(){
   return Object.assign({}, _user);
 };
@@ -36,6 +23,19 @@ SessionStore.isSignedIn = function(){
     return true;
   }else {
     return false;
+  }
+};
+
+SessionStore.__onDispatch = function(payload){
+  switch (payload.actionType) {
+    case SessionConstants.RECEIVE_USER:
+    _signIn(payload.user);
+    SessionStore.__emitChange();
+    break;
+    case SessionConstants.SIGN_OUT:
+    _signOut();
+    SessionStore.__emitChange();
+    break;
   }
 };
 
