@@ -33,7 +33,13 @@ TodoStore.deleteTodo = function(todo) {
 };
 
 TodoStore.addOneTodoList = function(todoList) {
-  _todos[todoList.id] = todoList;
+  let currentTodoList = _todos[todoList.id];
+  if (currentTodoList) {
+    currentTodoList.title = todoList.title;
+    currentTodoList.body = todoList.body;
+  } else {
+    _todos[todoList.id] = todoList;
+  }
 
 };
 
