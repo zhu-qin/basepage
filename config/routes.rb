@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
 
   post '/pusher/auth' => 'pusher#auth'
+  get  '/pusher/get_auth_token' => `pusher#getAuthToken`
 
 
   # The priority is based upon order of creation: first created -> highest priority.

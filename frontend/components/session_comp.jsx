@@ -5,8 +5,6 @@ const ErrorStore = require('../stores/error_store');
 const ProjectActions = require('../actions/project_actions');
 const hashHistory = require('react-router').hashHistory;
 const Link = require('react-router').Link;
-const PusherStore = require('../pusher/pusher_store');
-
 
 const Session = React.createClass({
   getInitialState: function(){
@@ -29,15 +27,14 @@ const Session = React.createClass({
   },
 
   _sessionListener: function(){
-    if (SessionStore.isSignedIn()){
+    if (SessionStore.isSignedIn()) {
       hashHistory.push('/projects/index');
     }
   },
 
   _errorStoreListener: function(){
     this.setState( {errors: ErrorStore.all()} );
-    setTimeout(function () {this.setState({errors: []});}.bind(this), 3000);
-
+    setTimeout(function () {this.setState({ errors: [] });}.bind(this), 3000);
   },
 
   _updateField: function(field, event){

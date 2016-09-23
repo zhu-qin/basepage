@@ -3,32 +3,47 @@ const SessionStore = require('../stores/session_store');
 
 let _channels = {};
 let _listeners = [];
+let _pusher;
 
 const PusherStore = {
-
-  pusher: new Pusher('4b389f8a160265cfaaa3', {
-    authEndpoint: '/pusher/auth',
-    auth: {
-      headers: {
-        'X-CSRF-Token': "<%= form_authenticity_token %>"
-        }
-      }
-  }),
+  getAuthToken: function (){
+    if (!_pusher){
+      $.ajax({
+        method: "GET",
+        url: `/pusher/get_auth_token`,
+        dataType: "TEXT"
+      })
+      .done((response) => {
+        _pusher = new Pusher('4b389f8a160265cfaaa3', {
+          authEndpoint: '/pusher/auth',
+          auth: {
+            headers: {
+              'X-CSRF-Token': `${response}`
+              }
+            }
+        });
+        PusherStore.addChannels();
+      })
+      .fail((res, err) => {
+        console.log(err);
+      });
+    }
+  },
 
   addChannels: function() {
     Object.keys(ProjectStore.all()).forEach((channelId) => {
       let project_id = `presence-project_${channelId}`;
-      let channel = PusherStore.pusher.subscribe(project_id);
+      let channel = _pusher.subscribe(project_id);
       _channels[project_id] = channel;
       // channel.bind("pusher:subscription_succeeded", (data) => {
-      //
+      //   console.log(data);
       // });
     });
   },
 
   removeChannels: function () {
     Object.keys(_channels).forEach((channelId)=>{
-      PusherStore.pusher.unsubscribe(channelId);
+      _pusher.unsubscribe(channelId);
     });
   },
 

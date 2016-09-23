@@ -17,7 +17,7 @@ const AllProjectsIndex = React.createClass({
     this.projectListener = ProjectStore.addListener(this._projectStoreListener);
     this.sessionListener = SessionStore.addListener(this._sessionStoreListener);
     ProjectActions.getAllProjects();
-    PusherStore.addChannels();
+    PusherStore.getAuthToken();
   },
 
   _projectStoreListener: function () {

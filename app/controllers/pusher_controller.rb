@@ -15,4 +15,12 @@ class PusherController < ApplicationController
     end
   end
 
+  def get_auth_token
+    if signed_in?
+      render text: form_authenticity_token
+    else
+      render text: 'Forbidden', status: '403'
+    end
+  end
+
 end
